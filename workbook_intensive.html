@@ -3,33 +3,33 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Конспект: Интенсив по Claude</title>
+<title>Конспект: Вводный урок</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Exo+2:wght@500;600;700;800&display=swap" rel="stylesheet">
 <style>
-*, *::before, *::after { box-sizing:border-box; margin:0; padding:0; font-style:normal; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; font-style: normal; }
 :root {
   --blue:#2C7BE5; --blue-l:#EBF3FF; --blue-m:#BAD6FF; --blue-d:#1749A0;
   --pink:#D94B78; --pink-l:#FFF0F6; --pink-m:#F5BAD0;
   --teal:#18A98E; --teal-l:#E5FAF7; --teal-m:rgba(24,169,142,.3);
   --amber:#D98C0A; --amber-l:#FFF8EC; --amber-m:#F5D980;
-  --purple:#7B5EA7; --purple-l:#F3EEFF; --purple-m:#D4C2F5;
   --g50:#F6F9FF; --g100:#EDF2FA; --g200:#D6E2F0;
   --g400:#7A9AB8; --g500:#4D6A84; --g600:#3D5A73; --g700:#2A4358; --g800:#162F44;
+  --white:#FFFFFF;
   --f:'Nunito',sans-serif; --fh:'Exo 2',sans-serif;
   --r1:10px; --r2:16px; --r3:24px;
   --s1:0 2px 12px rgba(44,123,229,.08); --s2:0 6px 28px rgba(44,123,229,.13);
 }
 body { font-family:var(--f); background:var(--g50); color:var(--g800); line-height:1.65; }
-.bg { position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:0; opacity:.3; }
+.bg { position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:0; opacity:.35; }
 .page { position:relative; z-index:1; max-width:740px; margin:0 auto; padding:28px 18px 80px; }
 
 /* HEADER */
-.hdr { background:linear-gradient(140deg,#DCF0FF 0%,#EDE8FF 100%); border:1.5px solid #C8DFF8; border-radius:var(--r3); padding:30px 28px 24px; margin-bottom:14px; position:relative; overflow:hidden; }
-.hdr::after { content:''; position:absolute; top:-50px; right:-50px; width:220px; height:220px; border-radius:50%; background:radial-gradient(circle,rgba(123,94,167,.12) 0%,transparent 70%); }
+.hdr { background:linear-gradient(140deg,#DCF0FF 0%,#FAE8F2 100%); border:1.5px solid #C8DFF8; border-radius:var(--r3); padding:30px 28px 24px; margin-bottom:14px; position:relative; overflow:hidden; }
+.hdr::after { content:''; position:absolute; top:-50px; right:-50px; width:200px; height:200px; border-radius:50%; background:radial-gradient(circle,rgba(44,123,229,.1) 0%,transparent 70%); }
 .badge { font-family:var(--fh); font-size:10px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:var(--blue); background:#fff; border:1px solid var(--blue-m); display:inline-block; padding:4px 12px; border-radius:20px; margin-bottom:12px; }
 .hdr h1 { font-family:var(--fh); font-size:24px; font-weight:800; color:var(--g800); line-height:1.2; margin-bottom:8px; }
-.hdr p { font-size:14px; color:var(--g600); max-width:500px; }
+.hdr p { font-size:14px; color:var(--g600); max-width:460px; }
 .hdr-chips { display:flex; gap:10px; flex-wrap:wrap; margin-top:16px; }
 .chip { font-size:12px; font-weight:600; color:var(--g600); background:#fff; border:1px solid var(--g200); padding:5px 12px; border-radius:20px; }
 
@@ -52,129 +52,117 @@ body { font-family:var(--f); background:var(--g50); color:var(--g800); line-heig
 .sec { margin-bottom:24px; }
 .sec-head { display:flex; align-items:center; gap:12px; margin-bottom:14px; }
 .sec-num { width:36px; height:36px; border-radius:11px; flex-shrink:0; font-family:var(--fh); font-size:15px; font-weight:800; display:flex; align-items:center; justify-content:center; color:#fff; }
-.nb{background:var(--blue)} .np{background:var(--pink)} .nt{background:var(--teal)} .na{background:#E09A1A} .nv{background:var(--purple)}
+.nb { background:var(--blue); } .np { background:var(--pink); } .nt { background:var(--teal); } .na { background:#E09A1A; }
 .sec-title { font-family:var(--fh); font-size:17px; font-weight:700; color:var(--g800); }
 .sec-sub { font-size:12px; color:var(--g400); margin-top:2px; }
 
 /* CARD */
 .card { background:#fff; border:1px solid var(--g200); border-radius:var(--r2); padding:20px; box-shadow:var(--s1); margin-bottom:10px; }
 
-/* INSIGHT BOXES */
+/* BLENDER */
+.blender-wrap { background:#fff; border:1px solid var(--g200); border-radius:var(--r2); padding:24px 20px; margin-bottom:10px; box-shadow:var(--s1); }
+.blender-title { font-family:var(--fh); font-size:15px; font-weight:700; color:var(--g800); margin-bottom:6px; }
+.blender-sub { font-size:13px; color:var(--g600); margin-bottom:18px; line-height:1.5; }
+.blender-svg-wrap { text-align:center; margin:0 auto 18px; }
+.bm-grid { display:grid; grid-template-columns:1fr auto 1fr; gap:14px; align-items:center; }
+@media(max-width:500px){ .bm-grid { grid-template-columns:1fr; } .bm-arrow { transform:rotate(90deg); } }
+.bm-box { border-radius:var(--r2); padding:14px; }
+.bm-l { background:var(--blue-l); border:1.5px solid var(--blue-m); }
+.bm-r { background:var(--amber-l); border:1.5px solid var(--amber-m); }
+.bm-lbl { font-family:var(--fh); font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.08em; margin-bottom:10px; }
+.bm-l .bm-lbl { color:var(--blue); } .bm-r .bm-lbl { color:var(--amber); }
+.bm-list { list-style:none; }
+.bm-list li { font-size:12px; color:var(--g700); padding:3px 0; border-bottom:1px solid rgba(44,123,229,.08); display:flex; align-items:center; gap:7px; }
+.bm-list li:last-child { border-bottom:none; }
+.fd { width:5px; height:5px; border-radius:50%; flex-shrink:0; }
+.bm-l .fd { background:var(--blue); } .bm-r .fd { background:#E09A1A; }
+.bm-arrow { font-size:22px; color:var(--g400); text-align:center; }
+.bm-r p { font-size:12px; color:var(--g600); margin-top:8px; line-height:1.4; }
+
+/* STORIES */
+.stories-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:10px; }
+@media(max-width:480px){ .stories-grid { grid-template-columns:1fr; } }
+.story { background:#fff; border:1px solid var(--g200); border-radius:var(--r2); padding:16px; box-shadow:var(--s1); }
+.story-top { display:flex; align-items:center; gap:10px; margin-bottom:10px; }
+.s-ico { width:36px; height:36px; border-radius:10px; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:18px; }
+.s-who { font-family:var(--fh); font-size:13px; font-weight:700; color:var(--g800); }
+.s-role { font-size:11px; color:var(--g400); }
+.s-before { font-size:12px; color:var(--g500); margin-bottom:6px; }
+.s-after { font-size:13px; font-weight:600; color:var(--g700); line-height:1.4; padding:8px 10px; background:var(--teal-l); border-left:3px solid var(--teal); border-radius:0 var(--r1) var(--r1) 0; }
+
+/* INSIGHT BOX */
 .ins { border-radius:0 var(--r1) var(--r1) 0; padding:14px 16px; margin-bottom:10px; }
-.ib{background:var(--blue-l);border-left:4px solid var(--blue)}
-.ip{background:var(--pink-l);border-left:4px solid var(--pink)}
-.it{background:var(--teal-l);border-left:4px solid var(--teal)}
-.ia{background:var(--amber-l);border-left:4px solid #E09A1A}
-.iv{background:var(--purple-l);border-left:4px solid var(--purple)}
+.ib { background:var(--blue-l); border-left:4px solid var(--blue); }
+.ip { background:var(--pink-l); border-left:4px solid var(--pink); }
+.it { background:var(--teal-l); border-left:4px solid var(--teal); }
+.ia { background:var(--amber-l); border-left:4px solid #E09A1A; }
 .ins .lbl { font-family:var(--fh); font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.1em; margin-bottom:6px; }
-.ib .lbl{color:var(--blue)} .ip .lbl{color:var(--pink)} .it .lbl{color:var(--teal)} .ia .lbl{color:var(--amber)} .iv .lbl{color:var(--purple)}
+.ib .lbl { color:var(--blue); } .ip .lbl { color:var(--pink); } .it .lbl { color:var(--teal); } .ia .lbl { color:var(--amber); }
 .ins p { font-size:14px; font-weight:600; color:var(--g800); line-height:1.5; }
 
-/* AI MAP */
-.ai-map { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-bottom:10px; }
-@media(max-width:520px){ .ai-map { grid-template-columns:1fr; } }
-.ai-cat { border-radius:var(--r2); padding:16px; }
-.ai-cat-b { background:var(--blue-l); border:1.5px solid var(--blue-m); }
-.ai-cat-p { background:var(--pink-l); border:1.5px solid var(--pink-m); }
-.ai-cat-a { background:var(--amber-l); border:1.5px solid var(--amber-m); }
-.ai-cat-lbl { font-family:var(--fh); font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.08em; margin-bottom:10px; }
-.ai-cat-b .ai-cat-lbl{color:var(--blue)} .ai-cat-p .ai-cat-lbl{color:var(--pink)} .ai-cat-a .ai-cat-lbl{color:var(--amber)}
-.ai-cat-title { font-family:var(--fh); font-size:13px; font-weight:700; color:var(--g800); margin-bottom:8px; }
-.ai-items { list-style:none; }
-.ai-items li { font-size:12px; color:var(--g700); padding:3px 0; border-bottom:1px solid rgba(44,123,229,.08); display:flex; align-items:center; gap:6px; }
-.ai-items li:last-child { border-bottom:none; }
-.ai-items li.main { font-weight:700; color:var(--blue); }
-.ai-dot { width:5px; height:5px; border-radius:50%; flex-shrink:0; }
-.ai-cat-b .ai-dot{background:var(--blue)} .ai-cat-p .ai-dot{background:var(--pink)} .ai-cat-a .ai-dot{background:#E09A1A}
+/* BARRIERS */
+.b-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+@media(max-width:520px){ .b-grid { grid-template-columns:1fr; } }
+.bc { background:#fff; border:1.5px solid var(--g200); border-radius:var(--r2); padding:16px; box-shadow:var(--s1); cursor:pointer; transition:all .2s; position:relative; }
+.bc:hover { box-shadow:var(--s2); transform:translateY(-2px); }
+.bc.on { border-color:var(--pink); background:var(--pink-l); }
+.bc-check { position:absolute; top:12px; right:12px; width:22px; height:22px; border-radius:50%; border:2px solid var(--g200); display:flex; align-items:center; justify-content:center; transition:all .2s; }
+.bc.on .bc-check { background:var(--pink); border-color:var(--pink); }
+.bc-check svg { opacity:0; transition:opacity .15s; }
+.bc.on .bc-check svg { opacity:1; }
+.bc-q { font-family:var(--fh); font-size:13px; font-weight:700; color:var(--g800); margin-bottom:8px; line-height:1.3; padding-right:28px; }
+.bc.on .bc-q { color:var(--pink); }
+.bc-a { font-size:12px; color:var(--g600); line-height:1.45; }
 
-/* CLAUDE FACTS */
-.facts-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:10px; }
-@media(max-width:480px){ .facts-grid { grid-template-columns:1fr; } }
-.fact { background:#fff; border:1px solid var(--g200); border-radius:var(--r2); padding:16px; box-shadow:var(--s1); }
-.fact-ico { font-size:22px; margin-bottom:8px; display:block; }
-.fact-title { font-family:var(--fh); font-size:13px; font-weight:700; color:var(--g800); margin-bottom:4px; }
-.fact-desc { font-size:12px; color:var(--g600); line-height:1.45; }
+/* MODES */
+.modes { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-bottom:10px; }
+@media(max-width:480px){ .modes { grid-template-columns:1fr; } }
+.mode { background:#fff; border:1px solid var(--g200); border-radius:var(--r2); padding:16px 14px; text-align:center; box-shadow:var(--s1); }
+.mode-ico { font-size:24px; margin-bottom:8px; display:block; }
+.mode-name { font-family:var(--fh); font-size:13px; font-weight:700; color:var(--g800); margin-bottom:4px; }
+.mode-desc { font-size:11px; color:var(--g600); line-height:1.4; }
 
-/* 3 RULES */
-.rules-flow { display:flex; flex-direction:column; gap:8px; margin-bottom:10px; }
-.rule { background:#fff; border:1px solid var(--g200); border-radius:var(--r2); padding:16px 18px; box-shadow:var(--s1); display:flex; gap:14px; align-items:flex-start; }
-.rule-n { width:32px; height:32px; border-radius:9px; flex-shrink:0; font-family:var(--fh); font-size:15px; font-weight:800; display:flex; align-items:center; justify-content:center; color:#fff; background:var(--blue); }
-.rule-title { font-family:var(--fh); font-size:14px; font-weight:700; color:var(--g800); margin-bottom:4px; }
-.rule-desc { font-size:13px; color:var(--g600); line-height:1.45; }
-.rule-eg { font-size:12px; color:var(--g500); margin-top:6px; padding:6px 10px; background:var(--g100); border-radius:var(--r1); line-height:1.4; }
-.rule-eg strong { color:var(--blue); }
+/* STEPS */
+.step { background:#fff; border:1px solid var(--g200); border-radius:var(--r2); padding:18px; box-shadow:var(--s1); margin-bottom:8px; display:flex; gap:16px; align-items:flex-start; }
+.step-n { width:38px; height:38px; border-radius:11px; flex-shrink:0; background:var(--blue-l); border:2px solid var(--blue-m); font-family:var(--fh); font-size:16px; font-weight:800; color:var(--blue); display:flex; align-items:center; justify-content:center; }
+.step-c strong { font-family:var(--fh); font-size:14px; font-weight:700; color:var(--g800); display:block; margin-bottom:4px; }
+.step-c p { font-size:13px; color:var(--g600); line-height:1.45; }
+.btn-g { display:inline-flex; align-items:center; gap:6px; font-size:12px; font-weight:700; color:var(--blue); background:var(--blue-l); border:1px solid var(--blue-m); padding:6px 14px; border-radius:20px; margin-top:8px; cursor:pointer; transition:all .15s; text-decoration:none; }
+.btn-g:hover { background:var(--blue); color:#fff; }
+.btn-g svg { width:12px; height:12px; }
 
-/* ARSENAL */
-.arsenal-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:10px; }
-@media(max-width:480px){ .arsenal-grid { grid-template-columns:1fr; } }
-.ar-card { background:#fff; border:1.5px solid var(--g200); border-radius:var(--r2); padding:14px 16px; box-shadow:var(--s1); cursor:pointer; transition:all .2s; position:relative; }
-.ar-card:hover { box-shadow:var(--s2); transform:translateY(-1px); }
-.ar-card.saved { border-color:var(--teal); background:var(--teal-l); }
-.ar-save { position:absolute; top:10px; right:10px; width:22px; height:22px; border-radius:50%; border:2px solid var(--g200); display:flex; align-items:center; justify-content:center; transition:all .2s; background:#fff; font-size:11px; color:var(--g400); }
-.ar-card.saved .ar-save { background:var(--teal); border-color:var(--teal); color:#fff; }
-.ar-situation { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.06em; color:var(--teal); margin-bottom:6px; font-family:var(--fh); }
-.ar-card.saved .ar-situation { color:var(--teal); }
-.ar-title { font-family:var(--fh); font-size:13px; font-weight:700; color:var(--g800); margin-bottom:6px; padding-right:26px; }
-.ar-prompt { font-size:11px; color:var(--g600); line-height:1.45; padding:6px 8px; background:var(--g100); border-radius:6px; font-family:monospace; }
-.ar-card.saved .ar-prompt { background:rgba(24,169,142,.08); }
+/* NOTICE */
+.notice { background:#FFFBEC; border:1.5px solid var(--amber-m); border-radius:var(--r2); padding:14px 16px; margin-bottom:10px; }
+.notice p { font-size:13px; color:var(--g700); line-height:1.5; }
 
-/* SPECIAL CARD */
-.special-card { background:linear-gradient(135deg,#1749A0 0%,var(--purple) 100%); border-radius:var(--r2); padding:18px 20px; color:#fff; margin-bottom:10px; position:relative; overflow:hidden; }
-.special-card::before { content:''; position:absolute; bottom:-20px; right:-20px; width:100px; height:100px; border-radius:50%; background:rgba(255,255,255,.08); }
-.sc-label { font-family:var(--fh); font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.12em; opacity:.65; margin-bottom:8px; }
-.sc-title { font-family:var(--fh); font-size:14px; font-weight:800; color:#fff; margin-bottom:6px; }
-.sc-text { font-size:13px; line-height:1.5; opacity:.9; color:#fff; }
-.sc-prompt { font-size:12px; background:rgba(255,255,255,.12); border-radius:8px; padding:10px 12px; margin-top:10px; line-height:1.5; color:#fff; font-family:monospace; }
+/* INSIGHT CHIPS */
+.chips-hint { font-size:13px; color:var(--g600); margin-bottom:12px; line-height:1.5; }
+.chips { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:14px; }
+.ich { font-size:13px; font-weight:600; color:var(--g700); background:#fff; border:1.5px solid var(--g200); padding:8px 14px; border-radius:20px; cursor:pointer; transition:all .2s; line-height:1.3; }
+.ich:hover { border-color:var(--blue); color:var(--blue); }
+.ich.pb { background:var(--blue); border-color:var(--blue); color:#fff; }
+.ich.pp { background:var(--pink); border-color:var(--pink); color:#fff; }
+.ich.pt { background:var(--teal); border-color:var(--teal); color:#fff; }
+.my-picks { background:var(--g100); border:1px dashed var(--g200); border-radius:var(--r2); padding:16px 18px; min-height:58px; margin-bottom:8px; }
+.mp-lbl { font-family:var(--fh); font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.08em; color:var(--g400); margin-bottom:8px; }
+.mp-items { display:flex; flex-wrap:wrap; gap:6px; }
+.mp-item { font-size:12px; font-weight:600; padding:5px 12px; border-radius:16px; color:#fff; }
+.prep-item { display:flex; align-items:center; justify-content:space-between; gap:16px; padding:14px 18px; border-bottom:1px solid var(--g100); }
+.pi-left { display:flex; align-items:center; gap:12px; flex:1; min-width:0; }
+.prep-item .cbox { flex-shrink:0; }
+.prep-item .btn-g { flex-shrink:0; white-space:nowrap; }
 
-/* PRACTICES */
-.prac-steps { list-style:none; }
-.prac-steps li { display:flex; align-items:flex-start; gap:12px; padding:14px 0; border-bottom:1px solid var(--g100); }
-.prac-steps li:last-child { border-bottom:none; }
+/* CHECKLIST */
+.cl { list-style:none; }
+.cl li { display:flex; align-items:flex-start; gap:12px; padding:12px 0; border-bottom:1px solid var(--g100); }
+.cl li:last-child { border-bottom:none; padding-bottom:0; }
 .cbox { width:22px; height:22px; border-radius:6px; border:2px solid var(--g200); flex-shrink:0; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all .2s; background:#fff; margin-top:2px; }
 .cbox.on { background:var(--blue); border-color:var(--blue); }
 .cbox svg { opacity:0; transition:opacity .15s; }
 .cbox.on svg { opacity:1; }
-.ps-t { font-family:var(--fh); font-size:14px; font-weight:700; color:var(--g800); margin-bottom:4px; }
-.ps-d { font-size:13px; color:var(--g600); line-height:1.45; }
-.ps-prompt { font-size:12px; color:var(--g700); background:var(--g100); border-radius:var(--r1); padding:8px 10px; margin-top:8px; line-height:1.5; }
-.done-p .ps-t { text-decoration:line-through; color:var(--g400); }
-
-/* METHODS */
-.methods { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:10px; }
-@media(max-width:500px){ .methods { grid-template-columns:1fr; } }
-.method { background:#fff; border:1.5px solid var(--g200); border-radius:var(--r2); padding:16px; box-shadow:var(--s1); }
-.method-n { font-family:var(--fh); font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.08em; color:var(--g400); margin-bottom:6px; }
-.method-title { font-family:var(--fh); font-size:13px; font-weight:700; color:var(--g800); margin-bottom:6px; }
-.method-desc { font-size:12px; color:var(--g600); line-height:1.45; margin-bottom:8px; }
-.method-when { font-size:11px; font-weight:700; color:var(--teal); margin-bottom:4px; font-family:var(--fh); }
-.method-prompt { font-size:11px; color:var(--g700); background:var(--g100); border-radius:var(--r1); padding:8px 10px; line-height:1.5; font-family:monospace; }
-
-/* THREE MODES */
-.modes3 { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-bottom:10px; }
-@media(max-width:500px){ .modes3 { grid-template-columns:1fr; } }
-.m3 { background:#fff; border:1px solid var(--g200); border-radius:var(--r2); padding:16px 14px; text-align:center; box-shadow:var(--s1); }
-.m3-ico { font-size:26px; margin-bottom:8px; display:block; }
-.m3-name { font-family:var(--fh); font-size:13px; font-weight:700; color:var(--g800); margin-bottom:4px; }
-.m3-desc { font-size:11px; color:var(--g600); line-height:1.4; }
-.m3-tech { font-size:10px; font-weight:700; color:var(--blue); margin-top:6px; font-family:var(--fh); text-transform:uppercase; letter-spacing:.06em; }
-
-/* REFLEX CHIPS */
-.rchips { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:14px; }
-.rch { font-size:13px; font-weight:600; color:var(--g700); background:#fff; border:1.5px solid var(--g200); padding:8px 14px; border-radius:20px; cursor:pointer; transition:all .2s; line-height:1.3; }
-.rch:hover { border-color:var(--blue); color:var(--blue); }
-.rch.rb { background:var(--blue); border-color:var(--blue); color:#fff; }
-.rch.rp { background:var(--pink); border-color:var(--pink); color:#fff; }
-.rch.rt { background:var(--teal); border-color:var(--teal); color:#fff; }
-.my-reflex { background:var(--g100); border:1px dashed var(--g200); border-radius:var(--r2); padding:14px 16px; min-height:50px; margin-bottom:8px; }
-.mr-lbl { font-family:var(--fh); font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.08em; color:var(--g400); margin-bottom:8px; }
-.mr-items { display:flex; flex-wrap:wrap; gap:6px; }
-.mr-item { font-size:12px; font-weight:600; padding:5px 12px; border-radius:16px; color:#fff; }
-.mr-empty { font-size:13px; color:var(--g400); }
-
-/* PREP ITEM */
-.prep-item { display:flex; align-items:center; justify-content:space-between; gap:16px; padding:14px 18px; border-bottom:1px solid var(--g100); }
-.pi-left { display:flex; align-items:center; gap:12px; flex:1; min-width:0; }
-.prep-item .cbox { flex-shrink:0; }
+.cl-t { font-family:var(--fh); font-size:14px; font-weight:700; color:var(--g800); margin-bottom:2px; }
+.cl-d { font-size:12px; color:var(--g600); line-height:1.4; }
+.done-wrap .cl-t { text-decoration:line-through; color:var(--g400); }
 
 /* TAKEAWAY */
 .tw { background:linear-gradient(135deg,var(--blue) 0%,#153E9A 100%); border-radius:var(--r3); padding:24px; color:#fff; margin-bottom:10px; position:relative; overflow:hidden; }
@@ -184,31 +172,16 @@ body { font-family:var(--f); background:var(--g50); color:var(--g800); line-heig
 
 /* TAG */
 .tag { display:inline-block; font-size:11px; font-weight:700; padding:3px 10px; border-radius:20px; font-family:var(--fh); text-transform:uppercase; letter-spacing:.06em; margin-bottom:10px; }
-.tb{background:var(--blue-l);color:var(--blue);border:1px solid var(--blue-m)}
-.tt{background:var(--teal-l);color:var(--teal);border:1px solid var(--teal-m)}
-.tp{background:var(--pink-l);color:var(--pink);border:1px solid var(--pink-m)}
-.tv{background:var(--purple-l);color:var(--purple);border:1px solid var(--purple-m)}
-
-/* SAVED COUNTER */
-.saved-hint { font-size:12px; color:var(--g400); margin-bottom:10px; }
-.saved-count { font-weight:700; color:var(--teal); }
-
-/* UNDERSTOOD BUTTON */
-.btn-understood { font-family:var(--fh); font-size:13px; font-weight:700; color:#fff; background:var(--blue); border:none; border-radius:20px; padding:10px 22px; cursor:pointer; display:inline-flex; align-items:center; gap:8px; transition:all .2s; box-shadow:0 2px 10px rgba(44,123,229,.3); }
-.btn-understood:hover { background:var(--blue-d); transform:translateY(-1px); }
-.btn-understood.done { background:var(--teal); box-shadow:0 2px 10px rgba(24,169,142,.3); }
-
-/* COPY BUTTON */
-.copy-btn { display:inline-flex; align-items:center; gap:5px; font-size:11px; font-weight:700; color:var(--blue); background:var(--blue-l); border:1px solid var(--blue-m); border-radius:16px; padding:5px 12px; cursor:pointer; margin-top:8px; transition:all .15s; }
-.copy-btn:hover { background:var(--blue); color:#fff; }
-.copy-btn.copied { background:var(--teal); border-color:var(--teal); color:#fff; }
-.copy-btn svg { width:11px; height:11px; }
+.tb { background:var(--blue-l); color:var(--blue); border:1px solid var(--blue-m); }
+.tp { background:var(--pink-l); color:var(--pink); border:1px solid var(--pink-m); }
+.tt { background:var(--teal-l); color:var(--teal); border:1px solid var(--teal-m); }
 
 /* UTILS */
 p { font-size:14px; color:var(--g600); line-height:1.6; margin-bottom:8px; }
 p:last-child { margin-bottom:0; }
 strong { font-weight:700; color:var(--g800); }
 .div { height:1px; background:var(--g200); margin:6px 0 20px; }
+.mb8 { margin-bottom:8px; }
 .list-nice { list-style:none; }
 .list-nice li { padding:8px 0; border-bottom:1px solid var(--g100); font-size:13px; color:var(--g700); display:flex; align-items:flex-start; gap:10px; }
 .list-nice li:last-child { border-bottom:none; }
@@ -217,29 +190,28 @@ strong { font-weight:700; color:var(--g800); }
 </head>
 <body>
 
-<svg class="bg" viewBox="0 0 800 1400" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-  <circle cx="60" cy="100" r="3" fill="#2C7BE5"/><circle cx="740" cy="60" r="2.5" fill="#D94B78"/>
-  <circle cx="700" cy="350" r="2" fill="#18A98E"/><circle cx="80" cy="600" r="2" fill="#7B5EA7"/>
-  <circle cx="760" cy="700" r="3" fill="#2C7BE5"/><circle cx="40" cy="1000" r="2" fill="#D94B78"/>
-  <circle cx="730" cy="1200" r="2.5" fill="#18A98E"/>
-  <line x1="60" y1="100" x2="740" y2="60" stroke="#2C7BE5" stroke-width=".7" opacity=".18"/>
-  <line x1="700" y1="350" x2="760" y2="700" stroke="#18A98E" stroke-width=".7" opacity=".15"/>
-  <line x1="80" y1="600" x2="40" y2="1000" stroke="#7B5EA7" stroke-width=".6" opacity=".15"/>
-  <line x1="740" y1="60" x2="700" y2="350" stroke="#D94B78" stroke-width=".6" opacity=".14"/>
+<svg class="bg" viewBox="0 0 800 1200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+  <circle cx="60" cy="120" r="3" fill="#2C7BE5"/><circle cx="740" cy="80" r="2.5" fill="#D94B78"/>
+  <circle cx="690" cy="300" r="2" fill="#18A98E"/><circle cx="100" cy="500" r="2" fill="#2C7BE5"/>
+  <circle cx="750" cy="600" r="3" fill="#2C7BE5"/><circle cx="50" cy="900" r="2" fill="#D94B78"/>
+  <circle cx="720" cy="1000" r="2.5" fill="#18A98E"/>
+  <line x1="60" y1="120" x2="740" y2="80" stroke="#2C7BE5" stroke-width=".7" opacity=".2"/>
+  <line x1="690" y1="300" x2="750" y2="600" stroke="#18A98E" stroke-width=".7" opacity=".18"/>
+  <line x1="100" y1="500" x2="50" y2="900" stroke="#2C7BE5" stroke-width=".6" opacity=".15"/>
+  <line x1="740" y1="80" x2="690" y2="300" stroke="#D94B78" stroke-width=".6" opacity=".15"/>
 </svg>
 
 <div class="page">
 
 <!-- HEADER -->
 <div class="hdr">
-  <div class="badge">Конспект · Интенсив</div>
-  <h1>Claude: от первого запроса<br>до виртуального ассистента</h1>
-  <p>Карта нейросетей, правила запросов, лайфхаки и техники, практики и рефлекс</p>
+  <div class="badge">Конспект · Вводный урок</div>
+  <h1>Для тех, кто откладывал,<br>сомневался или уже пробовал работать с ИИ</h1>
+  <p>Ключевые идеи, примеры делегирования и шаги для подготовки к интенсиву</p>
   <div class="hdr-chips">
-    <div class="chip">⏱ 3 часа</div>
-    <div class="chip">🛠 2 практики</div>
-    <div class="chip">💡 8 техник итерации</div>
-    <div class="chip">⚙ Первый проект</div>
+    <div class="chip">⏱ 25–35 мин</div>
+    <div class="chip">📋 6 блоков</div>
+    <div class="chip">✅ 3 шага к интенсиву</div>
   </div>
 </div>
 
@@ -252,512 +224,462 @@ strong { font-weight:700; color:var(--g800); }
   <div class="prog-track"><div class="prog-fill" id="fill" style="width:0%"></div></div>
   <div class="prog-legend">
     <div class="prog-leg-item">
-      <div class="sdot active" id="d0">0</div>
-      <div class="prog-leg-txt">Обзор<br><span>понял(а)</span></div>
-    </div>
-    <div class="prog-leg-item">
-      <div class="sdot" id="d1">1</div>
-      <div class="prog-leg-txt">Практика 1<br><span>три шага</span></div>
+      <div class="sdot active" id="d1">1</div>
+      <div class="prog-leg-txt">Рефлексия<br><span>разделы 3 и 5</span></div>
     </div>
     <div class="prog-leg-item">
       <div class="sdot" id="d2">2</div>
-      <div class="prog-leg-txt">Лайфхаки<br><span>3+ скопировано</span></div>
+      <div class="prog-leg-txt">Регистрация<br><span>в Claude</span></div>
     </div>
     <div class="prog-leg-item">
       <div class="sdot" id="d3">3</div>
-      <div class="prog-leg-txt">Практика 2<br><span>проект создан</span></div>
+      <div class="prog-leg-txt">Голосовой ввод<br><span>настроен</span></div>
     </div>
     <div class="prog-leg-item">
       <div class="sdot" id="d4">4</div>
-      <div class="prog-leg-txt">Рефлекс<br><span>осознания</span></div>
+      <div class="prog-leg-txt">Урок<br><span>просмотрен</span></div>
     </div>
   </div>
 </div>
 
-<!-- ══ СЕКЦИЯ 1: КАРТА НЕЙРОСЕТЕЙ ══ -->
+<!-- ══ БЛОК 1: ЗАЧЕМ ══ -->
 <div class="sec">
   <div class="sec-head">
     <div class="sec-num nb">1</div>
-    <div><div class="sec-title">Карта нейросетей</div><div class="sec-sub">Три категории — и почему это важно знать</div></div>
+    <div><div class="sec-title">Зачем это всё</div><div class="sec-sub">Метафора, которая объясняет главное</div></div>
   </div>
 
-  <div class="ai-map">
-    <div class="ai-cat ai-cat-b">
-      <div class="ai-cat-lbl">Языковые модели</div>
-      <div class="ai-cat-title">LLM</div>
-      <ul class="ai-items">
-        <li class="main"><span class="ai-dot"></span>Claude ← работаем здесь</li>
-        <li><span class="ai-dot"></span>ChatGPT</li>
-        <li><span class="ai-dot"></span>Gemini</li>
-        <li><span class="ai-dot"></span>DeepSeek</li>
-        <li><span class="ai-dot"></span>NotebookLM</li>
-      </ul>
+  <div class="blender-wrap">
+    <div class="blender-title">Представьте: у вас профессиональный кухонный комбайн</div>
+    <div class="blender-sub">Топовая модель с 32 программами. Умеет абсолютно всё. И вы используете его только для одного.</div>
+
+    <!-- SVG blender illustration -->
+    <div class="blender-svg-wrap">
+      <svg width="360" height="200" viewBox="0 0 360 200" fill="none" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;">
+        <!-- Body -->
+        <rect x="20" y="20" width="130" height="150" rx="16" fill="#EBF3FF" stroke="#BAD6FF" stroke-width="1.5"/>
+        <!-- Screen -->
+        <rect x="34" y="34" width="102" height="48" rx="9" fill="#1749A0"/>
+        <text x="85" y="54" text-anchor="middle" font-family="'Exo 2',sans-serif" font-size="10" font-weight="700" fill="#90BFFF">PRO 3000</text>
+        <text x="85" y="72" text-anchor="middle" font-family="'Nunito',sans-serif" font-size="8" fill="#6AA0E8">32 программы · AI режим</text>
+        <!-- Button rows -->
+        <rect x="34" y="92" width="21" height="15" rx="5" fill="#2C7BE5"/>
+        <rect x="60" y="92" width="21" height="15" rx="5" fill="#2C7BE5" opacity=".5"/>
+        <rect x="86" y="92" width="21" height="15" rx="5" fill="#2C7BE5" opacity=".5"/>
+        <rect x="112" y="92" width="21" height="15" rx="5" fill="#2C7BE5" opacity=".5"/>
+        <rect x="34" y="113" width="21" height="15" rx="5" fill="#2C7BE5" opacity=".35"/>
+        <rect x="60" y="113" width="21" height="15" rx="5" fill="#2C7BE5" opacity=".35"/>
+        <rect x="86" y="113" width="21" height="15" rx="5" fill="#2C7BE5" opacity=".35"/>
+        <rect x="112" y="113" width="21" height="15" rx="5" fill="#2C7BE5" opacity=".35"/>
+        <!-- Dial and power -->
+        <circle cx="62" cy="148" r="11" fill="#BAD6FF" stroke="#2C7BE5" stroke-width="1.5"/>
+        <circle cx="62" cy="148" r="3.5" fill="#2C7BE5"/>
+        <circle cx="95" cy="148" r="9" fill="#2C7BE5"/>
+        <text x="95" y="152" text-anchor="middle" font-size="9" fill="white" font-weight="bold">▶</text>
+
+        <!-- Highlight ring around first button (the one being used) -->
+        <rect x="31" y="89" width="27" height="21" rx="7" fill="none" stroke="#F5A623" stroke-width="2.2"/>
+
+        <!-- Dashed arrow down to label -->
+        <line x1="44" y1="111" x2="44" y2="175" stroke="#F5A623" stroke-width="1.5" stroke-dasharray="4,3"/>
+        <polygon points="44,178 40,172 48,172" fill="#F5A623"/>
+        <rect x="52" y="168" width="148" height="22" rx="8" fill="#FFF8EC" stroke="#F5D980" stroke-width="1"/>
+        <text x="126" y="183" text-anchor="middle" font-family="'Nunito',sans-serif" font-size="10" font-weight="700" fill="#B07A00">используется только это 🧅</text>
+
+        <!-- Floating feature tags (right side) -->
+        <rect x="168" y="24" width="68" height="19" rx="9" fill="#EBF3FF" stroke="#BAD6FF"/>
+        <text x="202" y="37" text-anchor="middle" font-family="'Nunito',sans-serif" font-size="9" font-weight="600" fill="#1749A0">Ассистент</text>
+        <rect x="246" y="24" width="60" height="19" rx="9" fill="#EBF3FF" stroke="#BAD6FF"/>
+        <text x="276" y="37" text-anchor="middle" font-family="'Nunito',sans-serif" font-size="9" font-weight="600" fill="#1749A0">Анализ</text>
+        <rect x="168" y="52" width="74" height="19" rx="9" fill="#EBF3FF" stroke="#BAD6FF"/>
+        <text x="205" y="65" text-anchor="middle" font-family="'Nunito',sans-serif" font-size="9" font-weight="600" fill="#1749A0">Автоматизация</text>
+        <rect x="252" y="52" width="72" height="19" rx="9" fill="#EBF3FF" stroke="#BAD6FF"/>
+        <text x="288" y="65" text-anchor="middle" font-family="'Nunito',sans-serif" font-size="9" font-weight="600" fill="#1749A0">Редактура</text>
+        <rect x="168" y="80" width="70" height="19" rx="9" fill="#EBF3FF" stroke="#BAD6FF"/>
+        <text x="203" y="93" text-anchor="middle" font-family="'Nunito',sans-serif" font-size="9" font-weight="600" fill="#1749A0">Память</text>
+        <rect x="248" y="80" width="62" height="19" rx="9" fill="#EBF3FF" stroke="#BAD6FF"/>
+        <text x="279" y="93" text-anchor="middle" font-family="'Nunito',sans-serif" font-size="9" font-weight="600" fill="#1749A0">Стиль</text>
+        <rect x="168" y="108" width="66" height="19" rx="9" fill="#EBF3FF" stroke="#BAD6FF"/>
+        <text x="201" y="121" text-anchor="middle" font-family="'Nunito',sans-serif" font-size="9" font-weight="600" fill="#1749A0">Документы</text>
+        <rect x="244" y="108" width="76" height="19" rx="9" fill="#EBF3FF" stroke="#BAD6FF"/>
+        <text x="282" y="121" text-anchor="middle" font-family="'Nunito',sans-serif" font-size="9" font-weight="600" fill="#1749A0">Голос → Текст</text>
+
+        <!-- Lines from tags to body -->
+        <line x1="168" y1="33" x2="150" y2="60" stroke="#BAD6FF" stroke-width=".8" opacity=".7"/>
+        <line x1="168" y1="62" x2="150" y2="80" stroke="#BAD6FF" stroke-width=".8" opacity=".7"/>
+        <line x1="168" y1="90" x2="150" y2="100" stroke="#BAD6FF" stroke-width=".8" opacity=".7"/>
+        <line x1="168" y1="117" x2="150" y2="120" stroke="#BAD6FF" stroke-width=".8" opacity=".7"/>
+      </svg>
     </div>
-    <div class="ai-cat ai-cat-p">
-      <div class="ai-cat-lbl">Визуальные</div>
-      <div class="ai-cat-title">Изображения / видео</div>
-      <ul class="ai-items">
-        <li><span class="ai-dot"></span>Midjourney</li>
-        <li><span class="ai-dot"></span>DALL-E</li>
-        <li><span class="ai-dot"></span>NanoBanana</li>
-        <li><span class="ai-dot"></span>Suno</li>
-        <li><span class="ai-dot"></span>Sora</li>
-      </ul>
-    </div>
-    <div class="ai-cat ai-cat-a">
-      <div class="ai-cat-lbl">Агрегаторы</div>
-      <div class="ai-cat-title">Много моделей сразу</div>
-      <ul class="ai-items">
-        <li><span class="ai-dot"></span>Perplexity</li>
-        <li><span class="ai-dot"></span>Poe</li>
-        <li><span class="ai-dot"></span>You.com</li>
-      </ul>
-      <p style="font-size:11px;color:var(--amber);margin-top:8px;font-weight:600;">Для экспериментов — ок.<br>Для работы — проигрывают.</p>
+
+    <div class="bm-grid">
+      <div class="bm-box bm-l">
+        <div class="bm-lbl">Что умеет ИИ</div>
+        <ul class="bm-list">
+          <li><span class="fd"></span>Писать тексты в вашем стиле</li>
+          <li><span class="fd"></span>Анализировать документы</li>
+          <li><span class="fd"></span>Помнить ваш контекст</li>
+          <li><span class="fd"></span>Автоматизировать процессы</li>
+          <li><span class="fd"></span>Думать вместе с вами</li>
+          <li><span class="fd"></span>Быть ассистентом 24/7</li>
+        </ul>
+      </div>
+      <div class="bm-arrow">→</div>
+      <div class="bm-box bm-r">
+        <div class="bm-lbl">Как используют сейчас</div>
+        <ul class="bm-list">
+          <li><span class="fd"></span>«Напиши мне пост»</li>
+        </ul>
+        <p style="margin-top:10px; color:var(--amber);">И когда получают что-то среднее — разочаровываются и закрывают.</p>
+      </div>
     </div>
   </div>
 
-  <div class="ins ia">
-    <div class="lbl">Почему «Claude в Perplexity» — не Claude</div>
-    <p>Вы получаете только языковую модель — «голову» без всего остального. Проекты, память, файлы, инструкции — всего этого в агрегаторе нет. Как двигатель Ferrari в другой машине: мощность та же, возможности — другие.</p>
+  <div class="ins it">
+    <div class="lbl">Главная мысль</div>
+    <p>Это не инструмент заменяет вас — это инструмент, который вы ещё не научились использовать на полную. На интенсиве мы это изменим.</p>
   </div>
 </div>
 
-<div class="div"></div>
-
-<!-- ══ СЕКЦИЯ 2: ПОЧЕМУ CLAUDE ══ -->
+<!-- ══ БЛОК 2: ИСТОРИИ ══ -->
 <div class="sec">
   <div class="sec-head">
-    <div class="sec-num nb">2</div>
-    <div><div class="sec-title">Почему Claude</div><div class="sec-sub">Факты и личный опыт</div></div>
+    <div class="sec-num nt">2</div>
+    <div><div class="sec-title">Кто и что уже делегирует</div><div class="sec-sub">Реальные примеры из разных сфер</div></div>
   </div>
 
-  <div class="facts-grid">
-    <div class="fact">
-      <span class="fact-ico">🎯</span>
-      <div class="fact-title">Точно следует инструкциям</div>
-      <div class="fact-desc">Написали инструкцию из 10 пунктов — выполнит все 10. Другие модели часто «теряют» пункты 7–10.</div>
+  <div class="stories-grid">
+    <div class="story">
+      <div class="story-top">
+        <div class="s-ico" style="background:#EBF3FF;">📋</div>
+        <div><div class="s-who">Консультант / коуч</div><div class="s-role">Специалист с встречами</div></div>
+      </div>
+      <div class="s-before">Раньше: 3 часа на подготовку материалов к каждой встрече</div>
+      <div class="s-after">Теперь 30 минут. Освободившееся время — на саму встречу и клиента</div>
     </div>
-    <div class="fact">
-      <span class="fact-ico">📄</span>
-      <div class="fact-title">Большой контекст без потерь</div>
-      <div class="fact-desc">200 000 токенов — около 500 страниц. Работает с длинными документами не «забывая» начало.</div>
+    <div class="story">
+      <div class="story-top">
+        <div class="s-ico" style="background:#E5FAF7;">🔧</div>
+        <div><div class="s-who">Мастер / подрядчик</div><div class="s-role">Физическая профессия</div></div>
+      </div>
+      <div class="s-before">Раньше: переписка, сметы и соцсети отнимали вечера</div>
+      <div class="s-after">Claude ведёт переписку и считает сметы. Руки — заняты делом</div>
     </div>
-    <div class="fact">
-      <span class="fact-ico">✍</span>
-      <div class="fact-title">Пишет в вашем стиле</div>
-      <div class="fact-desc">Даёте свои тексты как примеры — отвечает так, что звучит как вы. Не «нейросетевым» языком.</div>
+    <div class="story">
+      <div class="story-top">
+        <div class="s-ico" style="background:#FFF0F6;">✍</div>
+        <div><div class="s-who">Эксперт с курсом</div><div class="s-role">Методолог / тренер</div></div>
+      </div>
+      <div class="s-before">Раньше: знания были, но упиралась в пустой экран</div>
+      <div class="s-after">Надиктовывает голосом → Claude собирает структуру → она дорабатывает. Курс вышел.</div>
     </div>
-    <div class="fact">
-      <span class="fact-ico">❓</span>
-      <div class="fact-title">Спрашивает, если не понял</div>
-      <div class="fact-desc">Не угадывает и не выдаёт что попало. Задаёт уточняющий вопрос — меньше итераций.</div>
+    <div class="story">
+      <div class="story-top">
+        <div class="s-ico" style="background:#FFFBEC;">💼</div>
+        <div><div class="s-who">Предпринимательница</div><div class="s-role">Малый бизнес / фриланс</div></div>
+      </div>
+      <div class="s-before">Раньше: коммерческие предложения писала по 2 часа каждое</div>
+      <div class="s-after">Объясняет задачу голосом → черновик за 5 минут → правит 15 мин</div>
+    </div>
+    <div class="story">
+      <div class="story-top">
+        <div class="s-ico" style="background:#EBF3FF;">👩‍👧</div>
+        <div><div class="s-who">Мама с насыщенной жизнью</div><div class="s-role">Организатор / родитель</div></div>
+      </div>
+      <div class="s-before">Раньше: планирование, поиск активностей, разбор сложных вопросов</div>
+      <div class="s-after">Claude помогает с меню, идеями и объясняет сложное простым языком</div>
+    </div>
+    <div class="story">
+      <div class="story-top">
+        <div class="s-ico" style="background:#E5FAF7;">🎨</div>
+        <div><div class="s-who">Контент / SMM / дизайнер</div><div class="s-role">Творческая сфера</div></div>
+      </div>
+      <div class="s-before">Раньше: творческий блок, редактура и структурирование ели время</div>
+      <div class="s-after">Claude помогает выйти из блока и редактирует в нужном тоне</div>
     </div>
   </div>
 
   <div class="ins ib">
-    <div class="lbl">Где Claude не лучший</div>
-    <p>Актуальная информация из интернета → Perplexity. Генерация изображений → Midjourney / DALL-E.</p>
-  </div>
-
-  <div style="text-align:center; margin-bottom:6px;">
-    <button class="btn-understood" id="btn-understood" onclick="markUnderstood()">
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      Понял(а) — почему Claude
-    </button>
+    <div class="lbl">Общий принцип</div>
+    <p>Во всех этих историях AI не сделал работу за них. Он освободил ресурс — время, энергию, смелость — на то, что откладывалось или казалось недостижимым.</p>
   </div>
 </div>
 
 <div class="div"></div>
 
-<!-- ══ СЕКЦИЯ 3: ТРИ ПРАВИЛА ══ -->
+<!-- ══ БЛОК 3: БАРЬЕРЫ ══ -->
 <div class="sec">
   <div class="sec-head">
     <div class="sec-num np">3</div>
-    <div><div class="sec-title">Три правила хорошего запроса</div><div class="sec-sub">Применяйте по очереди — смотрите, как меняется результат</div></div>
+    <div><div class="sec-title">Что обычно мешает начать</div><div class="sec-sub">Нажмите на карточку, если узнали себя</div></div>
   </div>
 
-  <div class="rules-flow">
-    <div class="rule">
-      <div class="rule-n">1</div>
-      <div>
-        <div class="rule-title">Дайте роль</div>
-        <div class="rule-desc">Скажите Claude, кем он должен быть в этом разговоре — какой специалист, с каким опытом.</div>
-        <div class="rule-eg">❌ «Напиши пост»<br>✅ <strong>«Ты — опытный маркетолог, специализируешься на малом бизнесе в сфере услуг. Напиши пост...»</strong></div>
-      </div>
+  <div class="b-grid">
+    <div class="bc" onclick="toggleBarrier(this,'b1')" data-ins="Время не освобождается само — начать надо сейчас">
+      <div class="bc-check"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="bc-q">«Разберусь, когда будет время»</div>
+      <div class="bc-a">Время не появляется само. Каждый день «потом» — это потраченные часы, которые могли пойти на важное. То, что вы здесь — уже первый шаг.</div>
     </div>
-    <div class="rule">
-      <div class="rule-n">2</div>
-      <div>
-        <div class="rule-title">Дайте всю нужную информацию</div>
-        <div class="rule-desc">Кто ваша аудитория? Зачем этот текст? Что важно учесть? Чем больше — тем точнее результат.</div>
-        <div class="rule-eg">✅ <strong>«Моя аудитория — женщины 30–45, малый бизнес. Задача поста — показать экспертизу. Важно: живой тон, без клише.»</strong></div>
-      </div>
+    <div class="bc" onclick="toggleBarrier(this,'b2')" data-ins="ИИ нужен чтобы делать то, на что не хватало сил">
+      <div class="bc-check"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="bc-q">«Я и так справляюсь»</div>
+      <div class="bc-a">Справляетесь — да. Но что вы не делаете, потому что не хватает времени? Курс? Контент? Просто больше пространства для себя?</div>
     </div>
-    <div class="rule">
-      <div class="rule-n">3</div>
-      <div>
-        <div class="rule-title">Будьте конкретны в деталях</div>
-        <div class="rule-desc">Формат, длина, платформа, структура, что должно быть в начале и конце.</div>
-        <div class="rule-eg">✅ <strong>«Instagram, 150 слов, разговорный тон, начни с вопроса к читателю, в конце — один конкретный призыв.»</strong></div>
-      </div>
+    <div class="bc" onclick="toggleBarrier(this,'b3')" data-ins="Плохой результат — проблема запроса, не инструмента">
+      <div class="bc-check"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="bc-q">«Пробовала — не устроило»</div>
+      <div class="bc-a">Получили безликий ответ — это почти всегда проблема запроса, не Claude. Именно это мы разберём на интенсиве. У вас уже есть точка сравнения.</div>
+    </div>
+    <div class="bc" onclick="toggleBarrier(this,'b4')" data-ins="ИИ специально обучают для не-технарей — это просто разговор">
+      <div class="bc-check"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="bc-q">«Я не технарь»</div>
+      <div class="bc-a">Claude — это разговор обычным текстом. Никаких кодов и команд. Пишете, как пишете сообщение подруге. ИИ специально обучают для не-технарей.</div>
     </div>
   </div>
 
-  <div class="ins it">
-    <div class="lbl">Ключевой принцип итераций</div>
-    <p>Первый ответ Claude — это черновик, начало диалога, а не финал. Уточняйте, возражайте, направляйте — как с живым человеком. За 2–3 итерации из среднего ответа вырастает именно то, что нужно.</p>
+  <div class="ins ip" style="margin-top:10px;">
+    <div class="lbl">Про «стать зависимее»</div>
+    <p>Работа с ИИ не делает вас зависимее или поверхностнее. Когда объясняете задачу Claude — вы сами формулируете, чего хотите. Мысли структурируются. Люди говорят: «стала лучше понимать свои задачи».</p>
   </div>
 </div>
 
 <div class="div"></div>
 
-<!-- ══ СЕКЦИЯ 4: АРСЕНАЛ ══ -->
+<!-- ══ БЛОК 4: ИИ > ЧАТ ══ -->
 <div class="sec">
   <div class="sec-head">
     <div class="sec-num nt">4</div>
-    <div><div class="sec-title">Лайфхаки улучшения ответов</div><div class="sec-sub">Нажмите кнопку копирования — вставляйте прямо в Claude</div></div>
-  </div>
-
-
-
-  <div class="arsenal-grid">
-    <div class="ar-card">
-      <div class="ar-situation">Ответ слишком общий</div>
-      <div class="ar-title">Добавить информацию</div>
-      <div class="ar-prompt" id="ap1">«Я работаю в сфере [X], аудитория [Y], цель [Z]. Перепиши с учётом этого.»</div>
-      <button class="copy-btn" onclick="copyAr('ap1',this)"><svg viewBox="0 0 11 11" fill="none"><rect x="1" y="3" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M3 3V2a1 1 0 011-1h5a1 1 0 011 1v5a1 1 0 01-1 1H8" stroke="currentColor" stroke-width="1.3"/></svg>Скопировать</button>
-    </div>
-    <div class="ar-card">
-      <div class="ar-situation">Формат или тон не тот</div>
-      <div class="ar-title">Показать пример</div>
-      <div class="ar-prompt" id="ap2">«Вот пример, который мне нравится: [вставить]. Сделай похожим образом.»</div>
-      <button class="copy-btn" onclick="copyAr('ap2',this)"><svg viewBox="0 0 11 11" fill="none"><rect x="1" y="3" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M3 3V2a1 1 0 011-1h5a1 1 0 011 1v5a1 1 0 01-1 1H8" stroke="currentColor" stroke-width="1.3"/></svg>Скопировать</button>
-    </div>
-    <div class="ar-card">
-      <div class="ar-situation">Слишком длинно / коротко</div>
-      <div class="ar-title">Задать рамки</div>
-      <div class="ar-prompt" id="ap3">«Сократи до 3 абзацев» / «Не более 80 слов» / «Разверни второй пункт.»</div>
-      <button class="copy-btn" onclick="copyAr('ap3',this)"><svg viewBox="0 0 11 11" fill="none"><rect x="1" y="3" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M3 3V2a1 1 0 011-1h5a1 1 0 011 1v5a1 1 0 01-1 1H8" stroke="currentColor" stroke-width="1.3"/></svg>Скопировать</button>
-    </div>
-    <div class="ar-card">
-      <div class="ar-situation">Задача сложная, «плавает»</div>
-      <div class="ar-title">Разбить на шаги</div>
-      <div class="ar-prompt" id="ap4">«Давай по шагам. Сначала только [шаг 1]. Когда закончишь — скажи.»</div>
-      <button class="copy-btn" onclick="copyAr('ap4',this)"><svg viewBox="0 0 11 11" fill="none"><rect x="1" y="3" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M3 3V2a1 1 0 011-1h5a1 1 0 011 1v5a1 1 0 01-1 1H8" stroke="currentColor" stroke-width="1.3"/></svg>Скопировать</button>
-    </div>
-    <div class="ar-card">
-      <div class="ar-situation">Нужна глубже аналитика</div>
-      <div class="ar-title">Попросить думать вслух</div>
-      <div class="ar-prompt" id="ap5">«Прежде чем отвечать — подумай: какие варианты есть и почему именно этот?»</div>
-      <button class="copy-btn" onclick="copyAr('ap5',this)"><svg viewBox="0 0 11 11" fill="none"><rect x="1" y="3" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M3 3V2a1 1 0 011-1h5a1 1 0 011 1v5a1 1 0 01-1 1H8" stroke="currentColor" stroke-width="1.3"/></svg>Скопировать</button>
-    </div>
-    <div class="ar-card">
-      <div class="ar-situation">Хочу найти слабые места</div>
-      <div class="ar-title">Подключить критика</div>
-      <div class="ar-prompt" id="ap6">«Переключись в режим строгого критика. Найди три главных слабых места в этом тексте.»</div>
-      <button class="copy-btn" onclick="copyAr('ap6',this)"><svg viewBox="0 0 11 11" fill="none"><rect x="1" y="3" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M3 3V2a1 1 0 011-1h5a1 1 0 011 1v5a1 1 0 01-1 1H8" stroke="currentColor" stroke-width="1.3"/></svg>Скопировать</button>
-    </div>
-    <div class="ar-card">
-      <div class="ar-situation">Хочу взгляд со стороны</div>
-      <div class="ar-title">Глазами читателя / клиента</div>
-      <div class="ar-prompt" id="ap7">«Ответь от лица моего клиента, который это прочитал. Что почувствовал? Что зацепило, что оттолкнуло?»</div>
-      <button class="copy-btn" onclick="copyAr('ap7',this)"><svg viewBox="0 0 11 11" fill="none"><rect x="1" y="3" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M3 3V2a1 1 0 011-1h5a1 1 0 011 1v5a1 1 0 01-1 1H8" stroke="currentColor" stroke-width="1.3"/></svg>Скопировать</button>
-    </div>
-    <div class="ar-card">
-      <div class="ar-situation">Не знаю, как сформулировать</div>
-      <div class="ar-title">Секретный приём</div>
-      <div class="ar-prompt" id="ap8">«Я хочу сделать [X]. Помоги написать для этого хороший запрос — что тебе нужно знать?»</div>
-      <button class="copy-btn" onclick="copyAr('ap8',this)"><svg viewBox="0 0 11 11" fill="none"><rect x="1" y="3" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M3 3V2a1 1 0 011-1h5a1 1 0 011 1v5a1 1 0 01-1 1H8" stroke="currentColor" stroke-width="1.3"/></svg>Скопировать</button>
-    </div>
-  </div>
-</div>
-
-<div class="div"></div>
-
-<!-- ══ СЕКЦИЯ 5: ПРАКТИКА 1 ══ -->
-<div class="sec">
-  <div class="sec-head">
-    <div class="sec-num np">5</div>
-    <div><div class="sec-title">Практика 1: где Claude поможет именно вам</div><div class="sec-sub">Выполните три шага — это ваша персональная точка входа</div></div>
-  </div>
-
-  <div class="ins iv">
-    <div class="lbl">Голосовой ввод — ускоряет в 4–5 раз</div>
-    <p>Надиктовывайте голосом через Aquavoice или режим диктовки на телефоне. Мысли не нужно «переводить» в буквы — поток сохраняется. Вставляете готовый текст в Claude.</p>
-  </div>
-
-  <div class="card" style="padding:0;overflow:hidden;">
-    <ul class="prac-steps" style="padding:0 4px;">
-      <li style="padding:14px 16px;">
-        <div class="cbox" id="p1c1" onclick="tckP('p1c1','p1w1')"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div id="p1w1">
-          <div class="ps-t">Шаг 1 — надиктовать всё о себе</div>
-          <div class="ps-d">Голосом или текстом расскажите: кто вы, как выглядит ваш день, что отнимает время, что раздражает, чего хочется больше.</div>
-        </div>
-      </li>
-      <li style="padding:14px 16px;">
-        <div class="cbox" id="p1c2" onclick="tckP('p1c2','p1w2')"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div id="p1w2">
-          <div class="ps-t">Шаг 2 — отправить в Claude с запросом</div>
-          <div class="ps-prompt">«Вот информация обо мне. Помоги понять: в каких конкретных задачах Claude мог бы мне помочь прямо сейчас? Не общие слова — конкретно: вот эту задачу можно решить вот так. Дай 5–7 применений под мою ситуацию.»</div>
-        </div>
-      </li>
-      <li style="padding:14px 16px; border-bottom:none;">
-        <div class="cbox" id="p1c3" onclick="tckP('p1c3','p1w3')"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div id="p1w3">
-          <div class="ps-t">Шаг 3 — прочитать и отметить главное</div>
-          <div class="ps-d">Что удивило? Что совпало с тем, что и так знали? Какие 2–3 применения хочется попробовать первыми?</div>
-        </div>
-      </li>
-    </ul>
-  </div>
-</div>
-
-<div class="div"></div>
-
-<!-- ══ СЕКЦИЯ 6: ТРИ РЕЖИМА И ПРОЕКТЫ ══ -->
-<div class="sec">
-  <div class="sec-head">
-    <div class="sec-num nb">6</div>
-    <div><div class="sec-title">Три режима работы с Claude</div><div class="sec-sub">От одиночного запроса — к системе</div></div>
-  </div>
-
-  <div class="modes3">
-    <div class="m3">
-      <span class="m3-ico">🎯</span>
-      <div class="m3-name">Поручить</div>
-      <div class="m3-desc">Конкретная задача → Claude выполняет. Быстро, для разовых дел.</div>
-      <div class="m3-tech">Одноразовые чаты</div>
-    </div>
-    <div class="m3">
-      <span class="m3-ico">💬</span>
-      <div class="m3-name">Думать вместе</div>
-      <div class="m3-desc">Набрасываете идею → он разворачивает → вы корректируете.</div>
-      <div class="m3-tech">Диалог и итерации</div>
-    </div>
-    <div class="m3">
-      <span class="m3-ico">⚙</span>
-      <div class="m3-name">Работает на вас</div>
-      <div class="m3-desc">Один раз настроили — помнит ваш контекст при каждом обращении.</div>
-      <div class="m3-tech">Проекты</div>
-    </div>
+    <div><div class="sec-title">ИИ — это больше, чем чат</div><div class="sec-sub">От поисковика к системе работы</div></div>
   </div>
 
   <div class="card">
-    <div class="tag tb">Что такое проект</div>
-    <ul class="list-nice">
-      <li><span class="li-dot">✦</span><span><strong>Пространство с памятью</strong> — один раз написали инструкцию, Claude помнит её в каждом чате внутри проекта</span></li>
-      <li><span class="li-dot">✦</span><span><strong>Прикреплённые файлы</strong> — загружаете материалы один раз, они доступны в любом разговоре</span></li>
-      <li><span class="li-dot">✦</span><span><strong>Экономия на повторениях</strong> — не нужно каждый раз объяснять, кто вы и в каком стиле писать</span></li>
-      <li><span class="li-dot">✦</span><span><strong>Системная работа</strong> — можно создать методолога, маркетолога, редактора, наставника — и обращаться к нужному</span></li>
-    </ul>
+    <p>Большинство думают о нейросети как о чате: написал вопрос → получил ответ → закрыл. Как умный поисковик. И да, это работает — но это лишь верхний слой.</p>
+    <p><strong>На самом деле это возможность выстроить свою систему работы</strong> — под ваши задачи, ваш стиль, ваши приоритеты.</p>
   </div>
 
   <div class="ins ib">
-    <div class="lbl">Обратный промт-инжиниринг</div>
-    <p>Нравится, как какой-то автор или эксперт работает? Дайте Claude 5 примеров его материалов и попросите создать инструкцию в этом стиле. Получаете ассистента, уже настроенного на то, что вам нравится.</p>
-  </div>
-</div>
-
-<div class="div"></div>
-
-<!-- ══ СЕКЦИЯ 7: ПРАКТИКА 2 ══ -->
-<div class="sec">
-  <div class="sec-head">
-    <div class="sec-num nt">7</div>
-    <div><div class="sec-title">Практика 2: первый проект</div><div class="sec-sub">Выберите способ создания инструкции и создайте своего первого ассистента</div></div>
+    <div class="lbl">С чем мы работаем на интенсиве</div>
+    <p>Мы работаем с <strong>Claude</strong> — на сегодняшний день это один из лучших инструментов для работы с текстом, мышлением и задачами. Он точнее следует инструкциям, лучше удерживает суть длинного разговора и пишет живее, чем большинство аналогов. Именно поэтому — он в центре интенсива.</p>
   </div>
 
-  <div class="methods">
-    <div class="method">
-      <div class="method-n">Способ 1</div>
-      <div class="method-title">Промт-инженер</div>
-      <div class="method-desc">Claude сам задаёт вам вопросы и собирает из ваших ответов готовую инструкцию.</div>
-      <div class="method-when">✓ Если знаете, что хотите, но не знаете как сформулировать</div>
-      <div class="method-prompt">«Ты — эксперт по написанию инструкций для AI-ассистентов. Я хочу создать проект в Claude под задачу [задача]. Задай мне уточняющие вопросы — что нужно знать, чтобы написать хорошую инструкцию? Потом напиши готовую инструкцию.»</div>
-    </div>
-    <div class="method">
-      <div class="method-n">Способ 2</div>
-      <div class="method-title">Обратный промт-инжиниринг</div>
-      <div class="method-desc">Даёте Claude примеры того, что вам нравится — он создаёт инструкцию по образцу.</div>
-      <div class="method-when">✓ Если есть примеры нужного стиля или подхода</div>
-      <div class="method-prompt">«Вот примеры текстов в стиле, который мне нравится: [примеры]. На основе этого создай инструкцию для моего ассистента, который будет работать в похожем стиле.»</div>
-    </div>
-  </div>
-
-  <div class="card" style="padding:0;overflow:hidden;">
-    <ul class="prac-steps" style="padding:0 4px;">
-      <li style="padding:14px 16px;">
-        <div class="cbox" id="p2c1" onclick="tckP('p2c1','p2w1')"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div id="p2w1">
-          <div class="ps-t">Шаг 1 — выбрать способ и создать инструкцию</div>
-          <div class="ps-d">Способ 1 (промт-инженер) или Способ 2 (обратный). Используйте один из промтов выше.</div>
-        </div>
-      </li>
-      <li style="padding:14px 16px;">
-        <div class="cbox" id="p2c2" onclick="tckP('p2c2','p2w2')"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div id="p2w2">
-          <div class="ps-t">Шаг 2 — скопировать инструкцию в новый проект</div>
-          <div class="ps-d">Claude → левый сайдбар → «Новый проект» → вставить инструкцию в поле описания проекта.</div>
-        </div>
-      </li>
-      <li style="padding:14px 16px; border-bottom:none;">
-        <div class="cbox" id="p2c3" onclick="tckP('p2c3','p2w3')"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div id="p2w3">
-          <div class="ps-t">Шаг 3 — задать первый настоящий вопрос</div>
-          <div class="ps-d">Не тестовый — настоящий. То, что вам сейчас реально важно. Инструкцию можно и нужно дорабатывать — он будет становиться точнее.</div>
-        </div>
-      </li>
+  <div class="card mb8">
+    <div class="tag tt">Что это значит на практике</div>
+    <ul class="list-nice">
+      <li><span class="li-dot">✦</span><span><strong>Ассистенты под ваши задачи</strong> — настраиваете один раз, они помнят контекст при каждом обращении</span></li>
+      <li><span class="li-dot">✦</span><span><strong>Работа с документами</strong> — загружаете файлы, Claude работает с ними в разных чатах</span></li>
+      <li><span class="li-dot">✦</span><span><strong>Автоматизация повторяющегося</strong> — всё, что отнимает силы без отдачи</span></li>
+      <li><span class="li-dot">✦</span><span><strong>Это процесс, а не установка</strong> — на интенсиве база, дальше в своём темпе</span></li>
     </ul>
   </div>
 
-  <div class="ins it">
-    <div class="lbl">Что создали на интенсиве</div>
-    <p>Один раз настроили — и каждый следующий разговор начинается уже с пониманием вашего контекста. Это и есть режим «Работает на вас».</p>
+  <div class="card">
+    <div class="tag tb">Три режима работы</div>
+    <div class="modes">
+      <div class="mode">
+        <span class="mode-ico">🎯</span>
+        <div class="mode-name">Поручить</div>
+        <div class="mode-desc">Конкретная задача → Claude выполняет</div>
+      </div>
+      <div class="mode">
+        <span class="mode-ico">💬</span>
+        <div class="mode-name">Думать вместе</div>
+        <div class="mode-desc">Набрасываете → он разворачивает → вы корректируете</div>
+      </div>
+      <div class="mode">
+        <span class="mode-ico">⚙</span>
+        <div class="mode-name">Работает на вас</div>
+        <div class="mode-desc">Один раз настроили — помнит контекст всегда</div>
+      </div>
+    </div>
   </div>
 </div>
 
 <div class="div"></div>
 
-<!-- ══ СЕКЦИЯ 8: РЕФЛЕКС ══ -->
+<!-- ══ БЛОК 5: МОИ ИНСАЙТЫ ══ -->
 <div class="sec">
   <div class="sec-head">
-    <div class="sec-num np">8</div>
-    <div><div class="sec-title">Рефлекс и главный вывод</div><div class="sec-sub">Нажмите на осознания из интенсива — соберётся ваш список</div></div>
+    <div class="sec-num np">5</div>
+    <div><div class="sec-title">Что из этого урока осталось со мной</div><div class="sec-sub">Нажмите на то, что откликнулось — соберётся ваш список</div></div>
   </div>
 
-  <div class="special-card">
-    <div class="sc-label">Главный вывод интенсива</div>
-    <div class="sc-title">Стимул → реакция</div>
-    <div class="sc-text">Каждый раз, когда появляется задача — написать текст, придумать идею, разобраться в вопросе, подготовиться к разговору — первый импульс: открыть Claude и спросить. Не «сама быстро сделаю». Не «потом разберусь». Просто открыть и спросить. Это 30 секунд. Результат может сэкономить час.</div>
+  <div class="chips-hint">Это осознания из урока. Отметьте то, что почувствовали как своё.</div>
+  <div class="chips" id="chips">
+    <div class="ich" onclick="pick(this,'b')">Я открывал(а) ИИ ради одной кнопки — а там ещё двадцать девять</div>
+    <div class="ich" onclick="pick(this,'b')">У меня точно есть задачи, которые я делаю руками — хотя мог(ла) бы не делать</div>
+    <div class="ich" onclick="pick(this,'p')">Плохой ответ ИИ — не проблема инструмента, а знак, что стоит поработать с навыком постановки задач</div>
+    <div class="ich" onclick="pick(this,'p')">ИИ не думает вместо меня — он помогает мне думать лучше и быстрее</div>
+    <div class="ich" onclick="pick(this,'p')">Я откладывал(а) — но теперь полон(на) решимости действовать и погружаться</div>
+    <div class="ich" onclick="pick(this,'t')">Освоение ИИ — это навык, а не дар. Учится любой, даже не технарь</div>
+    <div class="ich" onclick="pick(this,'t')">Где-то в моей неделе есть время, которое можно освободить. Просто нужно его найти</div>
+    <div class="ich" onclick="pick(this,'t')">Начать работать с ИИ — не значит изучить всё сразу. Буду учиться постепенно</div>
   </div>
 
-  <div class="rchips" id="rchips">
-    <div class="rch" onclick="pickR(this,'b')">Первый ответ — черновик, а не финал</div>
-    <div class="rch" onclick="pickR(this,'b')">Плохой результат — был не тот запрос, не тот инструмент</div>
-    <div class="rch" onclick="pickR(this,'p')">Проект > чат для системной работы</div>
-    <div class="rch" onclick="pickR(this,'p')">Мой ассистент — это я, только быстрее</div>
-    <div class="rch" onclick="pickR(this,'t')">Я создал(а) первого ассистента сегодня</div>
-    <div class="rch" onclick="pickR(this,'t')">Голосовой ввод — беру в работу</div>
-    <div class="rch" onclick="pickR(this,'b')">Три правила запроса — запомнил(а)</div>
-    <div class="rch" onclick="pickR(this,'t')">Стимул-реакция начинается сегодня</div>
-  </div>
-
-  <div class="my-reflex">
-    <div class="mr-lbl">Моё из интенсива</div>
-    <div class="mr-items" id="mri">
-      <div class="mr-empty" id="mre">Нажмите на то, что откликнулось</div>
+  <div class="my-picks">
+    <div class="mp-lbl">Моё из этого урока</div>
+    <div class="mp-items" id="mpi">
+      <div class="mp-empty" id="mpe">Пока пусто — нажмите на то, что откликнулось</div>
     </div>
   </div>
-  <div style="font-size:12px;color:var(--g400);margin-bottom:12px;">💡 Сделайте скриншот, чтобы сохранить</div>
+  <div style="font-size:12px; color:var(--g400); margin-bottom:10px;">💡 Сделайте скриншот, чтобы сохранить</div>
+</div>
 
-  <div class="tw">
-    <div class="tw-lbl">До встречи на воркшопах</div>
-    <p>Открывайте воркбук, возвращайтесь к своему ассистенту, пробуйте. Рефлекс формируется за первую неделю — ловите себя на мысли «а может, спросить у Claude?» и делайте это. Раз. Второй. Третий.</p>
+<div class="div"></div>
+
+<!-- ══ БЛОК 6: ПОДГОТОВКА + ЧЕКЛИСТ ══ -->
+<div class="sec">
+  <div class="sec-head">
+    <div class="sec-num nt">✓</div>
+    <div><div class="sec-title">Чек-лист подготовки к интенсиву</div><div class="sec-sub">Отметьте и откройте гайд — всё в одном месте</div></div>
+  </div>
+
+  <div class="card" style="padding:0; overflow:hidden;">
+    <div class="prep-item" id="pi1">
+      <div class="pi-left">
+        <div class="cbox" id="c1" onclick="tck('c1','pi1')"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div>
+          <div class="cl-t">Зарегистрирован(а) в Claude</div>
+          <div class="cl-d">claude.ai — аккаунт через почту или Google</div>
+        </div>
+      </div>
+      <a class="btn-g" href="https://irinakleyman.github.io/neuro/claude-guide.html" target="_blank"><svg viewBox="0 0 12 12" fill="none"><path d="M1 6h10M7 2l4 4-4 4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>Гайд по регистрации</a>
+    </div>
+    <div class="prep-item" id="pi2">
+      <div class="pi-left">
+        <div class="cbox" id="c2" onclick="tck('c2','pi2')"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div>
+          <div class="cl-t">Голосовой ввод настроен</div>
+          <div class="cl-d">Aquavoice или режим диктовки — ускоряет в 4–5 раз</div>
+        </div>
+      </div>
+      <a class="btn-g" href="https://irinakleyman.github.io/neuro/voice-input-guide.html" target="_blank"><svg viewBox="0 0 12 12" fill="none"><path d="M1 6h10M7 2l4 4-4 4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>Гайд по голосовому вводу</a>
+    </div>
+    <div class="prep-item" style="border-bottom:none;" id="pi3">
+      <div class="pi-left">
+        <div class="cbox" id="c3" onclick="tck('c3','pi3')"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div>
+          <div class="cl-t">Вводный урок просмотрен до конца</div>
+          <div class="cl-d">Разобрался(лась) — зачем это и что мешало начать</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="notice" style="margin-top:10px;">
+    <p><strong>Если вы в России или Китае:</strong> доступ к Claude может потребовать VPN — это решаемо. Все принципы работы с ИИ, которые мы разберём, <strong>универсальны</strong> — работают в ChatGPT, Gemini и других инструментах.</p>
+  </div>
+
+  <div class="tw" style="margin-top:14px;">
+    <div class="tw-lbl">До встречи на интенсиве</div>
+    <p>Если вы откладывали — сегодня это заканчивается. Если сомневались — скоро будет ответ из собственного опыта. Если пробовали и разочаровались — сегодня будет другой опыт. Обещаю.</p>
   </div>
 </div>
 
-</div><!-- /page -->
+</div>
 
 <script>
-// ── PRACTICE CHECKBOXES ──
-const P1 = ['p1c1','p1c2','p1c3'];
-const P2 = ['p2c1','p2c2','p2c3'];
+const CBS = ['c1','c2','c3'];
 
-function tckP(id, wid) {
+function tck(id, wid) {
   document.getElementById(id).classList.toggle('on');
-  document.getElementById(wid).classList.toggle('done-p');
+  document.getElementById(wid).classList.toggle('done-wrap');
   upd();
 }
-
-// ── ARSENAL ──
-let arSaved = 0;
-function saveAr(card, id) {
-  const wasSaved = card.classList.contains('saved');
-  card.classList.toggle('saved');
-  arSaved = document.querySelectorAll('.ar-card.saved').length;
-  document.getElementById('saved-cnt').textContent = arSaved;
+function toggleBarrier(el, id) {
+  el.classList.toggle('on');
+  const ins = el.getAttribute('data-ins');
+  const pid = 'bar-' + id;
+  if (el.classList.contains('on')) addPick(pid, ins, 'p');
+  else removePick(pid);
   upd();
 }
-
-// ── REFLEX CHIPS ──
-function pickR(el, color) {
+function pick(el, color) {
   const text = el.textContent.trim();
-  const wasOn = el.classList.contains('rb') || el.classList.contains('rp') || el.classList.contains('rt');
-  el.classList.remove('rb','rp','rt');
-  const pid = 'r-' + text.substring(0,14).replace(/[\s()]/g,'');
+  const wasOn = el.classList.contains('pb') || el.classList.contains('pp') || el.classList.contains('pt');
+  el.classList.remove('pb','pp','pt');
+  const pid = 'chip-' + text.substring(0,14).replace(/[\s()]/g,'');
   if (!wasOn) {
-    el.classList.add('r'+color);
-    addR(pid, text, color);
+    el.classList.add('p' + color);
+    addPick(pid, text, color);
   } else {
-    removeR(pid);
+    removePick(pid);
   }
   upd();
 }
-function addR(id, text, color) {
-  removeR(id);
-  document.getElementById('mre').style.display='none';
+function addPick(id, text, color) {
+  removePick(id);
+  document.getElementById('mpe').style.display = 'none';
   const d = document.createElement('div');
-  d.className='mr-item'; d.id=id;
-  d.style.background = color==='p'?'var(--pink)':color==='t'?'var(--teal)':'var(--blue)';
-  d.textContent=text;
-  document.getElementById('mri').appendChild(d);
+  d.className = 'mp-item'; d.id = id;
+  const bg = color==='p'?'var(--pink)': color==='t'?'var(--teal)':'var(--blue)';
+  d.style.background = bg;
+  d.textContent = text;
+  document.getElementById('mpi').appendChild(d);
 }
-function removeR(id) {
+function removePick(id) {
   const el = document.getElementById(id);
   if (el) el.remove();
-  if (!document.querySelector('.mr-item')) document.getElementById('mre').style.display='';
+  if (!document.querySelector('.mp-item')) document.getElementById('mpe').style.display = '';
 }
-
-// ── PROGRESS ──
 function upd() {
-  const p1done = P1.every(id => document.getElementById(id).classList.contains('on'));
-  const arDone = arSaved >= 3;
-  const p2done = P2.every(id => document.getElementById(id).classList.contains('on'));
-  const rDone = document.querySelectorAll('.rch.rb,.rch.rp,.rch.rt').length >= 1;
-  const steps = [p1done, arDone, p2done, rDone];
-  const done = steps.filter(Boolean).length;
+  const barriers = document.querySelectorAll('.bc.on').length;
+  const chips = document.querySelectorAll('.ich.pb,.ich.pp,.ich.pt').length;
+  const s1 = (barriers >= 1 && chips >= 1) ? 1 : 0;
+  const s2 = document.getElementById('c1').classList.contains('on') ? 1 : 0;
+  const s3 = document.getElementById('c2').classList.contains('on') ? 1 : 0;
+  const s4 = document.getElementById('c3').classList.contains('on') ? 1 : 0;
+  const done = s1 + s2 + s3 + s4;
   const pct = done * 25;
-  document.getElementById('fill').style.width = pct+'%';
-  document.getElementById('pct').textContent = pct+'%';
-  ['d1','d2','d3','d4'].forEach((id,i) => {
+  document.getElementById('fill').style.width = pct + '%';
+  document.getElementById('pct').textContent = pct + '%';
+  function setDot(id, on) {
     const d = document.getElementById(id);
-    if (steps[i]) { d.classList.add('done'); d.classList.remove('active'); }
-    else if (i === steps.filter(Boolean).length) { d.classList.remove('done'); d.classList.add('active'); }
-    else { d.classList.remove('done','active'); }
-  });
-  if (pct===100 && !window._cf) { window._cf=true; confetti(); }
-  if (pct<100) window._cf=false;
+    if (on) { d.classList.add('done'); d.classList.remove('active'); }
+    else { d.classList.remove('done'); d.classList.toggle('active', true); }
+  }
+  setDot('d1', s1); setDot('d2', s2); setDot('d3', s3); setDot('d4', s4);
+  if (!s1) { document.getElementById('d1').classList.remove('done'); document.getElementById('d1').classList.add('active'); }
+  if (pct === 100 && !window._confettiFired) { window._confettiFired = true; launchConfetti(); }
+  if (pct < 100) window._confettiFired = false;
 }
 
 // ── CONFETTI ──
-function confetti() {
-  const c = document.createElement('canvas');
-  c.style.cssText='position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;';
-  document.body.appendChild(c);
-  const ctx=c.getContext('2d');
-  c.width=window.innerWidth; c.height=window.innerHeight;
-  const cols=['#2C7BE5','#D94B78','#18A98E','#F5A623','#7B5EA7','#FF6B6B'];
-  const ps=Array.from({length:130},()=>({
-    x:Math.random()*c.width, y:-20-Math.random()*120,
-    r:4+Math.random()*6, color:cols[Math.floor(Math.random()*cols.length)],
-    vx:(Math.random()-.5)*4, vy:2+Math.random()*4,
-    rot:Math.random()*360, rotV:(Math.random()-.5)*8,
-    shape:Math.random()>.5?'rect':'circle'
+function launchConfetti() {
+  const canvas = document.createElement('canvas');
+  canvas.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;';
+  document.body.appendChild(canvas);
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  const colors = ['#2C7BE5','#D94B78','#18A98E','#F5A623','#7B61FF','#FF6B6B'];
+  const particles = Array.from({length:120}, () => ({
+    x: Math.random() * canvas.width,
+    y: -20 - Math.random() * 100,
+    r: 4 + Math.random() * 6,
+    color: colors[Math.floor(Math.random()*colors.length)],
+    vx: (Math.random()-0.5)*4,
+    vy: 2 + Math.random()*4,
+    rot: Math.random()*360,
+    rotV: (Math.random()-0.5)*8,
+    shape: Math.random() > 0.5 ? 'rect' : 'circle'
   }));
-  let f=0;
+  let frame = 0;
   function draw() {
-    ctx.clearRect(0,0,c.width,c.height);
-    ps.forEach(p=>{
-      ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.rot*Math.PI/180);
-      ctx.fillStyle=p.color; ctx.globalAlpha=Math.max(0,1-f/190);
-      if(p.shape==='rect') ctx.fillRect(-p.r/2,-p.r/2,p.r,p.r*.6);
-      else{ctx.beginPath();ctx.arc(0,0,p.r/2,0,Math.PI*2);ctx.fill();}
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    particles.forEach(p => {
+      ctx.save();
+      ctx.translate(p.x, p.y);
+      ctx.rotate(p.rot * Math.PI/180);
+      ctx.fillStyle = p.color;
+      ctx.globalAlpha = Math.max(0, 1 - frame/180);
+      if (p.shape === 'rect') ctx.fillRect(-p.r/2, -p.r/2, p.r, p.r*0.6);
+      else { ctx.beginPath(); ctx.arc(0,0,p.r/2,0,Math.PI*2); ctx.fill(); }
       ctx.restore();
-      p.x+=p.vx; p.y+=p.vy; p.rot+=p.rotV; p.vy+=.08;
+      p.x += p.vx; p.y += p.vy; p.rot += p.rotV; p.vy += 0.08;
     });
-    f++;
-    if(f<210) requestAnimationFrame(draw); else c.remove();
+    frame++;
+    if (frame < 200) requestAnimationFrame(draw);
+    else canvas.remove();
   }
   draw();
 }
