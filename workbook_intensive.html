@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Конспект: Интенсив по Claude</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Exo+2:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing:border-box; margin:0; padding:0; font-style:normal; }
+:root {
+  --blue:#2C7BE5; --blue-l:#EBF3FF; --blue-m:#BAD6FF; --blue-d:#1749A0;
+  --pink:#D94B78; --pink-l:#FFF0F6; --pink-m:#F5BAD0;
+  --teal:#18A98E; --teal-l:#E5FAF7; --teal-m:rgba(24,169,142,.3);
+  --amber:#D98C0A; --amber-l:#FFF8EC; --amber-m:#F5D980;
+  --purple:#7B5EA7; --purple-l:#F3EEFF; --purple-m:#D4C2F5;
+  --g50:#F6F9FF; --g100:#EDF2FA; --g200:#D6E2F0;
+  --g400:#7A9AB8; --g500:#4D6A84; --g600:#3D5A73; --g700:#2A4358; --g800:#162F44;
+  --f:'Nunito',sans-serif; --fh:'Exo 2',sans-serif;
+  --r1:10px; --r2:16px; --r3:24px;
+  --s1:0 2px 12px rgba(44,123,229,.08); --s2:0 6px 28px rgba(44,123,229,.13);
+}
+body { font-family:var(--f); background:var(--g50); color:var(--g800); line-height:1.65; }
+.bg { position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:0; opacity:.3; }
+.page { position:relative; z-index:1; max-width:740px; margin:0 auto; padding:28px 18px 80px; }
+
+/* HEADER */
+.hdr { background:linear-gradient(140deg,#DCF0FF 0%,#EDE8FF 100%); border:1.5px solid #C8DFF8; border-radius:var(--r3); padding:30px 28px 24px; margin-bottom:14px; position:relative; overflow:hidden; }
+.hdr::after { content:''; position:absolute; top:-50px; right:-50px; width:220px; height:220px; border-radius:50%; background:radial-gradient(circle,rgba(123,94,167,.12) 0%,transparent 70%); }
+.badge { font-family:var(--fh); font-size:10px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:var(--blue); background:#fff; border:1px solid var(--blue-m); display:inline-block; padding:4px 12px; border-radius:20px; margin-bottom:12px; }
+.hdr h1 { font-family:var(--fh); font-size:24px; font-weight:800; color:var(--g800); line-height:1.2; margin-bottom:8px; }
+.hdr p { font-size:14px; color:var(--g600); max-width:500px; }
+.hdr-chips { display:flex; gap:10px; flex-wrap:wrap; margin-top:16px; }
+.chip { font-size:12px; font-weight:600; color:var(--g600); background:#fff; border:1px solid var(--g200); padding:5px 12px; border-radius:20px; }
+
+/* PROGRESS */
+.prog-wrap { background:#fff; border:1px solid var(--g200); border-radius:var(--r2); padding:16px 20px; margin-bottom:26px; box-shadow:var(--s1); }
+.prog-top { display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; }
+.prog-top span:first-child { font-family:var(--fh); font-size:11px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--g400); }
+.prog-pct { font-family:var(--fh); font-size:14px; font-weight:800; color:var(--blue); }
+.prog-track { height:8px; background:var(--g100); border-radius:99px; overflow:hidden; }
+.prog-fill { height:100%; border-radius:99px; background:linear-gradient(90deg,var(--blue) 0%,var(--pink) 100%); transition:width .5s; }
+.prog-legend { display:flex; gap:6px; margin-top:14px; justify-content:space-between; }
+.prog-leg-item { display:flex; flex-direction:column; align-items:center; gap:6px; flex:1; }
+.prog-leg-txt { font-size:10px; color:var(--g500); text-align:center; line-height:1.3; font-family:var(--fh); font-weight:600; }
+.prog-leg-txt span { font-weight:400; color:var(--g400); font-family:var(--f); }
+.sdot { width:30px; height:30px; border-radius:50%; border:2px solid var(--g200); background:#fff; color:var(--g400); font-family:var(--fh); font-size:11px; font-weight:700; display:flex; align-items:center; justify-content:center; transition:all .2s; }
+.sdot.active { border-color:var(--blue); color:var(--blue); }
+.sdot.done { background:var(--blue); border-color:var(--blue); color:#fff; }
+
+/* SECTION */
+.sec { margin-bottom:24px; }
+.sec-head { display:flex; align-items:center; gap:12px; margin-bottom:14px; }
+.sec-num { width:36px; height:36px; border-radius:11px; flex-shrink:0; font-family:var(--fh); font-size:15px; font-weight:800; display:flex; align-items:center; justify-content:center; color:#fff; }
+.nb{background:var(--blue)} .np{background:var(--pink)} .nt{background:var(--teal)} .na{background:#E09A1A} .nv{background:var(--purple)}
+.sec-title { font-family:var(--fh); font-size:17px; font-weight:700; color:var(--g800); }
+.sec-sub { font-size:12px; color:var(--g400); margin-top:2px; }
+
+/* CARD */
+.card { background:#fff; border:1px solid var(--g200); border-radius:var(--r2); padding:20px; box-shadow:var(--s1); margin-bottom:10px; }
+
+/* INSIGHT BOXES */
+.ins { border-radius:0 var(--r1) var(--r1) 0; padding:14px 16px; margin-bottom:10px; }
+.ib{background:var(--blue-l);border-left:4px solid var(--blue)}
+.ip{background:var(--pink-l);border-left:4px solid var(--pink)}
+.it{background:var(--teal-l);border-left:4px solid var(--teal)}
+.ia{background:var(--amber-l);border-left:4px solid #E09A1A}
+.iv{background:var(--purple-l);border-left:4px solid var(--purple)}
+.ins .lbl { font-family:var(--fh); font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.1em; margin-bottom:6px; }
+.ib .lbl{color:var(--blue)} .ip .lbl{color:var(--pink)} .it .lbl{color:var(--teal)} .ia .lbl{color:var(--amber)} .iv .lbl{color:var(--purple)}
+.ins p { font-size:14px; font-weight:600; color:var(--g800); line-height:1.5; }
+
+/* AI MAP */
+.ai-map { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-bottom:10px; }
+@media(max-width:520px){ .ai-map { grid-template-columns:1fr; } }
+.ai-cat { border-radius:var(--r2); padding:16px; }
+.ai-cat-b { background:var(--blue-l); border:1.5px solid var(--blue-m); }
+.ai-cat-p { background:var(--pink-l); border:1.5px solid var(--pink-m); }
+.ai-cat-a { background:var(--amber-l); border:1.5px solid var(--amber-m); }
+.ai-cat-lbl { font-family:var(--fh); font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.08em; margin-bottom:10px; }
+.ai-cat-b .ai-cat-lbl{color:var(--blue)} .ai-cat-p .ai-cat-lbl{color:var(--pink)} .ai-cat-a .ai-cat-lbl{color:var(--amber)}
+.ai-cat-title { font-family:var(--fh); font-size:13px; font-weight:700; color:var(--g800); margin-bottom:8px; }
+.ai-items { list-style:none; }
+.ai-items li { font-size:12px; color:var(--g700); padding:3px 0; border-bottom:1px solid rgba(44,123,229,.08); display:flex; align-items:center; gap:6px; }
+.ai-items li:last-child { border-bottom:none; }
+.ai-items li.main { font-weight:700; color:var(--blue); }
+.ai-dot { width:5px; height:5px; border-radius:50%; flex-shrink:0; }
+.ai-cat-b .ai-dot{background:var(--blue)} .ai-cat-p .ai-dot{background:var(--pink)} .ai-cat-a .ai-dot{background:#E09A1A}
+
+/* CLAUDE FACTS */
+.facts-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:10px; }
+@media(max-width:480px){ .facts-grid { grid-template-columns:1fr; } }
+.fact { background:#fff; border:1px solid var(--g200); border-radius:var(--r2); padding:16px; box-shadow:var(--s1); }
+.fact-ico { font-size:22px; margin-bottom:8px; display:block; }
+.fact-title { font-family:var(--fh); font-size:13px; font-weight:700; color:var(--g800); margin-bottom:4px; }
+.fact-desc { font-size:12px; color:var(--g600); line-height:1.45; }
+
+/* 3 RULES */
+.rules-flow { display:flex; flex-direction:column; gap:8px; margin-bottom:10px; }
+.rule { background:#fff; border:1px solid var(--g200); border-radius:var(--r2); padding:16px 18px; box-shadow:var(--s1); display:flex; gap:14px; align-items:flex-start; }
+.rule-n { width:32px; height:32px; border-radius:9px; flex-shrink:0; font-family:var(--fh); font-size:15px; font-weight:800; display:flex; align-items:center; justify-content:center; color:#fff; background:var(--blue); }
+.rule-title { font-family:var(--fh); font-size:14px; font-weight:700; color:var(--g800); margin-bottom:4px; }
+.rule-desc { font-size:13px; color:var(--g600); line-height:1.45; }
+.rule-eg { font-size:12px; color:var(--g500); margin-top:6px; padding:6px 10px; background:var(--g100); border-radius:var(--r1); line-height:1.4; }
+.rule-eg strong { color:var(--blue); }
+
+/* ARSENAL */
+.arsenal-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:10px; }
+@media(max-width:480px){ .arsenal-grid { grid-template-columns:1fr; } }
+.ar-card { background:#fff; border:1.5px solid var(--g200); border-radius:var(--r2); padding:14px 16px; box-shadow:var(--s1); cursor:pointer; transition:all .2s; position:relative; }
+.ar-card:hover { box-shadow:var(--s2); transform:translateY(-1px); }
+.ar-card.saved { border-color:var(--teal); background:var(--teal-l); }
+.ar-save { position:absolute; top:10px; right:10px; width:22px; height:22px; border-radius:50%; border:2px solid var(--g200); display:flex; align-items:center; justify-content:center; transition:all .2s; background:#fff; font-size:11px; color:var(--g400); }
+.ar-card.saved .ar-save { background:var(--teal); border-color:var(--teal); color:#fff; }
+.ar-situation { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.06em; color:var(--teal); margin-bottom:6px; font-family:var(--fh); }
+.ar-card.saved .ar-situation { color:var(--teal); }
+.ar-title { font-family:var(--fh); font-size:13px; font-weight:700; color:var(--g800); margin-bottom:6px; padding-right:26px; }
+.ar-prompt { font-size:11px; color:var(--g600); line-height:1.45; padding:6px 8px; background:var(--g100); border-radius:6px; font-family:monospace; }
+.ar-card.saved .ar-prompt { background:rgba(24,169,142,.08); }
+
+/* SPECIAL CARD */
+.special-card { background:linear-gradient(135deg,#1749A0 0%,var(--purple) 100%); border-radius:var(--r2); padding:18px 20px; color:#fff; margin-bottom:10px; position:relative; overflow:hidden; }
+.special-card::before { content:''; position:absolute; bottom:-20px; right:-20px; width:100px; height:100px; border-radius:50%; background:rgba(255,255,255,.08); }
+.sc-label { font-family:var(--fh); font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.12em; opacity:.65; margin-bottom:8px; }
+.sc-title { font-family:var(--fh); font-size:14px; font-weight:800; color:#fff; margin-bottom:6px; }
+.sc-text { font-size:13px; line-height:1.5; opacity:.9; color:#fff; }
+.sc-prompt { font-size:12px; background:rgba(255,255,255,.12); border-radius:8px; padding:10px 12px; margin-top:10px; line-height:1.5; color:#fff; font-family:monospace; }
+
+/* PRACTICES */
+.prac-steps { list-style:none; }
+.prac-steps li { display:flex; align-items:flex-start; gap:12px; padding:14px 0; border-bottom:1px solid var(--g100); }
+.prac-steps li:last-child { border-bottom:none; }
+.cbox { width:22px; height:22px; border-radius:6px; border:2px solid var(--g200); flex-shrink:0; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all .2s; background:#fff; margin-top:2px; }
+.cbox.on { background:var(--blue); border-color:var(--blue); }
+.cbox svg { opacity:0; transition:opacity .15s; }
+.cbox.on svg { opacity:1; }
+.ps-t { font-family:var(--fh); font-size:14px; font-weight:700; color:var(--g800); margin-bottom:4px; }
+.ps-d { font-size:13px; color:var(--g600); line-height:1.45; }
+.ps-prompt { font-size:12px; color:var(--g700); background:var(--g100); border-radius:var(--r1); padding:8px 10px; margin-top:8px; line-height:1.5; }
+.done-p .ps-t { text-decoration:line-through; color:var(--g400); }
+
+/* METHODS */
+.methods { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:10px; }
+@media(max-width:500px){ .methods { grid-template-columns:1fr; } }
+.method { background:#fff; border:1.5px solid var(--g200); border-radius:var(--r2); padding:16px; box-shadow:var(--s1); }
+.method-n { font-family:var(--fh); font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.08em; color:var(--g400); margin-bottom:6px; }
+.method-title { font-family:var(--fh); font-size:13px; font-weight:700; color:var(--g800); margin-bottom:6px; }
+.method-desc { font-size:12px; color:var(--g600); line-height:1.45; margin-bottom:8px; }
+.method-when { font-size:11px; font-weight:700; color:var(--teal); margin-bottom:4px; font-family:var(--fh); }
+.method-prompt { font-size:11px; color:var(--g700); background:var(--g100); border-radius:var(--r1); padding:8px 10px; line-height:1.5; font-family:monospace; }
+
+/* THREE MODES */
+.modes3 { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-bottom:10px; }
+@media(max-width:500px){ .modes3 { grid-template-columns:1fr; } }
+.m3 { background:#fff; border:1px solid var(--g200); border-radius:var(--r2); padding:16px 14px; text-align:center; box-shadow:var(--s1); }
+.m3-ico { font-size:26px; margin-bottom:8px; display:block; }
+.m3-name { font-family:var(--fh); font-size:13px; font-weight:700; color:var(--g800); margin-bottom:4px; }
+.m3-desc { font-size:11px; color:var(--g600); line-height:1.4; }
+.m3-tech { font-size:10px; font-weight:700; color:var(--blue); margin-top:6px; font-family:var(--fh); text-transform:uppercase; letter-spacing:.06em; }
+
+/* REFLEX CHIPS */
+.rchips { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:14px; }
+.rch { font-size:13px; font-weight:600; color:var(--g700); background:#fff; border:1.5px solid var(--g200); padding:8px 14px; border-radius:20px; cursor:pointer; transition:all .2s; line-height:1.3; }
+.rch:hover { border-color:var(--blue); color:var(--blue); }
+.rch.rb { background:var(--blue); border-color:var(--blue); color:#fff; }
+.rch.rp { background:var(--pink); border-color:var(--pink); color:#fff; }
+.rch.rt { background:var(--teal); border-color:var(--teal); color:#fff; }
+.my-reflex { background:var(--g100); border:1px dashed var(--g200); border-radius:var(--r2); padding:14px 16px; min-height:50px; margin-bottom:8px; }
+.mr-lbl { font-family:var(--fh); font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.08em; color:var(--g400); margin-bottom:8px; }
+.mr-items { display:flex; flex-wrap:wrap; gap:6px; }
+.mr-item { font-size:12px; font-weight:600; padding:5px 12px; border-radius:16px; color:#fff; }
+.mr-empty { font-size:13px; color:var(--g400); }
+
+/* PREP ITEM */
+.prep-item { display:flex; align-items:center; justify-content:space-between; gap:16px; padding:14px 18px; border-bottom:1px solid var(--g100); }
+.pi-left { display:flex; align-items:center; gap:12px; flex:1; min-width:0; }
+.prep-item .cbox { flex-shrink:0; }
+
+/* TAKEAWAY */
+.tw { background:linear-gradient(135deg,var(--blue) 0%,#153E9A 100%); border-radius:var(--r3); padding:24px; color:#fff; margin-bottom:10px; position:relative; overflow:hidden; }
+.tw::before { content:''; position:absolute; bottom:-30px; right:-30px; width:140px; height:140px; border-radius:50%; background:rgba(255,255,255,.06); }
+.tw-lbl { font-family:var(--fh); font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.12em; opacity:.65; margin-bottom:10px; }
+.tw p { font-family:var(--fh); font-size:15px; font-weight:700; line-height:1.45; position:relative; z-index:1; color:#fff; }
+
+/* TAG */
+.tag { display:inline-block; font-size:11px; font-weight:700; padding:3px 10px; border-radius:20px; font-family:var(--fh); text-transform:uppercase; letter-spacing:.06em; margin-bottom:10px; }
+.tb{background:var(--blue-l);color:var(--blue);border:1px solid var(--blue-m)}
+.tt{background:var(--teal-l);color:var(--teal);border:1px solid var(--teal-m)}
+.tp{background:var(--pink-l);color:var(--pink);border:1px solid var(--pink-m)}
+.tv{background:var(--purple-l);color:var(--purple);border:1px solid var(--purple-m)}
+
+/* SAVED COUNTER */
+.saved-hint { font-size:12px; color:var(--g400); margin-bottom:10px; }
+.saved-count { font-weight:700; color:var(--teal); }
+
+/* UNDERSTOOD BUTTON */
+.btn-understood { font-family:var(--fh); font-size:13px; font-weight:700; color:#fff; background:var(--blue); border:none; border-radius:20px; padding:10px 22px; cursor:pointer; display:inline-flex; align-items:center; gap:8px; transition:all .2s; box-shadow:0 2px 10px rgba(44,123,229,.3); }
+.btn-understood:hover { background:var(--blue-d); transform:translateY(-1px); }
+.btn-understood.done { background:var(--teal); box-shadow:0 2px 10px rgba(24,169,142,.3); }
+
+/* COPY BUTTON */
+.copy-btn { display:inline-flex; align-items:center; gap:5px; font-size:11px; font-weight:700; color:var(--blue); background:var(--blue-l); border:1px solid var(--blue-m); border-radius:16px; padding:5px 12px; cursor:pointer; margin-top:8px; transition:all .15s; }
+.copy-btn:hover { background:var(--blue); color:#fff; }
+.copy-btn.copied { background:var(--teal); border-color:var(--teal); color:#fff; }
+.copy-btn svg { width:11px; height:11px; }
+
+/* UTILS */
+p { font-size:14px; color:var(--g600); line-height:1.6; margin-bottom:8px; }
+p:last-child { margin-bottom:0; }
+strong { font-weight:700; color:var(--g800); }
+.div { height:1px; background:var(--g200); margin:6px 0 20px; }
+.list-nice { list-style:none; }
+.list-nice li { padding:8px 0; border-bottom:1px solid var(--g100); font-size:13px; color:var(--g700); display:flex; align-items:flex-start; gap:10px; }
+.list-nice li:last-child { border-bottom:none; }
+.li-dot { color:var(--teal); font-size:16px; flex-shrink:0; margin-top:-1px; }
+</style>
+</head>
+<body>
+
+<svg class="bg" viewBox="0 0 800 1400" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+  <circle cx="60" cy="100" r="3" fill="#2C7BE5"/><circle cx="740" cy="60" r="2.5" fill="#D94B78"/>
+  <circle cx="700" cy="350" r="2" fill="#18A98E"/><circle cx="80" cy="600" r="2" fill="#7B5EA7"/>
+  <circle cx="760" cy="700" r="3" fill="#2C7BE5"/><circle cx="40" cy="1000" r="2" fill="#D94B78"/>
+  <circle cx="730" cy="1200" r="2.5" fill="#18A98E"/>
+  <line x1="60" y1="100" x2="740" y2="60" stroke="#2C7BE5" stroke-width=".7" opacity=".18"/>
+  <line x1="700" y1="350" x2="760" y2="700" stroke="#18A98E" stroke-width=".7" opacity=".15"/>
+  <line x1="80" y1="600" x2="40" y2="1000" stroke="#7B5EA7" stroke-width=".6" opacity=".15"/>
+  <line x1="740" y1="60" x2="700" y2="350" stroke="#D94B78" stroke-width=".6" opacity=".14"/>
+</svg>
+
+<div class="page">
+
+<!-- HEADER -->
+<div class="hdr">
+  <div class="badge">Конспект · Интенсив</div>
+  <h1>Claude: от первого запроса<br>до виртуального ассистента</h1>
+  <p>Карта нейросетей, правила запросов, лайфхаки и техники, практики и рефлекс</p>
+  <div class="hdr-chips">
+    <div class="chip">⏱ 3 часа</div>
+    <div class="chip">🛠 2 практики</div>
+    <div class="chip">💡 8 техник итерации</div>
+    <div class="chip">⚙ Первый проект</div>
+  </div>
+</div>
+
+<!-- PROGRESS -->
+<div class="prog-wrap">
+  <div class="prog-top">
+    <span>Прогресс</span>
+    <span class="prog-pct" id="pct">0%</span>
+  </div>
+  <div class="prog-track"><div class="prog-fill" id="fill" style="width:0%"></div></div>
+  <div class="prog-legend">
+    <div class="prog-leg-item">
+      <div class="sdot active" id="d0">0</div>
+      <div class="prog-leg-txt">Обзор<br><span>понял(а)</span></div>
+    </div>
+    <div class="prog-leg-item">
+      <div class="sdot" id="d1">1</div>
+      <div class="prog-leg-txt">Практика 1<br><span>три шага</span></div>
+    </div>
+    <div class="prog-leg-item">
+      <div class="sdot" id="d2">2</div>
+      <div class="prog-leg-txt">Лайфхаки<br><span>3+ скопировано</span></div>
+    </div>
+    <div class="prog-leg-item">
+      <div class="sdot" id="d3">3</div>
+      <div class="prog-leg-txt">Практика 2<br><span>проект создан</span></div>
+    </div>
+    <div class="prog-leg-item">
+      <div class="sdot" id="d4">4</div>
+      <div class="prog-leg-txt">Рефлекс<br><span>осознания</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ СЕКЦИЯ 1: КАРТА НЕЙРОСЕТЕЙ ══ -->
+<div class="sec">
+  <div class="sec-head">
+    <div class="sec-num nb">1</div>
+    <div><div class="sec-title">Карта нейросетей</div><div class="sec-sub">Три категории — и почему это важно знать</div></div>
+  </div>
+
+  <div class="ai-map">
+    <div class="ai-cat ai-cat-b">
+      <div class="ai-cat-lbl">Языковые модели</div>
+      <div class="ai-cat-title">LLM</div>
+      <ul class="ai-items">
+        <li class="main"><span class="ai-dot"></span>Claude ← работаем здесь</li>
+        <li><span class="ai-dot"></span>ChatGPT</li>
+        <li><span class="ai-dot"></span>Gemini</li>
+        <li><span class="ai-dot"></span>DeepSeek</li>
+        <li><span class="ai-dot"></span>NotebookLM</li>
+      </ul>
+    </div>
+    <div class="ai-cat ai-cat-p">
+      <div class="ai-cat-lbl">Визуальные</div>
+      <div class="ai-cat-title">Изображения / видео</div>
+      <ul class="ai-items">
+        <li><span class="ai-dot"></span>Midjourney</li>
+        <li><span class="ai-dot"></span>DALL-E</li>
+        <li><span class="ai-dot"></span>NanoBanana</li>
+        <li><span class="ai-dot"></span>Suno</li>
+        <li><span class="ai-dot"></span>Sora</li>
+      </ul>
+    </div>
+    <div class="ai-cat ai-cat-a">
+      <div class="ai-cat-lbl">Агрегаторы</div>
+      <div class="ai-cat-title">Много моделей сразу</div>
+      <ul class="ai-items">
+        <li><span class="ai-dot"></span>Perplexity</li>
+        <li><span class="ai-dot"></span>Poe</li>
+        <li><span class="ai-dot"></span>You.com</li>
+      </ul>
+      <p style="font-size:11px;color:var(--amber);margin-top:8px;font-weight:600;">Для экспериментов — ок.<br>Для работы — проигрывают.</p>
+    </div>
+  </div>
+
+  <div class="ins ia">
+    <div class="lbl">Почему «Claude в Perplexity» — не Claude</div>
+    <p>Вы получаете только языковую модель — «голову» без всего остального. Проекты, память, файлы, инструкции — всего этого в агрегаторе нет. Как двигатель Ferrari в другой машине: мощность та же, возможности — другие.</p>
+  </div>
+</div>
+
+<div class="div"></div>
+
+<!-- ══ СЕКЦИЯ 2: ПОЧЕМУ CLAUDE ══ -->
+<div class="sec">
+  <div class="sec-head">
+    <div class="sec-num nb">2</div>
+    <div><div class="sec-title">Почему Claude</div><div class="sec-sub">Факты и личный опыт</div></div>
+  </div>
+
+  <div class="facts-grid">
+    <div class="fact">
+      <span class="fact-ico">🎯</span>
+      <div class="fact-title">Точно следует инструкциям</div>
+      <div class="fact-desc">Написали инструкцию из 10 пунктов — выполнит все 10. Другие модели часто «теряют» пункты 7–10.</div>
+    </div>
+    <div class="fact">
+      <span class="fact-ico">📄</span>
+      <div class="fact-title">Большой контекст без потерь</div>
+      <div class="fact-desc">200 000 токенов — около 500 страниц. Работает с длинными документами не «забывая» начало.</div>
+    </div>
+    <div class="fact">
+      <span class="fact-ico">✍</span>
+      <div class="fact-title">Пишет в вашем стиле</div>
+      <div class="fact-desc">Даёте свои тексты как примеры — отвечает так, что звучит как вы. Не «нейросетевым» языком.</div>
+    </div>
+    <div class="fact">
+      <span class="fact-ico">❓</span>
+      <div class="fact-title">Спрашивает, если не понял</div>
+      <div class="fact-desc">Не угадывает и не выдаёт что попало. Задаёт уточняющий вопрос — меньше итераций.</div>
+    </div>
+  </div>
+
+  <div class="ins ib">
+    <div class="lbl">Где Claude не лучший</div>
+    <p>Актуальная информация из интернета → Perplexity. Генерация изображений → Midjourney / DALL-E.</p>
+  </div>
+
+  <div style="text-align:center; margin-bottom:6px;">
+    <button class="btn-understood" id="btn-understood" onclick="markUnderstood()">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Понял(а) — почему Claude
+    </button>
+  </div>
+</div>
+
+<div class="div"></div>
+
+<!-- ══ СЕКЦИЯ 3: ТРИ ПРАВИЛА ══ -->
+<div class="sec">
+  <div class="sec-head">
+    <div class="sec-num np">3</div>
+    <div><div class="sec-title">Три правила хорошего запроса</div><div class="sec-sub">Применяйте по очереди — смотрите, как меняется результат</div></div>
+  </div>
+
+  <div class="rules-flow">
+    <div class="rule">
+      <div class="rule-n">1</div>
+      <div>
+        <div class="rule-title">Дайте роль</div>
+        <div class="rule-desc">Скажите Claude, кем он должен быть в этом разговоре — какой специалист, с каким опытом.</div>
+        <div class="rule-eg">❌ «Напиши пост»<br>✅ <strong>«Ты — опытный маркетолог, специализируешься на малом бизнесе в сфере услуг. Напиши пост...»</strong></div>
+      </div>
+    </div>
+    <div class="rule">
+      <div class="rule-n">2</div>
+      <div>
+        <div class="rule-title">Дайте всю нужную информацию</div>
+        <div class="rule-desc">Кто ваша аудитория? Зачем этот текст? Что важно учесть? Чем больше — тем точнее результат.</div>
+        <div class="rule-eg">✅ <strong>«Моя аудитория — женщины 30–45, малый бизнес. Задача поста — показать экспертизу. Важно: живой тон, без клише.»</strong></div>
+      </div>
+    </div>
+    <div class="rule">
+      <div class="rule-n">3</div>
+      <div>
+        <div class="rule-title">Будьте конкретны в деталях</div>
+        <div class="rule-desc">Формат, длина, платформа, структура, что должно быть в начале и конце.</div>
+        <div class="rule-eg">✅ <strong>«Instagram, 150 слов, разговорный тон, начни с вопроса к читателю, в конце — один конкретный призыв.»</strong></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ins it">
+    <div class="lbl">Ключевой принцип итераций</div>
+    <p>Первый ответ Claude — это черновик, начало диалога, а не финал. Уточняйте, возражайте, направляйте — как с живым человеком. За 2–3 итерации из среднего ответа вырастает именно то, что нужно.</p>
+  </div>
+</div>
+
+<div class="div"></div>
+
+<!-- ══ СЕКЦИЯ 4: АРСЕНАЛ ══ -->
+<div class="sec">
+  <div class="sec-head">
+    <div class="sec-num nt">4</div>
+    <div><div class="sec-title">Лайфхаки улучшения ответов</div><div class="sec-sub">Нажмите кнопку копирования — вставляйте прямо в Claude</div></div>
+  </div>
+
+
+
+  <div class="arsenal-grid">
+    <div class="ar-card">
+      <div class="ar-situation">Ответ слишком общий</div>
+      <div class="ar-title">Добавить информацию</div>
+      <div class="ar-prompt" id="ap1">«Я работаю в сфере [X], аудитория [Y], цель [Z]. Перепиши с учётом этого.»</div>
+      <button class="copy-btn" onclick="copyAr('ap1',this)"><svg viewBox="0 0 11 11" fill="none"><rect x="1" y="3" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M3 3V2a1 1 0 011-1h5a1 1 0 011 1v5a1 1 0 01-1 1H8" stroke="currentColor" stroke-width="1.3"/></svg>Скопировать</button>
+    </div>
+    <div class="ar-card">
+      <div class="ar-situation">Формат или тон не тот</div>
+      <div class="ar-title">Показать пример</div>
+      <div class="ar-prompt" id="ap2">«Вот пример, который мне нравится: [вставить]. Сделай похожим образом.»</div>
+      <button class="copy-btn" onclick="copyAr('ap2',this)"><svg viewBox="0 0 11 11" fill="none"><rect x="1" y="3" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M3 3V2a1 1 0 011-1h5a1 1 0 011 1v5a1 1 0 01-1 1H8" stroke="currentColor" stroke-width="1.3"/></svg>Скопировать</button>
+    </div>
+    <div class="ar-card">
+      <div class="ar-situation">Слишком длинно / коротко</div>
+      <div class="ar-title">Задать рамки</div>
+      <div class="ar-prompt" id="ap3">«Сократи до 3 абзацев» / «Не более 80 слов» / «Разверни второй пункт.»</div>
+      <button class="copy-btn" onclick="copyAr('ap3',this)"><svg viewBox="0 0 11 11" fill="none"><rect x="1" y="3" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M3 3V2a1 1 0 011-1h5a1 1 0 011 1v5a1 1 0 01-1 1H8" stroke="currentColor" stroke-width="1.3"/></svg>Скопировать</button>
+    </div>
+    <div class="ar-card">
+      <div class="ar-situation">Задача сложная, «плавает»</div>
+      <div class="ar-title">Разбить на шаги</div>
+      <div class="ar-prompt" id="ap4">«Давай по шагам. Сначала только [шаг 1]. Когда закончишь — скажи.»</div>
+      <button class="copy-btn" onclick="copyAr('ap4',this)"><svg viewBox="0 0 11 11" fill="none"><rect x="1" y="3" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M3 3V2a1 1 0 011-1h5a1 1 0 011 1v5a1 1 0 01-1 1H8" stroke="currentColor" stroke-width="1.3"/></svg>Скопировать</button>
+    </div>
+    <div class="ar-card">
+      <div class="ar-situation">Нужна глубже аналитика</div>
+      <div class="ar-title">Попросить думать вслух</div>
+      <div class="ar-prompt" id="ap5">«Прежде чем отвечать — подумай: какие варианты есть и почему именно этот?»</div>
+      <button class="copy-btn" onclick="copyAr('ap5',this)"><svg viewBox="0 0 11 11" fill="none"><rect x="1" y="3" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M3 3V2a1 1 0 011-1h5a1 1 0 011 1v5a1 1 0 01-1 1H8" stroke="currentColor" stroke-width="1.3"/></svg>Скопировать</button>
+    </div>
+    <div class="ar-card">
+      <div class="ar-situation">Хочу найти слабые места</div>
+      <div class="ar-title">Подключить критика</div>
+      <div class="ar-prompt" id="ap6">«Переключись в режим строгого критика. Найди три главных слабых места в этом тексте.»</div>
+      <button class="copy-btn" onclick="copyAr('ap6',this)"><svg viewBox="0 0 11 11" fill="none"><rect x="1" y="3" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M3 3V2a1 1 0 011-1h5a1 1 0 011 1v5a1 1 0 01-1 1H8" stroke="currentColor" stroke-width="1.3"/></svg>Скопировать</button>
+    </div>
+    <div class="ar-card">
+      <div class="ar-situation">Хочу взгляд со стороны</div>
+      <div class="ar-title">Глазами читателя / клиента</div>
+      <div class="ar-prompt" id="ap7">«Ответь от лица моего клиента, который это прочитал. Что почувствовал? Что зацепило, что оттолкнуло?»</div>
+      <button class="copy-btn" onclick="copyAr('ap7',this)"><svg viewBox="0 0 11 11" fill="none"><rect x="1" y="3" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M3 3V2a1 1 0 011-1h5a1 1 0 011 1v5a1 1 0 01-1 1H8" stroke="currentColor" stroke-width="1.3"/></svg>Скопировать</button>
+    </div>
+    <div class="ar-card">
+      <div class="ar-situation">Не знаю, как сформулировать</div>
+      <div class="ar-title">Секретный приём</div>
+      <div class="ar-prompt" id="ap8">«Я хочу сделать [X]. Помоги написать для этого хороший запрос — что тебе нужно знать?»</div>
+      <button class="copy-btn" onclick="copyAr('ap8',this)"><svg viewBox="0 0 11 11" fill="none"><rect x="1" y="3" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M3 3V2a1 1 0 011-1h5a1 1 0 011 1v5a1 1 0 01-1 1H8" stroke="currentColor" stroke-width="1.3"/></svg>Скопировать</button>
+    </div>
+  </div>
+</div>
+
+<div class="div"></div>
+
+<!-- ══ СЕКЦИЯ 5: ПРАКТИКА 1 ══ -->
+<div class="sec">
+  <div class="sec-head">
+    <div class="sec-num np">5</div>
+    <div><div class="sec-title">Практика 1: где Claude поможет именно вам</div><div class="sec-sub">Выполните три шага — это ваша персональная точка входа</div></div>
+  </div>
+
+  <div class="ins iv">
+    <div class="lbl">Голосовой ввод — ускоряет в 4–5 раз</div>
+    <p>Надиктовывайте голосом через Aquavoice или режим диктовки на телефоне. Мысли не нужно «переводить» в буквы — поток сохраняется. Вставляете готовый текст в Claude.</p>
+  </div>
+
+  <div class="card" style="padding:0;overflow:hidden;">
+    <ul class="prac-steps" style="padding:0 4px;">
+      <li style="padding:14px 16px;">
+        <div class="cbox" id="p1c1" onclick="tckP('p1c1','p1w1')"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div id="p1w1">
+          <div class="ps-t">Шаг 1 — надиктовать всё о себе</div>
+          <div class="ps-d">Голосом или текстом расскажите: кто вы, как выглядит ваш день, что отнимает время, что раздражает, чего хочется больше.</div>
+        </div>
+      </li>
+      <li style="padding:14px 16px;">
+        <div class="cbox" id="p1c2" onclick="tckP('p1c2','p1w2')"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div id="p1w2">
+          <div class="ps-t">Шаг 2 — отправить в Claude с запросом</div>
+          <div class="ps-prompt">«Вот информация обо мне. Помоги понять: в каких конкретных задачах Claude мог бы мне помочь прямо сейчас? Не общие слова — конкретно: вот эту задачу можно решить вот так. Дай 5–7 применений под мою ситуацию.»</div>
+        </div>
+      </li>
+      <li style="padding:14px 16px; border-bottom:none;">
+        <div class="cbox" id="p1c3" onclick="tckP('p1c3','p1w3')"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div id="p1w3">
+          <div class="ps-t">Шаг 3 — прочитать и отметить главное</div>
+          <div class="ps-d">Что удивило? Что совпало с тем, что и так знали? Какие 2–3 применения хочется попробовать первыми?</div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="div"></div>
+
+<!-- ══ СЕКЦИЯ 6: ТРИ РЕЖИМА И ПРОЕКТЫ ══ -->
+<div class="sec">
+  <div class="sec-head">
+    <div class="sec-num nb">6</div>
+    <div><div class="sec-title">Три режима работы с Claude</div><div class="sec-sub">От одиночного запроса — к системе</div></div>
+  </div>
+
+  <div class="modes3">
+    <div class="m3">
+      <span class="m3-ico">🎯</span>
+      <div class="m3-name">Поручить</div>
+      <div class="m3-desc">Конкретная задача → Claude выполняет. Быстро, для разовых дел.</div>
+      <div class="m3-tech">Одноразовые чаты</div>
+    </div>
+    <div class="m3">
+      <span class="m3-ico">💬</span>
+      <div class="m3-name">Думать вместе</div>
+      <div class="m3-desc">Набрасываете идею → он разворачивает → вы корректируете.</div>
+      <div class="m3-tech">Диалог и итерации</div>
+    </div>
+    <div class="m3">
+      <span class="m3-ico">⚙</span>
+      <div class="m3-name">Работает на вас</div>
+      <div class="m3-desc">Один раз настроили — помнит ваш контекст при каждом обращении.</div>
+      <div class="m3-tech">Проекты</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="tag tb">Что такое проект</div>
+    <ul class="list-nice">
+      <li><span class="li-dot">✦</span><span><strong>Пространство с памятью</strong> — один раз написали инструкцию, Claude помнит её в каждом чате внутри проекта</span></li>
+      <li><span class="li-dot">✦</span><span><strong>Прикреплённые файлы</strong> — загружаете материалы один раз, они доступны в любом разговоре</span></li>
+      <li><span class="li-dot">✦</span><span><strong>Экономия на повторениях</strong> — не нужно каждый раз объяснять, кто вы и в каком стиле писать</span></li>
+      <li><span class="li-dot">✦</span><span><strong>Системная работа</strong> — можно создать методолога, маркетолога, редактора, наставника — и обращаться к нужному</span></li>
+    </ul>
+  </div>
+
+  <div class="ins ib">
+    <div class="lbl">Обратный промт-инжиниринг</div>
+    <p>Нравится, как какой-то автор или эксперт работает? Дайте Claude 5 примеров его материалов и попросите создать инструкцию в этом стиле. Получаете ассистента, уже настроенного на то, что вам нравится.</p>
+  </div>
+</div>
+
+<div class="div"></div>
+
+<!-- ══ СЕКЦИЯ 7: ПРАКТИКА 2 ══ -->
+<div class="sec">
+  <div class="sec-head">
+    <div class="sec-num nt">7</div>
+    <div><div class="sec-title">Практика 2: первый проект</div><div class="sec-sub">Выберите способ создания инструкции и создайте своего первого ассистента</div></div>
+  </div>
+
+  <div class="methods">
+    <div class="method">
+      <div class="method-n">Способ 1</div>
+      <div class="method-title">Промт-инженер</div>
+      <div class="method-desc">Claude сам задаёт вам вопросы и собирает из ваших ответов готовую инструкцию.</div>
+      <div class="method-when">✓ Если знаете, что хотите, но не знаете как сформулировать</div>
+      <div class="method-prompt">«Ты — эксперт по написанию инструкций для AI-ассистентов. Я хочу создать проект в Claude под задачу [задача]. Задай мне уточняющие вопросы — что нужно знать, чтобы написать хорошую инструкцию? Потом напиши готовую инструкцию.»</div>
+    </div>
+    <div class="method">
+      <div class="method-n">Способ 2</div>
+      <div class="method-title">Обратный промт-инжиниринг</div>
+      <div class="method-desc">Даёте Claude примеры того, что вам нравится — он создаёт инструкцию по образцу.</div>
+      <div class="method-when">✓ Если есть примеры нужного стиля или подхода</div>
+      <div class="method-prompt">«Вот примеры текстов в стиле, который мне нравится: [примеры]. На основе этого создай инструкцию для моего ассистента, который будет работать в похожем стиле.»</div>
+    </div>
+  </div>
+
+  <div class="card" style="padding:0;overflow:hidden;">
+    <ul class="prac-steps" style="padding:0 4px;">
+      <li style="padding:14px 16px;">
+        <div class="cbox" id="p2c1" onclick="tckP('p2c1','p2w1')"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div id="p2w1">
+          <div class="ps-t">Шаг 1 — выбрать способ и создать инструкцию</div>
+          <div class="ps-d">Способ 1 (промт-инженер) или Способ 2 (обратный). Используйте один из промтов выше.</div>
+        </div>
+      </li>
+      <li style="padding:14px 16px;">
+        <div class="cbox" id="p2c2" onclick="tckP('p2c2','p2w2')"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div id="p2w2">
+          <div class="ps-t">Шаг 2 — скопировать инструкцию в новый проект</div>
+          <div class="ps-d">Claude → левый сайдбар → «Новый проект» → вставить инструкцию в поле описания проекта.</div>
+        </div>
+      </li>
+      <li style="padding:14px 16px; border-bottom:none;">
+        <div class="cbox" id="p2c3" onclick="tckP('p2c3','p2w3')"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div id="p2w3">
+          <div class="ps-t">Шаг 3 — задать первый настоящий вопрос</div>
+          <div class="ps-d">Не тестовый — настоящий. То, что вам сейчас реально важно. Инструкцию можно и нужно дорабатывать — он будет становиться точнее.</div>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <div class="ins it">
+    <div class="lbl">Что создали на интенсиве</div>
+    <p>Один раз настроили — и каждый следующий разговор начинается уже с пониманием вашего контекста. Это и есть режим «Работает на вас».</p>
+  </div>
+</div>
+
+<div class="div"></div>
+
+<!-- ══ СЕКЦИЯ 8: РЕФЛЕКС ══ -->
+<div class="sec">
+  <div class="sec-head">
+    <div class="sec-num np">8</div>
+    <div><div class="sec-title">Рефлекс и главный вывод</div><div class="sec-sub">Нажмите на осознания из интенсива — соберётся ваш список</div></div>
+  </div>
+
+  <div class="special-card">
+    <div class="sc-label">Главный вывод интенсива</div>
+    <div class="sc-title">Стимул → реакция</div>
+    <div class="sc-text">Каждый раз, когда появляется задача — написать текст, придумать идею, разобраться в вопросе, подготовиться к разговору — первый импульс: открыть Claude и спросить. Не «сама быстро сделаю». Не «потом разберусь». Просто открыть и спросить. Это 30 секунд. Результат может сэкономить час.</div>
+  </div>
+
+  <div class="rchips" id="rchips">
+    <div class="rch" onclick="pickR(this,'b')">Первый ответ — черновик, а не финал</div>
+    <div class="rch" onclick="pickR(this,'b')">Плохой результат — был не тот запрос, не тот инструмент</div>
+    <div class="rch" onclick="pickR(this,'p')">Проект > чат для системной работы</div>
+    <div class="rch" onclick="pickR(this,'p')">Мой ассистент — это я, только быстрее</div>
+    <div class="rch" onclick="pickR(this,'t')">Я создал(а) первого ассистента сегодня</div>
+    <div class="rch" onclick="pickR(this,'t')">Голосовой ввод — беру в работу</div>
+    <div class="rch" onclick="pickR(this,'b')">Три правила запроса — запомнил(а)</div>
+    <div class="rch" onclick="pickR(this,'t')">Стимул-реакция начинается сегодня</div>
+  </div>
+
+  <div class="my-reflex">
+    <div class="mr-lbl">Моё из интенсива</div>
+    <div class="mr-items" id="mri">
+      <div class="mr-empty" id="mre">Нажмите на то, что откликнулось</div>
+    </div>
+  </div>
+  <div style="font-size:12px;color:var(--g400);margin-bottom:12px;">💡 Сделайте скриншот, чтобы сохранить</div>
+
+  <div class="tw">
+    <div class="tw-lbl">До встречи на воркшопах</div>
+    <p>Открывайте воркбук, возвращайтесь к своему ассистенту, пробуйте. Рефлекс формируется за первую неделю — ловите себя на мысли «а может, спросить у Claude?» и делайте это. Раз. Второй. Третий.</p>
+  </div>
+</div>
+
+</div><!-- /page -->
+
+<script>
+// ── PRACTICE CHECKBOXES ──
+const P1 = ['p1c1','p1c2','p1c3'];
+const P2 = ['p2c1','p2c2','p2c3'];
+
+function tckP(id, wid) {
+  document.getElementById(id).classList.toggle('on');
+  document.getElementById(wid).classList.toggle('done-p');
+  upd();
+}
+
+// ── ARSENAL ──
+let arSaved = 0;
+function saveAr(card, id) {
+  const wasSaved = card.classList.contains('saved');
+  card.classList.toggle('saved');
+  arSaved = document.querySelectorAll('.ar-card.saved').length;
+  document.getElementById('saved-cnt').textContent = arSaved;
+  upd();
+}
+
+// ── REFLEX CHIPS ──
+function pickR(el, color) {
+  const text = el.textContent.trim();
+  const wasOn = el.classList.contains('rb') || el.classList.contains('rp') || el.classList.contains('rt');
+  el.classList.remove('rb','rp','rt');
+  const pid = 'r-' + text.substring(0,14).replace(/[\s()]/g,'');
+  if (!wasOn) {
+    el.classList.add('r'+color);
+    addR(pid, text, color);
+  } else {
+    removeR(pid);
+  }
+  upd();
+}
+function addR(id, text, color) {
+  removeR(id);
+  document.getElementById('mre').style.display='none';
+  const d = document.createElement('div');
+  d.className='mr-item'; d.id=id;
+  d.style.background = color==='p'?'var(--pink)':color==='t'?'var(--teal)':'var(--blue)';
+  d.textContent=text;
+  document.getElementById('mri').appendChild(d);
+}
+function removeR(id) {
+  const el = document.getElementById(id);
+  if (el) el.remove();
+  if (!document.querySelector('.mr-item')) document.getElementById('mre').style.display='';
+}
+
+// ── PROGRESS ──
+function upd() {
+  const p1done = P1.every(id => document.getElementById(id).classList.contains('on'));
+  const arDone = arSaved >= 3;
+  const p2done = P2.every(id => document.getElementById(id).classList.contains('on'));
+  const rDone = document.querySelectorAll('.rch.rb,.rch.rp,.rch.rt').length >= 1;
+  const steps = [p1done, arDone, p2done, rDone];
+  const done = steps.filter(Boolean).length;
+  const pct = done * 25;
+  document.getElementById('fill').style.width = pct+'%';
+  document.getElementById('pct').textContent = pct+'%';
+  ['d1','d2','d3','d4'].forEach((id,i) => {
+    const d = document.getElementById(id);
+    if (steps[i]) { d.classList.add('done'); d.classList.remove('active'); }
+    else if (i === steps.filter(Boolean).length) { d.classList.remove('done'); d.classList.add('active'); }
+    else { d.classList.remove('done','active'); }
+  });
+  if (pct===100 && !window._cf) { window._cf=true; confetti(); }
+  if (pct<100) window._cf=false;
+}
+
+// ── CONFETTI ──
+function confetti() {
+  const c = document.createElement('canvas');
+  c.style.cssText='position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;';
+  document.body.appendChild(c);
+  const ctx=c.getContext('2d');
+  c.width=window.innerWidth; c.height=window.innerHeight;
+  const cols=['#2C7BE5','#D94B78','#18A98E','#F5A623','#7B5EA7','#FF6B6B'];
+  const ps=Array.from({length:130},()=>({
+    x:Math.random()*c.width, y:-20-Math.random()*120,
+    r:4+Math.random()*6, color:cols[Math.floor(Math.random()*cols.length)],
+    vx:(Math.random()-.5)*4, vy:2+Math.random()*4,
+    rot:Math.random()*360, rotV:(Math.random()-.5)*8,
+    shape:Math.random()>.5?'rect':'circle'
+  }));
+  let f=0;
+  function draw() {
+    ctx.clearRect(0,0,c.width,c.height);
+    ps.forEach(p=>{
+      ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.rot*Math.PI/180);
+      ctx.fillStyle=p.color; ctx.globalAlpha=Math.max(0,1-f/190);
+      if(p.shape==='rect') ctx.fillRect(-p.r/2,-p.r/2,p.r,p.r*.6);
+      else{ctx.beginPath();ctx.arc(0,0,p.r/2,0,Math.PI*2);ctx.fill();}
+      ctx.restore();
+      p.x+=p.vx; p.y+=p.vy; p.rot+=p.rotV; p.vy+=.08;
+    });
+    f++;
+    if(f<210) requestAnimationFrame(draw); else c.remove();
+  }
+  draw();
+}
+</script>
+</body>
+</html>
