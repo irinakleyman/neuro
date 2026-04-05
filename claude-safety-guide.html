@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Безопасность аккаунта Claude</title>
+<link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@500;600;700;800&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;font-style:normal!important}
+:root{
+  --blue:#2C7BE5;--blue-l:#EBF3FF;--blue-m:#BAD6FF;--blue-d:#1749A0;
+  --pink:#D94B78;--pink-l:#FFF0F6;
+  --teal:#18A98E;--teal-l:#E5FAF7;
+  --amber:#D98C0A;--amber-l:#FFF8EC;
+  --g50:#F6F9FF;--g100:#EEF3FB;--g200:#DDE6F5;--g300:#C8D7EF;
+  --g400:#A3B8D8;--g500:#7896BA;--g600:#4F6E96;--g700:#334E73;--g800:#1E3252;
+  --r1:10px;--r2:16px;--r3:24px;
+  --s1:0 2px 12px rgba(44,123,229,.08);--s2:0 6px 28px rgba(44,123,229,.13)
+}
+body{background:var(--g50);font-family:'Nunito',sans-serif;font-size:14px;color:var(--g800);min-height:100vh;position:relative}
+.bg-svg{position:fixed;inset:0;width:100%;height:100%;z-index:0;opacity:.35;pointer-events:none}
+.page{position:relative;z-index:1;max-width:760px;margin:0 auto;padding:28px 20px 60px}
+
+.hdr{background:linear-gradient(135deg,#DCF0FF,#FAE8F2);border:1.5px solid var(--blue-m);border-radius:var(--r3);padding:28px 32px;margin-bottom:24px;position:relative;overflow:hidden}
+.hdr::after{content:'';position:absolute;top:-60px;right:-60px;width:240px;height:240px;background:radial-gradient(circle,rgba(44,123,229,.12) 0%,transparent 70%);pointer-events:none}
+.hdr-label{font-family:'Exo 2',sans-serif;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--blue);margin-bottom:8px}
+.hdr h1{font-family:'Exo 2',sans-serif;font-size:24px;font-weight:800;color:var(--blue-d);line-height:1.25;margin-bottom:8px}
+.hdr p{color:var(--g600);font-size:14px;line-height:1.6;margin-bottom:18px;max-width:520px}
+.hdr-chips{display:flex;flex-wrap:wrap;gap:8px}
+.hdr-chip{background:#fff;border:1px solid var(--g200);border-radius:20px;padding:5px 12px;font-size:12px;font-weight:600;color:var(--g600)}
+
+.sec-head{display:flex;align-items:flex-start;gap:12px;margin-bottom:16px;margin-top:32px}
+.sec-icon{width:36px;height:36px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.sec-icon.nb{background:var(--blue-l)}
+.sec-icon.np{background:var(--pink-l)}
+.sec-icon.nt{background:var(--teal-l)}
+.sec-icon.na{background:var(--amber-l)}
+.sec-title{font-family:'Exo 2',sans-serif;font-size:17px;font-weight:700;color:var(--g800);line-height:1.2}
+.sec-sub{font-size:13px;color:var(--g500);margin-top:3px}
+
+.card{background:#fff;border:1px solid var(--g200);border-radius:var(--r2);padding:20px;box-shadow:var(--s1);margin-bottom:12px}
+
+.insight{border-left:4px solid;border-radius:0 var(--r1) var(--r1) 0;padding:12px 16px;margin:12px 0}
+.insight.blue{border-color:var(--blue);background:var(--blue-l)}
+.insight.pink{border-color:var(--pink);background:var(--pink-l)}
+.insight.teal{border-color:var(--teal);background:var(--teal-l)}
+.insight.amber{border-color:var(--amber);background:var(--amber-l)}
+.insight-label{font-family:'Exo 2',sans-serif;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:5px}
+.insight.blue .insight-label{color:var(--blue)}
+.insight.pink .insight-label{color:var(--pink)}
+.insight.teal .insight-label{color:var(--teal)}
+.insight.amber .insight-label{color:var(--amber)}
+.insight p{font-size:13px;font-weight:600;color:var(--blue-d);line-height:1.6}
+.insight a{color:var(--blue);text-decoration:underline}
+
+/* RULE CARDS GRID */
+.rules-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}
+.rule-card{background:#fff;border:1.5px solid var(--g200);border-radius:var(--r2);padding:16px;box-shadow:var(--s1)}
+.rule-card.good{border-color:var(--teal);background:linear-gradient(135deg,#fff,var(--teal-l))}
+.rule-card.bad{border-color:var(--pink);background:linear-gradient(135deg,#fff,var(--pink-l))}
+.rule-icon{font-size:22px;margin-bottom:8px}
+.rule-title{font-family:'Exo 2',sans-serif;font-size:12px;font-weight:700;color:var(--g800);margin-bottom:4px;line-height:1.3}
+.rule-desc{font-size:11px;color:var(--g600);line-height:1.5}
+.rule-card.good .rule-title{color:var(--teal)}
+.rule-card.bad .rule-title{color:var(--pink)}
+
+/* STEPS */
+.steps{display:flex;flex-direction:column;gap:0}
+.step-row{display:flex;gap:0}
+.step-left{display:flex;flex-direction:column;align-items:center;width:32px;flex-shrink:0}
+.step-circle{width:26px;height:26px;border-radius:50%;background:var(--blue);display:flex;align-items:center;justify-content:center;font-family:'Exo 2',sans-serif;font-size:11px;font-weight:800;color:#fff;flex-shrink:0}
+.step-line{width:2px;background:var(--g200);flex:1;min-height:12px;margin:2px 0}
+.step-row:last-child .step-line{display:none}
+.step-content{flex:1;padding:0 0 18px 12px}
+.step-title{font-family:'Exo 2',sans-serif;font-size:13px;font-weight:700;color:var(--g800);margin-bottom:4px}
+.step-desc{font-size:13px;color:var(--g600);line-height:1.7}
+.step-desc a{color:var(--blue);text-decoration:underline}
+.step-desc strong{color:var(--g800)}
+
+/* CODE BLOCK */
+.code-block{background:var(--blue-d);border-radius:var(--r1);padding:16px 18px;margin:12px 0;font-family:monospace;font-size:12px;line-height:1.7;color:#e8f0fe;white-space:pre-wrap;position:relative}
+.code-label{font-family:'Exo 2',sans-serif;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--blue-m);margin-bottom:8px;display:block}
+.copy-btn{position:absolute;top:10px;right:10px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:6px;padding:4px 10px;font-family:'Exo 2',sans-serif;font-size:10px;font-weight:700;color:rgba(255,255,255,.7);cursor:pointer;transition:all .2s}
+.copy-btn:hover{background:rgba(255,255,255,.2);color:#fff}
+.copy-btn.copied{color:var(--teal);border-color:var(--teal)}
+
+/* WARN BOX */
+.warn-box{background:var(--amber-l);border:1px solid #f0d090;border-radius:var(--r1);padding:10px 14px;font-size:12px;color:var(--amber);font-weight:600;margin:10px 0;line-height:1.6}
+
+/* SERVICE LINK */
+.service-link{display:inline-flex;align-items:center;gap:5px;background:var(--blue-l);border:1px solid var(--blue-m);border-radius:var(--r1);padding:6px 12px;font-size:12px;font-weight:700;font-family:'Exo 2',sans-serif;color:var(--blue);text-decoration:none;transition:all .2s}
+.service-link:hover{background:var(--blue);color:#fff}
+
+/* PRIORITY TAG */
+.prio-tag{display:inline-block;font-family:'Exo 2',sans-serif;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;border-radius:20px;padding:2px 8px;margin-left:6px;vertical-align:middle}
+.prio-tag.must{background:var(--pink-l);color:var(--pink);border:1px solid var(--pink)}
+.prio-tag.good{background:var(--teal-l);color:var(--teal);border:1px solid var(--teal)}
+
+/* TAKEAWAY */
+.takeaway{background:linear-gradient(135deg,var(--blue),#153E9A);border-radius:var(--r3);padding:28px 32px;position:relative;overflow:hidden;margin-top:32px}
+.takeaway::before{content:'';position:absolute;bottom:-40px;right:-40px;width:200px;height:200px;background:rgba(255,255,255,.08);border-radius:50%;pointer-events:none}
+.takeaway h3{font-family:'Exo 2',sans-serif;font-size:18px;font-weight:700;color:#fff;margin-bottom:10px}
+.takeaway p{font-family:'Exo 2',sans-serif;font-size:13px;font-weight:500;color:rgba(255,255,255,.85);line-height:1.7;margin-bottom:18px}
+.takeaway .btn{background:#fff;color:var(--blue)}
+.takeaway .btn:hover{background:var(--blue-l)}
+
+.btn{display:inline-flex;align-items:center;gap:8px;background:var(--blue);color:#fff;border:none;border-radius:var(--r1);padding:11px 20px;font-family:'Exo 2',sans-serif;font-size:13px;font-weight:700;cursor:pointer;text-decoration:none;transition:all .2s;line-height:1}
+.btn:hover{background:var(--blue-d);transform:translateY(-1px)}
+.btn.btn-teal{background:var(--teal)}
+.btn.btn-teal:hover{background:#15907a}
+
+.divider{height:1px;background:var(--g100);margin:24px 0}
+
+.path-card{background:#fff;border:1.5px solid var(--g200);border-radius:var(--r2);margin-bottom:10px;overflow:hidden;box-shadow:var(--s1)}
+.path-header{padding:14px 18px;cursor:pointer;display:flex;align-items:center;gap:12px;transition:background .2s}
+.path-header:hover{background:var(--g50)}
+.path-badge{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+.path-info{flex:1}
+.path-title{font-family:'Exo 2',sans-serif;font-size:13px;font-weight:700;color:var(--g800)}
+.path-sub{font-size:11px;color:var(--g500);margin-top:2px}
+.path-toggle{font-size:18px;color:var(--g400);transition:transform .3s;line-height:1}
+.path-card.open .path-toggle{transform:rotate(90deg)}
+.path-body{display:none;padding:0 18px 16px;border-top:1px solid var(--g100)}
+.path-card.open .path-body{display:block}
+.path-body p{font-size:13px;line-height:1.7;color:var(--g700);margin-top:10px}
+
+.hidden{display:none}
+.fade-in{animation:fadeIn .4s ease both}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+@media(max-width:540px){
+  .rules-grid{grid-template-columns:1fr}
+  .hdr{padding:22px 20px}
+  .hdr h1{font-size:20px}
+  .page{padding:16px 14px 50px}
+}
+</style>
+</head>
+<body>
+
+<svg class="bg-svg" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+  <line x1="120" y1="180" x2="400" y2="320" stroke="#2C7BE5" stroke-width="1.5"/>
+  <line x1="400" y1="320" x2="750" y2="200" stroke="#D94B78" stroke-width="1.5"/>
+  <line x1="750" y1="200" x2="1050" y2="400" stroke="#18A98E" stroke-width="1.5"/>
+  <line x1="400" y1="320" x2="600" y2="580" stroke="#2C7BE5" stroke-width="1.5"/>
+  <circle cx="120" cy="180" r="7" fill="#2C7BE5"/>
+  <circle cx="400" cy="320" r="10" fill="#2C7BE5"/>
+  <circle cx="750" cy="200" r="6" fill="#D94B78"/>
+  <circle cx="1050" cy="400" r="9" fill="#18A98E"/>
+  <circle cx="600" cy="580" r="5" fill="#2C7BE5"/>
+  <circle cx="900" cy="650" r="7" fill="#D94B78"/>
+  <circle cx="200" cy="550" r="5" fill="#18A98E"/>
+</svg>
+
+<div class="page">
+
+<!-- HEADER -->
+<div class="hdr">
+  <div class="hdr-label">Гайд по безопасности аккаунта</div>
+  <h1>Как защитить аккаунт Claude от блокировки</h1>
+  <p>Что важно соблюдать в работе, как сохранить историю чатов — и что делать, если блокировка всё же случилась.</p>
+  <div class="hdr-chips">
+    <span class="hdr-chip">🔒 Профилактика</span>
+    <span class="hdr-chip">💾 Экспорт данных</span>
+    <span class="hdr-chip">📬 Апелляция</span>
+  </div>
+</div>
+
+<!-- SECTION 1: WHY BLOCKS HAPPEN -->
+<div class="sec-head">
+  <div class="sec-icon na">⚠️</div>
+  <div>
+    <div class="sec-title">Почему блокируют аккаунты</div>
+    <div class="sec-sub">Важно понимать, прежде чем говорить о защите</div>
+  </div>
+</div>
+
+<div class="insight amber">
+  <div class="insight-label">📊 Честная статистика</div>
+  <p>По данным Anthropic, во второй половине 2025 года было заблокировано 1,45 миллиона аккаунтов. Из 52 000 апелляций одобрено только 1 700 — это 3,3%. Вывод один: <strong>профилактика важнее лечения</strong>.</p>
+</div>
+
+<div class="card">
+  <p style="font-size:13px;color:var(--g700);line-height:1.7;margin-bottom:12px">Система блокировок у Claude автоматическая. Она не знает, кто вы и зачем используете инструмент — она видит паттерны. Блокировка может случиться даже у добросовестного пользователя, если его поведение похоже на нарушение. Вот что чаще всего триггерит автоматику:</p>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+    <div style="background:var(--pink-l);border-radius:var(--r1);padding:10px 12px;font-size:12px;color:var(--g700);line-height:1.5"><strong style="color:var(--pink)">🚩</strong> Частая смена VPN-страны<br>(сегодня Германия, завтра США)</div>
+    <div style="background:var(--pink-l);border-radius:var(--r1);padding:10px 12px;font-size:12px;color:var(--g700);line-height:1.5"><strong style="color:var(--pink)">🚩</strong> Карта не совпадает по стране с VPN или номером</div>
+    <div style="background:var(--pink-l);border-radius:var(--r1);padding:10px 12px;font-size:12px;color:var(--g700);line-height:1.5"><strong style="color:var(--pink)">🚩</strong> Несколько аккаунтов с одного устройства или IP</div>
+    <div style="background:var(--pink-l);border-radius:var(--r1);padding:10px 12px;font-size:12px;color:var(--g700);line-height:1.5"><strong style="color:var(--pink)">🚩</strong> Бот-подобное поведение: сотни быстрых запросов подряд</div>
+    <div style="background:var(--pink-l);border-radius:var(--r1);padding:10px 12px;font-size:12px;color:var(--g700);line-height:1.5"><strong style="color:var(--pink)">🚩</strong> Попытки обойти ограничения безопасности (jailbreak)</div>
+    <div style="background:var(--pink-l);border-radius:var(--r1);padding:10px 12px;font-size:12px;color:var(--g700);line-height:1.5"><strong style="color:var(--pink)">🚩</strong> Сомнительные платёжные данные или серия отказов при оплате</div>
+  </div>
+</div>
+
+<!-- SECTION 2: GOLDEN RULES -->
+<div class="sec-head">
+  <div class="sec-icon nb">🛡️</div>
+  <div>
+    <div class="sec-title">Золотые правила — что соблюдать всегда</div>
+    <div class="sec-sub">Всё это снижает риск блокировки до минимума</div>
+  </div>
+</div>
+
+<div class="rules-grid">
+  <div class="rule-card good">
+    <div class="rule-icon">🌍</div>
+    <div class="rule-title">Одна страна — всё</div>
+    <div class="rule-desc">VPN, номер телефона и карта — из одной разрешённой страны. Не меняйте VPN-локацию без необходимости.</div>
+  </div>
+  <div class="rule-card good">
+    <div class="rule-icon">💳</div>
+    <div class="rule-title">Надёжная карта или гифт-карта</div>
+    <div class="rule-desc">Платите картой из поддерживаемой страны или официальной подарочной подпиской. Не пробуйте несколько карт подряд при отказе.</div>
+  </div>
+  <div class="rule-card good">
+    <div class="rule-icon">📧</div>
+    <div class="rule-title">Нероссийская почта</div>
+    <div class="rule-desc">Регистрируйтесь на Gmail или Proton Mail. Это ваш главный ключ к аккаунту — сохраните пароль в менеджере.</div>
+  </div>
+  <div class="rule-card good">
+    <div class="rule-icon">👤</div>
+    <div class="rule-title">Один аккаунт</div>
+    <div class="rule-desc">Не создавайте несколько аккаунтов с одного устройства или IP. Это прямое нарушение Terms of Service.</div>
+  </div>
+  <div class="rule-card good">
+    <div class="rule-icon">🤝</div>
+    <div class="rule-title">Человеческое поведение</div>
+    <div class="rule-desc">Не отправляйте сотни запросов подряд за несколько минут. Claude — это инструмент для думания, а не конвейер.</div>
+  </div>
+  <div class="rule-card good">
+    <div class="rule-icon">📋</div>
+    <div class="rule-title">Соблюдение правил использования</div>
+    <div class="rule-desc">Читайте запросы: не просите Claude помочь с вредоносным контентом. Если тема чувствительная — добавьте контекст и цель.</div>
+  </div>
+</div>
+
+<div class="insight blue">
+  <div class="insight-label">💡 Про чувствительные темы</div>
+  <p>Если вам нужно обсудить что-то, что может показаться системе подозрительным (кибербезопасность, медицина, юридические вопросы) — добавьте контекст. Вместо «как взломать сайт» — «для курса по кибербезопасности, объясни принципы SQL-инъекций». Контекст снижает риск срабатывания фильтра.</p>
+</div>
+
+<div class="insight pink">
+  <div class="insight-label">🚫 Что никогда не делать</div>
+  <p>Не пытайтесь обойти систему безопасности Claude с помощью специальных промтов (jailbreak). Даже если это «просто интересно» — это одна из главных причин блокировки. Anthropic отслеживает такие паттерны автоматически.</p>
+</div>
+
+<!-- SECTION 3: EXPORT DATA -->
+<div class="sec-head">
+  <div class="sec-icon nt">💾</div>
+  <div>
+    <div class="sec-title">Сохраните историю чатов — заранее</div>
+    <div class="sec-sub">Если аккаунт заблокируют, поддержка не даст доступ к вашим материалам</div>
+  </div>
+</div>
+
+<div class="insight pink">
+  <div class="insight-label">⚠️ Важно знать</div>
+  <p>При блокировке аккаунта доступ к чатам закрывается мгновенно. Поддержка Anthropic официально подтверждает: они <strong>не могут предоставить доступ к данным</strong> заблокированного аккаунта даже через апелляцию. Единственный способ сохранить работу — экспортировать её заранее.</p>
+</div>
+
+<div class="card">
+  <p style="font-size:13px;font-weight:700;color:var(--g800);margin-bottom:14px">Как экспортировать всю историю — официальный способ:</p>
+  <div class="steps">
+    <div class="step-row">
+      <div class="step-left">
+        <div class="step-circle">1</div>
+        <div class="step-line"></div>
+      </div>
+      <div class="step-content">
+        <div class="step-title">Откройте claude.ai на компьютере</div>
+        <div class="step-desc">Экспорт недоступен из мобильного приложения — только через браузер или десктоп-приложение.</div>
+      </div>
+    </div>
+    <div class="step-row">
+      <div class="step-left">
+        <div class="step-circle">2</div>
+        <div class="step-line"></div>
+      </div>
+      <div class="step-content">
+        <div class="step-title">Перейдите в Settings → Privacy → Export Data</div>
+        <div class="step-desc">Нажмите на свои инициалы в левом нижнем углу → Settings → раздел Privacy → кнопка Export Data.</div>
+      </div>
+    </div>
+    <div class="step-row">
+      <div class="step-left">
+        <div class="step-circle">3</div>
+        <div class="step-line"></div>
+      </div>
+      <div class="step-content">
+        <div class="step-title">Подтвердите запрос</div>
+        <div class="step-desc">Anthropic пришлёт письмо со ссылкой на скачивание — обычно в течение нескольких минут, иногда до нескольких часов.</div>
+      </div>
+    </div>
+    <div class="step-row">
+      <div class="step-left">
+        <div class="step-circle">4</div>
+        <div class="step-line"></div>
+      </div>
+      <div class="step-content">
+        <div class="step-title">Скачайте ZIP-файл в течение 24 часов</div>
+        <div class="step-desc">Ссылка действует 24 часа. Внутри ZIP — файл <strong>conversations.json</strong> со всей вашей историей чатов и данными Projects.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="warn-box">📂 JSON-файл не читается «как текст». Чтобы просматривать его удобно, используйте расширение <strong>AI Chat Exporter</strong> в Chrome — сохраняет отдельные чаты в PDF, Markdown или TXT прямо в интерфейсе Claude.</div>
+</div>
+
+<div class="insight teal">
+  <div class="insight-label">💡 Рекомендация</div>
+  <p>Делайте экспорт периодически — в зависимости от того, как часто и сколько вы работаете в Claude. Если используете каждый день — раз в неделю. Если изредка — раз в месяц. Сохраняйте архив в облачном хранилище (Google Drive, Dropbox). Удалённые чаты в экспорт не попадают, так что не удаляйте то, что может пригодиться.</p>
+</div>
+
+<!-- SECTION 4: APPEAL -->
+<div class="sec-head">
+  <div class="sec-icon np">📬</div>
+  <div>
+    <div class="sec-title">Если блокировка всё же случилась</div>
+    <div class="sec-sub">Как правильно написать апелляцию — и чего ожидать</div>
+  </div>
+</div>
+
+<div class="insight amber">
+  <div class="insight-label">🎯 Реальные ожидания</div>
+  <p>Процент одобрения апелляций — около 3%. Это мало, но ваши шансы выше, если вы предоставите <strong>доказательства оплаты, чёткое описание использования</strong> и отправите через правильные каналы. Каждый пункт важен.</p>
+</div>
+
+<div class="insight pink" style="margin-top:0">
+  <div class="insight-label">🔴 Как выглядит блокировка</div>
+  <p>При попытке войти в заблокированный аккаунт вы увидите одно из этих сообщений:<br><br>
+  <strong>«Your account has been disabled after an automatic review of your recent activities»</strong><br>
+  (Ваш аккаунт отключён после автоматической проверки)<br><br>
+  или<br><br>
+  <strong>«This organization has been disabled»</strong><br>
+  (Организация отключена — чаще при блокировке за платёж)<br><br>
+  Войти в аккаунт при этом невозможно — доступ к чатам и данным закрывается мгновенно.</p>
+</div>
+
+<div class="card">
+  <p style="font-size:13px;font-weight:700;color:var(--g800);margin-bottom:4px">Шаг 1 — Не создавайте новый аккаунт сразу</p>
+  <p style="font-size:13px;color:var(--g700);line-height:1.7;margin-bottom:14px">Пока идёт рассмотрение апелляции — не регистрируйтесь заново с того же устройства или IP. Это может усугубить ситуацию.</p>
+
+  <p style="font-size:13px;font-weight:700;color:var(--g800);margin-bottom:4px">Шаг 2 — Заполните официальную форму апелляции</p>
+  <p style="font-size:13px;color:var(--g700);line-height:1.7;margin-bottom:8px">Это основной канал. Обычный чат поддержки не поможет — только форма или письмо напрямую в команду.</p>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px">
+    <a href="https://support.claude.com/en/articles/8241253-safeguards-warnings-and-appeals" target="_blank" rel="noopener" class="service-link">📋 Форма апелляции</a>
+    <a href="mailto:support@anthropic.com" class="service-link">✉️ support@anthropic.com</a>
+  </div>
+
+  <p style="font-size:13px;font-weight:700;color:var(--g800);margin-bottom:4px">Шаг 3 — Составьте письмо с помощью другой нейросети</p>
+  <p style="font-size:13px;color:var(--g700);line-height:1.7;margin-bottom:4px">Письмо нужно написать на <strong>английском</strong> — вежливо и по делу. Используйте промпт ниже в любой доступной нейросети (ChatGPT, Gemini, DeepSeek и др.) — она задаст уточняющие вопросы и составит письмо под вашу ситуацию.</p>
+</div>
+
+<!-- PROMPT BLOCK -->
+<div class="code-block">
+  <span class="code-label">Промпт для составления письма-апелляции — вставьте в любую нейросеть</span>
+  <button class="copy-btn" id="copyBtn" onclick="copyTemplate()">Скопировать</button>Помоги мне написать письмо-апелляцию в службу поддержки Anthropic
+(support@anthropic.com) с просьбой восстановить заблокированный
+аккаунт Claude.
+
+Сначала задай мне следующие уточняющие вопросы по одному:
+1. Какой email адрес заблокированного аккаунта?
+2. Примерно когда заблокировали аккаунт?
+3. Было ли объяснение причины блокировки?
+4. Для чего ты используешь Claude?
+   (работа, обучение, написание текстов, программирование и т.д.)
+5. Была ли у тебя оплаченная подписка? Есть ли квитанция об оплате?
+6. Есть ли что-то важное, что стоит упомянуть или объяснить?
+
+После того как я отвечу на все вопросы:
+
+— Напиши сначала текст письма на РУССКОМ языке, чтобы я мог(ла)
+  его проверить и согласовать
+— Затем напиши финальный текст на АНГЛИЙСКОМ для отправки
+
+Важные требования к письму:
+— Тема письма: "Appeal for Banned Account: [email аккаунта]"
+— Тон: вежливый, профессиональный, без агрессии и обвинений
+— Описать законное использование Claude
+— Выразить уважение к политике безопасности Anthropic
+— Взять на себя обязательство соблюдать правила в будущем
+— Попросить о проверке дела живым сотрудником (human review)
+
+Важно: даже если мои ответы на вопросы звучат не идеально или
+неловко — помоги переформулировать их максимально выгодно и
+убедительно. Твоя цель — написать письмо с наибольшей вероятностью
+восстановления аккаунта. Не приукрашивай факты, но подай их
+в наилучшем свете.</div>
+
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px">
+  <div class="insight teal" style="margin:0">
+    <div class="insight-label">✅ Что важно передать нейросети</div>
+    <p style="font-size:12px">Точный email аккаунта · Описание как вы используете Claude · Дата блокировки · Подтверждение оплаты если есть</p>
+  </div>
+  <div class="insight pink" style="margin:0">
+    <div class="insight-label">❌ Не делайте</div>
+    <p style="font-size:12px">Не отправляйте одно и то же письмо несколько раз — это воспринимается как спам. Одно письмо + вежливый follow-up через 7 дней если нет ответа.</p>
+  </div>
+</div>
+
+<div class="insight blue" style="margin-top:12px">
+  <div class="insight-label">⏱️ Сроки ответа</div>
+  <p>Обычно первый ответ приходит за 3–7 рабочих дней. Полное рассмотрение — 7–14 дней. Если через 7 дней нет ответа — отправьте вежливый follow-up, сославшись на исходное письмо.</p>
+</div>
+
+<div class="warn-box">💰 Деньги за неиспользованный период подписки обычно возвращаются автоматически в течение 1–3 дней — чек на возврат приходит на почту в день блокировки. Если возврат не пришёл, подайте отдельный запрос на <strong>billing@anthropic.com</strong> — независимо от апелляции.</div>
+
+<div class="insight amber" style="margin-top:12px">
+  <div class="insight-label">🔄 Если апелляция не помогла — регистрируем новый аккаунт</div>
+  <p>Ответ от Anthropic может прийти через несколько дней, а может не прийти вовсе — иногда ожидание затягивается на недели без каких-либо новостей. Если ситуация зашла в тупик, можно аккуратно зарегистрировать новый аккаунт:<br><br>
+  — <strong>Новая почта:</strong> Gmail или Proton Mail, не связанная с предыдущим аккаунтом<br>
+  — <strong>Другой способ оплаты</strong><br>
+  — С первого дня соблюдайте все правила — повторные нарушения могут привести к постоянной блокировке</p>
+</div>
+
+<!-- TAKEAWAY -->
+<div class="takeaway">
+  <h3>🛡️ Главное: профилактика лучше апелляции</h3>
+  <p>Соблюдайте одну VPN-локацию, платите надёжной картой, не создавайте несколько аккаунтов — и риск блокировки минимален. Делайте экспорт данных регулярно — в зависимости от объёма работы. А если блокировка случилась — апеллируйте спокойно, один раз, с доказательствами.</p>
+  <a href="https://claude.ai" target="_blank" rel="noopener" class="btn">🚀 Открыть Claude</a>
+</div>
+
+</div><!-- .page -->
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+function togglePath(id) {
+  document.getElementById(id).classList.toggle('open');
+}
+
+function copyTemplate() {
+  const btn = document.querySelector('.copy-btn');
+  const codeBlock = document.querySelector('.code-block');
+  const text = codeBlock.innerText.replace('Шаблон письма-апелляции (английский)\n','').replace(
