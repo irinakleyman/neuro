@@ -3,686 +3,819 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Конспект: Вводный урок</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Exo+2:wght@500;600;700;800&display=swap" rel="stylesheet">
+<title>Вводный урок — Конспект</title>
+<link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@500;600;700;800&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; font-style: normal; }
-:root {
-  --blue:#2C7BE5; --blue-l:#EBF3FF; --blue-m:#BAD6FF; --blue-d:#1749A0;
-  --pink:#D94B78; --pink-l:#FFF0F6; --pink-m:#F5BAD0;
-  --teal:#18A98E; --teal-l:#E5FAF7; --teal-m:rgba(24,169,142,.3);
-  --amber:#D98C0A; --amber-l:#FFF8EC; --amber-m:#F5D980;
-  --g50:#F6F9FF; --g100:#EDF2FA; --g200:#D6E2F0;
-  --g400:#7A9AB8; --g500:#4D6A84; --g600:#3D5A73; --g700:#2A4358; --g800:#162F44;
-  --white:#FFFFFF;
-  --f:'Nunito',sans-serif; --fh:'Exo 2',sans-serif;
-  --r1:10px; --r2:16px; --r3:24px;
-  --s1:0 2px 12px rgba(44,123,229,.08); --s2:0 6px 28px rgba(44,123,229,.13);
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;font-style:normal!important}
+:root{
+  --blue:#2C7BE5;--blue-l:#EBF3FF;--blue-m:#BAD6FF;--blue-d:#1749A0;
+  --pink:#D94B78;--pink-l:#FFF0F6;
+  --teal:#18A98E;--teal-l:#E5FAF7;
+  --amber:#D98C0A;--amber-l:#FFF8EC;
+  --g50:#F6F9FF;--g100:#EEF3FB;--g200:#DDE6F5;--g300:#C8D7EF;
+  --g400:#A3B8D8;--g500:#7896BA;--g600:#4F6E96;--g700:#334E73;--g800:#1E3252;
+  --r1:10px;--r2:16px;--r3:24px;
+  --s1:0 2px 12px rgba(44,123,229,.08);--s2:0 6px 28px rgba(44,123,229,.13)
 }
-body { font-family:var(--f); background:var(--g50); color:var(--g800); line-height:1.65; }
-.bg { position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:0; opacity:.35; }
-.page { position:relative; z-index:1; max-width:740px; margin:0 auto; padding:28px 18px 80px; }
+body{background:var(--g50);font-family:'Nunito',sans-serif;font-size:14px;color:var(--g800);min-height:100vh;position:relative}
+.bg-svg{position:fixed;inset:0;width:100%;height:100%;z-index:0;opacity:.35;pointer-events:none}
+.page{position:relative;z-index:1;max-width:760px;margin:0 auto;padding:28px 20px 60px}
 
 /* HEADER */
-.hdr { background:linear-gradient(140deg,#DCF0FF 0%,#FAE8F2 100%); border:1.5px solid #C8DFF8; border-radius:var(--r3); padding:30px 28px 24px; margin-bottom:14px; position:relative; overflow:hidden; }
-.hdr::after { content:''; position:absolute; top:-50px; right:-50px; width:200px; height:200px; border-radius:50%; background:radial-gradient(circle,rgba(44,123,229,.1) 0%,transparent 70%); }
-.badge { font-family:var(--fh); font-size:10px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:var(--blue); background:#fff; border:1px solid var(--blue-m); display:inline-block; padding:4px 12px; border-radius:20px; margin-bottom:12px; }
-.hdr h1 { font-family:var(--fh); font-size:24px; font-weight:800; color:var(--g800); line-height:1.2; margin-bottom:8px; }
-.hdr p { font-size:14px; color:var(--g600); max-width:460px; }
-.hdr-chips { display:flex; gap:10px; flex-wrap:wrap; margin-top:16px; }
-.chip { font-size:12px; font-weight:600; color:var(--g600); background:#fff; border:1px solid var(--g200); padding:5px 12px; border-radius:20px; }
+.hdr{background:linear-gradient(135deg,#DCF0FF,#FAE8F2);border:1.5px solid var(--blue-m);border-radius:var(--r3);padding:28px 32px;margin-bottom:24px;position:relative;overflow:hidden}
+.hdr::after{content:'';position:absolute;top:-60px;right:-60px;width:240px;height:240px;background:radial-gradient(circle,rgba(44,123,229,.12) 0%,transparent 70%);pointer-events:none}
+.hdr-label{font-family:'Exo 2',sans-serif;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--blue);margin-bottom:8px}
+.hdr h1{font-family:'Exo 2',sans-serif;font-size:24px;font-weight:800;color:var(--blue-d);line-height:1.25;margin-bottom:8px}
+.hdr p{color:var(--g600);font-size:14px;line-height:1.6;margin-bottom:18px;max-width:520px}
+.hdr-chips{display:flex;flex-wrap:wrap;gap:8px}
+.hdr-chip{background:#fff;border:1px solid var(--g200);border-radius:20px;padding:5px 12px;font-size:12px;font-weight:600;color:var(--g600)}
 
 /* PROGRESS */
-.prog-wrap { background:#fff; border:1px solid var(--g200); border-radius:var(--r2); padding:16px 20px; margin-bottom:26px; box-shadow:var(--s1); }
-.prog-top { display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; }
-.prog-top span:first-child { font-family:var(--fh); font-size:11px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--g400); }
-.prog-pct { font-family:var(--fh); font-size:14px; font-weight:800; color:var(--blue); }
-.prog-track { height:8px; background:var(--g100); border-radius:99px; overflow:hidden; }
-.prog-fill { height:100%; border-radius:99px; background:linear-gradient(90deg,var(--blue) 0%,var(--pink) 100%); transition:width .5s; }
-.prog-legend { display:flex; gap:6px; margin-top:14px; justify-content:space-between; }
-.prog-leg-item { display:flex; flex-direction:column; align-items:center; gap:6px; flex:1; }
-.prog-leg-txt { font-size:10px; color:var(--g500); text-align:center; line-height:1.3; font-family:var(--fh); font-weight:600; }
-.prog-leg-txt span { font-weight:400; color:var(--g400); font-family:var(--f); }
-.sdot { width:30px; height:30px; border-radius:50%; border:2px solid var(--g200); background:#fff; color:var(--g400); font-family:var(--fh); font-size:11px; font-weight:700; display:flex; align-items:center; justify-content:center; transition:all .2s; }
-.sdot.active { border-color:var(--blue); color:var(--blue); }
-.sdot.done { background:var(--blue); border-color:var(--blue); color:#fff; }
+.prog-card{background:#fff;border:1px solid var(--g200);border-radius:var(--r2);padding:20px;margin-bottom:24px;box-shadow:var(--s1)}
+.prog-track{height:8px;background:var(--g100);border-radius:4px;overflow:hidden;margin-bottom:16px}
+.prog-fill{height:100%;background:linear-gradient(90deg,var(--blue),var(--pink));border-radius:4px;transition:width .5s ease;width:0%}
+.prog-steps{display:grid;grid-template-columns:repeat(5,1fr);gap:4px}
+.prog-step{display:flex;flex-direction:column;align-items:center;gap:5px}
+.step-dot{width:24px;height:24px;border-radius:50%;border:2px solid var(--g300);display:flex;align-items:center;justify-content:center;font-family:'Exo 2',sans-serif;font-size:10px;font-weight:700;color:var(--g400);transition:all .3s;flex-shrink:0}
+.step-dot.active{border-color:var(--blue);color:var(--blue)}
+.step-dot.done{background:var(--blue);border-color:var(--blue);color:#fff}
+.step-label{font-family:'Exo 2',sans-serif;font-size:9px;font-weight:700;color:var(--g400);text-align:center;text-transform:uppercase;letter-spacing:.04em;transition:color .3s;line-height:1.2}
+.step-dot.active~.step-label,.step-dot.done~.step-label{color:var(--blue)}
 
-/* SECTION */
-.sec { margin-bottom:24px; }
-.sec-head { display:flex; align-items:center; gap:12px; margin-bottom:14px; }
-.sec-num { width:36px; height:36px; border-radius:11px; flex-shrink:0; font-family:var(--fh); font-size:15px; font-weight:800; display:flex; align-items:center; justify-content:center; color:#fff; }
-.nb { background:var(--blue); } .np { background:var(--pink); } .nt { background:var(--teal); } .na { background:#E09A1A; }
-.sec-title { font-family:var(--fh); font-size:17px; font-weight:700; color:var(--g800); }
-.sec-sub { font-size:12px; color:var(--g400); margin-top:2px; }
+/* SECTION HEADS */
+.sec-head{display:flex;align-items:flex-start;gap:12px;margin-bottom:16px}
+.sec-icon{width:36px;height:36px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.sec-icon.nb{background:var(--blue-l)}.sec-icon.np{background:var(--pink-l)}
+.sec-icon.nt{background:var(--teal-l)}.sec-icon.na{background:var(--amber-l)}
+.sec-title{font-family:'Exo 2',sans-serif;font-size:17px;font-weight:700;color:var(--g800);line-height:1.2}
+.sec-sub{font-size:13px;color:var(--g500);margin-top:3px}
+section{margin-bottom:24px}
 
-/* CARD */
-.card { background:#fff; border:1px solid var(--g200); border-radius:var(--r2); padding:20px; box-shadow:var(--s1); margin-bottom:10px; }
+/* CARDS */
+.card{background:#fff;border:1px solid var(--g200);border-radius:var(--r2);padding:20px;box-shadow:var(--s1)}
 
-/* BLENDER */
-.blender-wrap { background:#fff; border:1px solid var(--g200); border-radius:var(--r2); padding:24px 20px; margin-bottom:10px; box-shadow:var(--s1); }
-.blender-title { font-family:var(--fh); font-size:15px; font-weight:700; color:var(--g800); margin-bottom:6px; }
-.blender-sub { font-size:13px; color:var(--g600); margin-bottom:18px; line-height:1.5; }
-.blender-svg-wrap { text-align:center; margin:0 auto 18px; }
-.bm-grid { display:grid; grid-template-columns:1fr auto 1fr; gap:14px; align-items:center; }
-@media(max-width:500px){ .bm-grid { grid-template-columns:1fr; } .bm-arrow { transform:rotate(90deg); } }
-.bm-box { border-radius:var(--r2); padding:14px; }
-.bm-l { background:var(--blue-l); border:1.5px solid var(--blue-m); }
-.bm-r { background:var(--amber-l); border:1.5px solid var(--amber-m); }
-.bm-lbl { font-family:var(--fh); font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.08em; margin-bottom:10px; }
-.bm-l .bm-lbl { color:var(--blue); } .bm-r .bm-lbl { color:var(--amber); }
-.bm-list { list-style:none; }
-.bm-list li { font-size:12px; color:var(--g700); padding:3px 0; border-bottom:1px solid rgba(44,123,229,.08); display:flex; align-items:center; gap:7px; }
-.bm-list li:last-child { border-bottom:none; }
-.fd { width:5px; height:5px; border-radius:50%; flex-shrink:0; }
-.bm-l .fd { background:var(--blue); } .bm-r .fd { background:#E09A1A; }
-.bm-arrow { font-size:22px; color:var(--g400); text-align:center; }
-.bm-r p { font-size:12px; color:var(--g600); margin-top:8px; line-height:1.4; }
+/* INSIGHT BLOCKS */
+.insight{border-left:4px solid;border-radius:0 var(--r1) var(--r1) 0;padding:12px 16px;margin:14px 0}
+.insight.blue{border-color:var(--blue);background:var(--blue-l)}
+.insight.pink{border-color:var(--pink);background:var(--pink-l)}
+.insight.teal{border-color:var(--teal);background:var(--teal-l)}
+.insight.amber{border-color:var(--amber);background:var(--amber-l)}
+.insight-label{font-family:'Exo 2',sans-serif;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:5px}
+.insight.blue .insight-label{color:var(--blue)}.insight.pink .insight-label{color:var(--pink)}
+.insight.teal .insight-label{color:var(--teal)}.insight.amber .insight-label{color:var(--amber)}
+.insight p{font-size:13px;font-weight:600;color:var(--blue-d);line-height:1.6}
+.insight a{color:var(--blue);text-decoration:underline}
 
-/* STORIES */
-.stories-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:10px; }
-@media(max-width:480px){ .stories-grid { grid-template-columns:1fr; } }
-.story { background:#fff; border:1px solid var(--g200); border-radius:var(--r2); padding:16px; box-shadow:var(--s1); }
-.story-top { display:flex; align-items:center; gap:10px; margin-bottom:10px; }
-.s-ico { width:36px; height:36px; border-radius:10px; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:18px; }
-.s-who { font-family:var(--fh); font-size:13px; font-weight:700; color:var(--g800); }
-.s-role { font-size:11px; color:var(--g400); }
-.s-before { font-size:12px; color:var(--g500); margin-bottom:6px; }
-.s-after { font-size:13px; font-weight:600; color:var(--g700); line-height:1.4; padding:8px 10px; background:var(--teal-l); border-left:3px solid var(--teal); border-radius:0 var(--r1) var(--r1) 0; }
+/* BARRIER CARDS */
+.barrier-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.barrier-card{background:#fff;border:1.5px solid var(--g200);border-radius:var(--r2);padding:16px 18px;cursor:pointer;transition:all .25s}
+.barrier-card:hover{box-shadow:var(--s2);transform:translateY(-2px)}
+.barrier-card.on{border-color:var(--pink);background:var(--pink-l)}
+.barrier-card.on .bc-title{color:var(--pink)}
+.barrier-card.on .bc-check{background:var(--pink);border-color:var(--pink);color:#fff}
+.bc-top{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:6px}
+.bc-check{width:20px;height:20px;border-radius:50%;border:2px solid var(--g300);flex-shrink:0;transition:all .25s;display:flex;align-items:center;justify-content:center;font-size:10px;color:transparent;margin-top:1px}
+.bc-title{font-family:'Exo 2',sans-serif;font-size:13px;font-weight:700;color:var(--g800);flex:1;line-height:1.3;transition:color .25s}
+.bc-desc{font-size:12px;color:var(--g500);line-height:1.5}
 
-/* INSIGHT BOX */
-.ins { border-radius:0 var(--r1) var(--r1) 0; padding:14px 16px; margin-bottom:10px; }
-.ib { background:var(--blue-l); border-left:4px solid var(--blue); }
-.ip { background:var(--pink-l); border-left:4px solid var(--pink); }
-.it { background:var(--teal-l); border-left:4px solid var(--teal); }
-.ia { background:var(--amber-l); border-left:4px solid #E09A1A; }
-.ins .lbl { font-family:var(--fh); font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.1em; margin-bottom:6px; }
-.ib .lbl { color:var(--blue); } .ip .lbl { color:var(--pink); } .it .lbl { color:var(--teal); } .ia .lbl { color:var(--amber); }
-.ins p { font-size:14px; font-weight:600; color:var(--g800); line-height:1.5; }
+/* WS LIST */
+.ws-list{display:flex;flex-direction:column;gap:8px}
+.ws-item{display:flex;align-items:flex-start;gap:12px;background:#fff;border:1px solid var(--g200);border-radius:var(--r2);padding:14px 16px;box-shadow:var(--s1)}
+.ws-num{width:28px;height:28px;border-radius:50%;background:var(--blue);display:flex;align-items:center;justify-content:center;font-family:'Exo 2',sans-serif;font-size:12px;font-weight:800;color:#fff;flex-shrink:0;margin-top:1px}
+.ws-item.adv .ws-num{background:var(--amber)}
+.ws-title{font-family:'Exo 2',sans-serif;font-size:13px;font-weight:700;color:var(--g800);margin-bottom:3px}
+.ws-desc{font-size:12px;color:var(--g500);line-height:1.5}
 
-/* BARRIERS */
-.b-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
-@media(max-width:520px){ .b-grid { grid-template-columns:1fr; } }
-.bc { background:#fff; border:1.5px solid var(--g200); border-radius:var(--r2); padding:16px; box-shadow:var(--s1); cursor:pointer; transition:all .2s; position:relative; }
-.bc:hover { box-shadow:var(--s2); transform:translateY(-2px); }
-.bc.on { border-color:var(--pink); background:var(--pink-l); }
-.bc-check { position:absolute; top:12px; right:12px; width:22px; height:22px; border-radius:50%; border:2px solid var(--g200); display:flex; align-items:center; justify-content:center; transition:all .2s; }
-.bc.on .bc-check { background:var(--pink); border-color:var(--pink); }
-.bc-check svg { opacity:0; transition:opacity .15s; }
-.bc.on .bc-check svg { opacity:1; }
-.bc-q { font-family:var(--fh); font-size:13px; font-weight:700; color:var(--g800); margin-bottom:8px; line-height:1.3; padding-right:28px; }
-.bc.on .bc-q { color:var(--pink); }
-.bc-a { font-size:12px; color:var(--g600); line-height:1.45; }
+/* TARIFFS */
+.tariff-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:14px}
+.tariff-card{background:#fff;border:1.5px solid var(--g200);border-radius:var(--r2);padding:16px;box-shadow:var(--s1)}
+.tariff-card.featured{border-color:var(--blue);background:var(--blue-l)}
+.tariff-badge{font-family:'Exo 2',sans-serif;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;border-radius:20px;padding:3px 10px;display:inline-block;margin-bottom:8px}
+.tariff-card:first-child .tariff-badge{background:var(--g100);color:var(--g600)}
+.tariff-card.featured .tariff-badge{background:var(--blue);color:#fff}
+.tariff-card:last-child .tariff-badge{background:var(--amber-l);color:var(--amber)}
+.tariff-title{font-family:'Exo 2',sans-serif;font-size:13px;font-weight:700;color:var(--g800);margin-bottom:8px}
+.tariff-list{list-style:none;font-size:12px;color:var(--g600);line-height:1.7}
+.tariff-list li::before{content:'→ ';color:var(--blue);font-weight:700}
+.tariff-for{margin-top:10px;font-size:11px;color:var(--g500);border-top:1px solid var(--g200);padding-top:8px;line-height:1.5}
 
-/* MODES */
-.modes { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-bottom:10px; }
-@media(max-width:480px){ .modes { grid-template-columns:1fr; } }
-.mode { background:#fff; border:1px solid var(--g200); border-radius:var(--r2); padding:16px 14px; text-align:center; box-shadow:var(--s1); }
-.mode-ico { font-size:24px; margin-bottom:8px; display:block; }
-.mode-name { font-family:var(--fh); font-size:13px; font-weight:700; color:var(--g800); margin-bottom:4px; }
-.mode-desc { font-size:11px; color:var(--g600); line-height:1.4; }
+/* STORY CARDS */
+.story-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.story-card{background:#fff;border:1px solid var(--g200);border-radius:var(--r2);padding:14px;box-shadow:var(--s1)}
+.story-was{font-size:11px;color:var(--g500);margin-bottom:4px;font-family:'Exo 2',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.06em}
+.story-was-text{font-size:13px;color:var(--g600);line-height:1.5;margin-bottom:8px}
+.story-became{border-left:3px solid var(--teal);background:var(--teal-l);border-radius:0 6px 6px 0;padding:8px 10px;font-size:13px;font-weight:600;color:var(--g700);line-height:1.5}
 
-/* STEPS */
-.step { background:#fff; border:1px solid var(--g200); border-radius:var(--r2); padding:18px; box-shadow:var(--s1); margin-bottom:8px; display:flex; gap:16px; align-items:flex-start; }
-.step-n { width:38px; height:38px; border-radius:11px; flex-shrink:0; background:var(--blue-l); border:2px solid var(--blue-m); font-family:var(--fh); font-size:16px; font-weight:800; color:var(--blue); display:flex; align-items:center; justify-content:center; }
-.step-c strong { font-family:var(--fh); font-size:14px; font-weight:700; color:var(--g800); display:block; margin-bottom:4px; }
-.step-c p { font-size:13px; color:var(--g600); line-height:1.45; }
-.btn-g { display:inline-flex; align-items:center; gap:6px; font-size:12px; font-weight:700; color:var(--blue); background:var(--blue-l); border:1px solid var(--blue-m); padding:6px 14px; border-radius:20px; margin-top:8px; cursor:pointer; transition:all .15s; text-decoration:none; }
-.btn-g:hover { background:var(--blue); color:#fff; }
-.btn-g svg { width:12px; height:12px; }
+/* REACT ROW */
+.react-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;padding-top:16px;border-top:1px solid var(--g100)}
+.react-btn{display:inline-flex;align-items:center;gap:7px;background:#fff;border:1.5px solid var(--g200);border-radius:20px;padding:9px 18px;font-family:'Nunito',sans-serif;font-size:13px;font-weight:700;color:var(--g700);cursor:pointer;transition:all .2s;line-height:1.2}
+.react-btn:hover{border-color:var(--blue);color:var(--blue);background:var(--blue-l)}
+.react-btn.reacted{background:var(--blue);border-color:var(--blue);color:#fff;cursor:default}
+.react-btn.reacted-teal{background:var(--teal);border-color:var(--teal);color:#fff;cursor:default}
+.react-btn.reacted-pink{background:var(--pink);border-color:var(--pink);color:#fff;cursor:default}
 
-/* NOTICE */
-.notice { background:#FFFBEC; border:1.5px solid var(--amber-m); border-radius:var(--r2); padding:14px 16px; margin-bottom:10px; }
-.notice p { font-size:13px; color:var(--g700); line-height:1.5; }
+/* MOOD SCALE */
+.mood-label{font-family:'Exo 2',sans-serif;font-size:13px;font-weight:700;color:var(--g700);margin-bottom:12px}
+.mood-scale{display:flex;gap:5px;flex-wrap:wrap;align-items:center}
+.mood-btn{width:38px;height:38px;border-radius:50%;border:2px solid var(--g200);background:#fff;font-family:'Exo 2',sans-serif;font-size:12px;font-weight:800;color:var(--g500);cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.mood-btn:hover{border-color:var(--blue);color:var(--blue);background:var(--blue-l)}
+.mood-btn.mood-sel{background:var(--blue);border-color:var(--blue);color:#fff;transform:scale(1.18)}
+.mood-ends{display:flex;justify-content:space-between;font-size:11px;color:var(--g400);margin-top:6px;font-weight:600}
+.mood-result{margin-top:10px;font-size:13px;font-weight:600;min-height:20px;transition:all .3s;color:var(--blue-d)}
 
-/* INSIGHT CHIPS */
-.chips-hint { font-size:13px; color:var(--g600); margin-bottom:12px; line-height:1.5; }
-.chips { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:14px; }
-.ich { font-size:13px; font-weight:600; color:var(--g700); background:#fff; border:1.5px solid var(--g200); padding:8px 14px; border-radius:20px; cursor:pointer; transition:all .2s; line-height:1.3; }
-.ich:hover { border-color:var(--blue); color:var(--blue); }
-.ich.pb { background:var(--blue); border-color:var(--blue); color:#fff; }
-.ich.pp { background:var(--pink); border-color:var(--pink); color:#fff; }
-.ich.pt { background:var(--teal); border-color:var(--teal); color:#fff; }
-.my-picks { background:var(--g100); border:1px dashed var(--g200); border-radius:var(--r2); padding:16px 18px; min-height:58px; margin-bottom:8px; }
-.mp-lbl { font-family:var(--fh); font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.08em; color:var(--g400); margin-bottom:8px; }
-.mp-items { display:flex; flex-wrap:wrap; gap:6px; }
-.mp-item { font-size:12px; font-weight:600; padding:5px 12px; border-radius:16px; color:#fff; }
-.prep-item { display:flex; align-items:center; justify-content:space-between; gap:16px; padding:14px 18px; border-bottom:1px solid var(--g100); }
-.pi-left { display:flex; align-items:center; gap:12px; flex:1; min-width:0; }
-.prep-item .cbox { flex-shrink:0; }
-.prep-item .btn-g { flex-shrink:0; white-space:nowrap; }
+/* CLARITY */
+.clarity-q{font-family:'Exo 2',sans-serif;font-size:13px;font-weight:700;color:var(--g700);margin-bottom:10px}
+.clarity-btns{display:flex;gap:8px;flex-wrap:wrap}
+.clarity-btn{display:inline-flex;align-items:center;gap:7px;background:#fff;border:1.5px solid var(--g200);border-radius:20px;padding:9px 18px;font-family:'Nunito',sans-serif;font-size:13px;font-weight:700;color:var(--g700);cursor:pointer;transition:all .2s}
+.clarity-btn:hover{border-color:var(--teal);color:var(--teal);background:var(--teal-l)}
+.clarity-btn.cl-yes{background:var(--teal);border-color:var(--teal);color:#fff;cursor:default}
+.clarity-btn.cl-no{background:var(--pink);border-color:var(--pink);color:#fff;cursor:default}
+.clarity-answer{margin-top:12px;padding:12px 16px;border-radius:var(--r1);font-size:13px;font-weight:600;line-height:1.6;display:none}
+.clarity-answer.show{display:block;animation:fadeIn .4s ease}
+.clarity-answer.ans-yes{background:var(--teal-l);color:var(--teal)}
+.clarity-answer.ans-no{background:var(--blue-l);color:var(--blue-d)}
 
-/* CHECKLIST */
-.cl { list-style:none; }
-.cl li { display:flex; align-items:flex-start; gap:12px; padding:12px 0; border-bottom:1px solid var(--g100); }
-.cl li:last-child { border-bottom:none; padding-bottom:0; }
-.cbox { width:22px; height:22px; border-radius:6px; border:2px solid var(--g200); flex-shrink:0; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all .2s; background:#fff; margin-top:2px; }
-.cbox.on { background:var(--blue); border-color:var(--blue); }
-.cbox svg { opacity:0; transition:opacity .15s; }
-.cbox.on svg { opacity:1; }
-.cl-t { font-family:var(--fh); font-size:14px; font-weight:700; color:var(--g800); margin-bottom:2px; }
-.cl-d { font-size:12px; color:var(--g600); line-height:1.4; }
-.done-wrap .cl-t { text-decoration:line-through; color:var(--g400); }
+/* PREP LIST */
+.prep-list{list-style:none}
+.prep-item{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:16px 20px;border-bottom:1px solid var(--g100);transition:background .2s}
+.prep-item.done-wrap{background:var(--g50)}
+.prep-item.done-wrap .prep-title{text-decoration:line-through;color:var(--g400)}
+.prep-item:last-child{border-bottom:none}
+.prep-left{display:flex;align-items:flex-start;gap:12px;flex:1;min-width:0}
+.prep-num{font-family:'Exo 2',sans-serif;font-size:14px;font-weight:800;color:var(--blue);width:24px;flex-shrink:0;margin-top:2px}
+.prep-text{flex:1;min-width:0}
+.prep-title{font-family:'Exo 2',sans-serif;font-size:13px;font-weight:700;color:var(--g800);margin-bottom:3px;transition:all .2s;line-height:1.3}
+.prep-desc{font-size:12px;color:var(--g500);line-height:1.5}
+.prep-desc a{color:var(--blue);text-decoration:underline}
+.prep-right{display:flex;flex-direction:column;align-items:flex-end;gap:6px;flex-shrink:0}
+.prep-guide{background:var(--g50);border:1px solid var(--g200);border-radius:var(--r1);padding:5px 11px;font-family:'Exo 2',sans-serif;font-size:11px;font-weight:700;color:var(--g600);cursor:pointer;text-decoration:none;white-space:nowrap;transition:all .2s;display:inline-block;border:none}
+.prep-guide:hover{background:var(--blue-l);color:var(--blue)}
+.prep-done-btn{background:var(--teal-l);border:1.5px solid var(--teal);border-radius:20px;padding:6px 14px;font-family:'Exo 2',sans-serif;font-size:11px;font-weight:700;color:var(--teal);cursor:pointer;white-space:nowrap;transition:all .2s}
+.prep-done-btn:hover{background:var(--teal);color:#fff}
+.prep-done-btn.done{background:var(--teal);color:#fff;cursor:default;border-color:var(--teal)}
+
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(19,40,75,.55);backdrop-filter:blur(4px);z-index:9000;display:flex;align-items:center;justify-content:center;padding:16px;opacity:0;pointer-events:none;transition:opacity .3s}
+.modal-overlay.open{opacity:1;pointer-events:all}
+.modal-box{background:#fff;border-radius:var(--r3);width:100%;max-width:560px;max-height:88vh;display:flex;flex-direction:column;box-shadow:0 24px 64px rgba(19,40,75,.3);transform:translateY(20px);transition:transform .3s}
+.modal-overlay.open .modal-box{transform:translateY(0)}
+.modal-hdr{padding:20px 24px 16px;border-bottom:1px solid var(--g100);display:flex;align-items:center;gap:12px;flex-shrink:0}
+.modal-hdr-icon{width:36px;height:36px;border-radius:11px;background:var(--blue-l);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.modal-hdr-title{font-family:'Exo 2',sans-serif;font-size:16px;font-weight:700;color:var(--g800)}
+.modal-hdr-sub{font-size:12px;color:var(--g500);margin-top:2px}
+.modal-close{width:32px;height:32px;border-radius:50%;background:var(--g100);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;color:var(--g500);flex-shrink:0;transition:all .2s;line-height:1;margin-left:auto}
+.modal-close:hover{background:var(--g200);color:var(--g800)}
+.modal-progress{display:flex;gap:6px;align-items:center;padding:12px 24px;border-bottom:1px solid var(--g100);flex-shrink:0}
+.modal-dot{width:8px;height:8px;border-radius:50%;background:var(--g200);transition:all .3s;flex-shrink:0}
+.modal-dot.m-active{background:var(--blue);transform:scale(1.3)}
+.modal-dot.m-done{background:var(--teal)}
+.modal-body{overflow-y:auto;padding:20px 24px;flex:1}
+.modal-step{display:none}
+.modal-step.m-current{display:block;animation:fadeIn .35s ease}
+.modal-step-title{font-family:'Exo 2',sans-serif;font-size:15px;font-weight:700;color:var(--g800);margin-bottom:8px}
+.modal-step-desc{font-size:13px;color:var(--g700);line-height:1.7;margin-bottom:8px}
+.modal-step-desc a{color:var(--blue);text-decoration:underline}
+.modal-step-desc strong{color:var(--g800)}
+.modal-nav{padding:16px 24px;border-top:1px solid var(--g100);display:flex;justify-content:space-between;align-items:center;flex-shrink:0}
+.modal-step-counter{font-family:'Exo 2',sans-serif;font-size:11px;font-weight:700;color:var(--g400);text-transform:uppercase;letter-spacing:.06em}
+.modal-open-btn{display:flex;align-items:center;gap:12px;background:#fff;border:2px solid var(--g200);border-radius:var(--r2);padding:14px 18px;cursor:pointer;transition:all .25s;text-align:left;width:100%;margin-top:10px}
+.modal-open-btn:hover{border-color:var(--blue);box-shadow:var(--s2);transform:translateY(-1px)}
+.modal-open-btn-icon{width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.modal-open-btn-title{font-family:'Exo 2',sans-serif;font-size:14px;font-weight:700;color:var(--g800)}
+.modal-open-btn-sub{font-size:12px;color:var(--g500);margin-top:2px}
+.modal-arrow{font-size:18px;color:var(--g400);margin-left:auto}
+
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;gap:8px;background:var(--blue);color:#fff;border:none;border-radius:var(--r1);padding:11px 20px;font-family:'Exo 2',sans-serif;font-size:13px;font-weight:700;cursor:pointer;text-decoration:none;transition:all .2s;line-height:1}
+.btn:hover{background:var(--blue-d);transform:translateY(-1px)}
+.btn.btn-ghost{background:transparent;color:var(--blue);border:2px solid var(--blue)}
+.btn.btn-ghost:hover{background:var(--blue-l)}
 
 /* TAKEAWAY */
-.tw { background:linear-gradient(135deg,var(--blue) 0%,#153E9A 100%); border-radius:var(--r3); padding:24px; color:#fff; margin-bottom:10px; position:relative; overflow:hidden; }
-.tw::before { content:''; position:absolute; bottom:-30px; right:-30px; width:140px; height:140px; border-radius:50%; background:rgba(255,255,255,.06); }
-.tw-lbl { font-family:var(--fh); font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.12em; opacity:.65; margin-bottom:10px; }
-.tw p { font-family:var(--fh); font-size:15px; font-weight:700; line-height:1.45; position:relative; z-index:1; color:#fff; }
-
-/* TAG */
-.tag { display:inline-block; font-size:11px; font-weight:700; padding:3px 10px; border-radius:20px; font-family:var(--fh); text-transform:uppercase; letter-spacing:.06em; margin-bottom:10px; }
-.tb { background:var(--blue-l); color:var(--blue); border:1px solid var(--blue-m); }
-.tp { background:var(--pink-l); color:var(--pink); border:1px solid var(--pink-m); }
-.tt { background:var(--teal-l); color:var(--teal); border:1px solid var(--teal-m); }
+.takeaway{background:linear-gradient(135deg,var(--blue),#153E9A);border-radius:var(--r3);padding:28px 32px;position:relative;overflow:hidden}
+.takeaway::before{content:'';position:absolute;bottom:-40px;right:-40px;width:200px;height:200px;background:rgba(255,255,255,.08);border-radius:50%;pointer-events:none}
+.takeaway h3{font-family:'Exo 2',sans-serif;font-size:18px;font-weight:700;color:#fff;margin-bottom:10px;position:relative}
+.takeaway p{font-family:'Exo 2',sans-serif;font-size:14px;font-weight:500;color:rgba(255,255,255,.85);line-height:1.8;position:relative}
 
 /* UTILS */
-p { font-size:14px; color:var(--g600); line-height:1.6; margin-bottom:8px; }
-p:last-child { margin-bottom:0; }
-strong { font-weight:700; color:var(--g800); }
-.div { height:1px; background:var(--g200); margin:6px 0 20px; }
-.mb8 { margin-bottom:8px; }
-.list-nice { list-style:none; }
-.list-nice li { padding:8px 0; border-bottom:1px solid var(--g100); font-size:13px; color:var(--g700); display:flex; align-items:flex-start; gap:10px; }
-.list-nice li:last-child { border-bottom:none; }
-.li-dot { color:var(--teal); font-size:16px; flex-shrink:0; margin-top:-1px; }
+.hidden{display:none!important}
+.fade-in{animation:fadeIn .4s ease both}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.warn-box{background:var(--amber-l);border:1px solid #f0d090;border-radius:var(--r1);padding:10px 14px;font-size:12px;color:var(--amber);font-weight:600;margin-top:10px;line-height:1.6}
+.note-box{background:var(--g100);border-radius:var(--r1);padding:10px 14px;font-size:12px;color:var(--g600);line-height:1.6;margin-top:12px}
+
+@media(max-width:540px){
+  .tariff-grid,.story-grid,.barrier-grid{grid-template-columns:1fr}
+  .hdr{padding:22px 20px}.hdr h1{font-size:20px}
+  .page{padding:16px 14px 50px}
+  .mood-btn{width:30px;height:30px;font-size:11px}
+  .mood-scale{gap:3px}
+}
 </style>
 </head>
 <body>
 
-<svg class="bg" viewBox="0 0 800 1200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-  <circle cx="60" cy="120" r="3" fill="#2C7BE5"/><circle cx="740" cy="80" r="2.5" fill="#D94B78"/>
-  <circle cx="690" cy="300" r="2" fill="#18A98E"/><circle cx="100" cy="500" r="2" fill="#2C7BE5"/>
-  <circle cx="750" cy="600" r="3" fill="#2C7BE5"/><circle cx="50" cy="900" r="2" fill="#D94B78"/>
-  <circle cx="720" cy="1000" r="2.5" fill="#18A98E"/>
-  <line x1="60" y1="120" x2="740" y2="80" stroke="#2C7BE5" stroke-width=".7" opacity=".2"/>
-  <line x1="690" y1="300" x2="750" y2="600" stroke="#18A98E" stroke-width=".7" opacity=".18"/>
-  <line x1="100" y1="500" x2="50" y2="900" stroke="#2C7BE5" stroke-width=".6" opacity=".15"/>
-  <line x1="740" y1="80" x2="690" y2="300" stroke="#D94B78" stroke-width=".6" opacity=".15"/>
+<svg class="bg-svg" viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+  <line x1="100" y1="200" x2="380" y2="340" stroke="#2C7BE5" stroke-width="1.5"/>
+  <line x1="380" y1="340" x2="680" y2="210" stroke="#D94B78" stroke-width="1.5"/>
+  <line x1="680" y1="210" x2="960" y2="420" stroke="#18A98E" stroke-width="1.5"/>
+  <line x1="960" y1="420" x2="1120" y2="260" stroke="#2C7BE5" stroke-width="1.5"/>
+  <circle cx="100" cy="200" r="7" fill="#2C7BE5"/><circle cx="380" cy="340" r="12" fill="#D94B78"/>
+  <circle cx="680" cy="210" r="9" fill="#18A98E"/><circle cx="960" cy="420" r="14" fill="#2C7BE5"/>
+  <circle cx="1120" cy="260" r="6" fill="#D94B78"/><circle cx="220" cy="600" r="8" fill="#18A98E"/>
+  <circle cx="560" cy="660" r="5" fill="#D98C0A"/>
 </svg>
 
 <div class="page">
 
 <!-- HEADER -->
 <div class="hdr">
-  <div class="badge">Конспект · Вводный урок</div>
-  <h1>Для тех, кто откладывал,<br>сомневался или уже пробовал работать с ИИ</h1>
-  <p>Ключевые идеи, примеры делегирования и шаги для подготовки к интенсиву</p>
+  <div class="hdr-label">Конспект · Вводный урок</div>
+  <h1>Добро пожаловать на интенсив по Claude</h1>
+  <p>Смотрите самостоятельно до интенсива. Здесь — всё главное из урока и интерактивный чеклист подготовки.</p>
   <div class="hdr-chips">
-    <div class="chip">⏱ 25–35 мин</div>
-    <div class="chip">📋 6 блоков</div>
-    <div class="chip">✅ 3 шага к интенсиву</div>
+    <span class="hdr-chip">⏱ до 20 минут</span>
+    <span class="hdr-chip">📋 организационный урок</span>
+    <span class="hdr-chip">✅ чеклист подготовки</span>
   </div>
 </div>
 
 <!-- PROGRESS -->
-<div class="prog-wrap">
-  <div class="prog-top">
-    <span>Прогресс</span>
-    <span class="prog-pct" id="pct">0%</span>
-  </div>
-  <div class="prog-track"><div class="prog-fill" id="fill" style="width:0%"></div></div>
-  <div class="prog-legend">
-    <div class="prog-leg-item">
-      <div class="sdot active" id="d1">1</div>
-      <div class="prog-leg-txt">Рефлексия<br><span>разделы 3 и 5</span></div>
-    </div>
-    <div class="prog-leg-item">
-      <div class="sdot" id="d2">2</div>
-      <div class="prog-leg-txt">Регистрация<br><span>в Claude</span></div>
-    </div>
-    <div class="prog-leg-item">
-      <div class="sdot" id="d3">3</div>
-      <div class="prog-leg-txt">Голосовой ввод<br><span>настроен</span></div>
-    </div>
-    <div class="prog-leg-item">
-      <div class="sdot" id="d4">4</div>
-      <div class="prog-leg-txt">Урок<br><span>просмотрен</span></div>
-    </div>
+<div class="prog-card">
+  <div class="prog-track"><div class="prog-fill" id="progFill"></div></div>
+  <div class="prog-steps">
+    <div class="prog-step"><div class="step-dot active" id="dot1">1</div><div class="step-label">Интенсив</div></div>
+    <div class="prog-step"><div class="step-dot" id="dot2">2</div><div class="step-label">Зачем</div></div>
+    <div class="prog-step"><div class="step-dot" id="dot3">3</div><div class="step-label">Барьеры</div></div>
+    <div class="prog-step"><div class="step-dot" id="dot4">4</div><div class="step-label">Настрой</div></div>
+    <div class="prog-step"><div class="step-dot" id="dot5">5</div><div class="step-label">Готова!</div></div>
   </div>
 </div>
 
-<!-- ══ БЛОК 1: ЗАЧЕМ ══ -->
-<div class="sec">
+
+<!-- ══ БЛОК 1: ЧТО ЖДЁТ НА ИНТЕНСИВЕ ══ -->
+<section>
   <div class="sec-head">
-    <div class="sec-num nb">1</div>
-    <div><div class="sec-title">Зачем это всё</div><div class="sec-sub">Метафора, которая объясняет главное</div></div>
-  </div>
-
-  <div class="blender-wrap">
-    <div class="blender-title">Представьте: у вас профессиональный кухонный комбайн</div>
-    <div class="blender-sub">Топовая модель с 32 программами. Умеет абсолютно всё. И вы используете его только для одного.</div>
-
-    <!-- SVG blender illustration -->
-    <div class="blender-svg-wrap">
-      <svg width="360" height="200" viewBox="0 0 360 200" fill="none" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;">
-        <!-- Body -->
-        <rect x="20" y="20" width="130" height="150" rx="16" fill="#EBF3FF" stroke="#BAD6FF" stroke-width="1.5"/>
-        <!-- Screen -->
-        <rect x="34" y="34" width="102" height="48" rx="9" fill="#1749A0"/>
-        <text x="85" y="54" text-anchor="middle" font-family="'Exo 2',sans-serif" font-size="10" font-weight="700" fill="#90BFFF">PRO 3000</text>
-        <text x="85" y="72" text-anchor="middle" font-family="'Nunito',sans-serif" font-size="8" fill="#6AA0E8">32 программы · AI режим</text>
-        <!-- Button rows -->
-        <rect x="34" y="92" width="21" height="15" rx="5" fill="#2C7BE5"/>
-        <rect x="60" y="92" width="21" height="15" rx="5" fill="#2C7BE5" opacity=".5"/>
-        <rect x="86" y="92" width="21" height="15" rx="5" fill="#2C7BE5" opacity=".5"/>
-        <rect x="112" y="92" width="21" height="15" rx="5" fill="#2C7BE5" opacity=".5"/>
-        <rect x="34" y="113" width="21" height="15" rx="5" fill="#2C7BE5" opacity=".35"/>
-        <rect x="60" y="113" width="21" height="15" rx="5" fill="#2C7BE5" opacity=".35"/>
-        <rect x="86" y="113" width="21" height="15" rx="5" fill="#2C7BE5" opacity=".35"/>
-        <rect x="112" y="113" width="21" height="15" rx="5" fill="#2C7BE5" opacity=".35"/>
-        <!-- Dial and power -->
-        <circle cx="62" cy="148" r="11" fill="#BAD6FF" stroke="#2C7BE5" stroke-width="1.5"/>
-        <circle cx="62" cy="148" r="3.5" fill="#2C7BE5"/>
-        <circle cx="95" cy="148" r="9" fill="#2C7BE5"/>
-        <text x="95" y="152" text-anchor="middle" font-size="9" fill="white" font-weight="bold">▶</text>
-
-        <!-- Highlight ring around first button (the one being used) -->
-        <rect x="31" y="89" width="27" height="21" rx="7" fill="none" stroke="#F5A623" stroke-width="2.2"/>
-
-        <!-- Dashed arrow down to label -->
-        <line x1="44" y1="111" x2="44" y2="175" stroke="#F5A623" stroke-width="1.5" stroke-dasharray="4,3"/>
-        <polygon points="44,178 40,172 48,172" fill="#F5A623"/>
-        <rect x="52" y="168" width="148" height="22" rx="8" fill="#FFF8EC" stroke="#F5D980" stroke-width="1"/>
-        <text x="126" y="183" text-anchor="middle" font-family="'Nunito',sans-serif" font-size="10" font-weight="700" fill="#B07A00">используется только это 🧅</text>
-
-        <!-- Floating feature tags (right side) -->
-        <rect x="168" y="24" width="68" height="19" rx="9" fill="#EBF3FF" stroke="#BAD6FF"/>
-        <text x="202" y="37" text-anchor="middle" font-family="'Nunito',sans-serif" font-size="9" font-weight="600" fill="#1749A0">Ассистент</text>
-        <rect x="246" y="24" width="60" height="19" rx="9" fill="#EBF3FF" stroke="#BAD6FF"/>
-        <text x="276" y="37" text-anchor="middle" font-family="'Nunito',sans-serif" font-size="9" font-weight="600" fill="#1749A0">Анализ</text>
-        <rect x="168" y="52" width="74" height="19" rx="9" fill="#EBF3FF" stroke="#BAD6FF"/>
-        <text x="205" y="65" text-anchor="middle" font-family="'Nunito',sans-serif" font-size="9" font-weight="600" fill="#1749A0">Автоматизация</text>
-        <rect x="252" y="52" width="72" height="19" rx="9" fill="#EBF3FF" stroke="#BAD6FF"/>
-        <text x="288" y="65" text-anchor="middle" font-family="'Nunito',sans-serif" font-size="9" font-weight="600" fill="#1749A0">Редактура</text>
-        <rect x="168" y="80" width="70" height="19" rx="9" fill="#EBF3FF" stroke="#BAD6FF"/>
-        <text x="203" y="93" text-anchor="middle" font-family="'Nunito',sans-serif" font-size="9" font-weight="600" fill="#1749A0">Память</text>
-        <rect x="248" y="80" width="62" height="19" rx="9" fill="#EBF3FF" stroke="#BAD6FF"/>
-        <text x="279" y="93" text-anchor="middle" font-family="'Nunito',sans-serif" font-size="9" font-weight="600" fill="#1749A0">Стиль</text>
-        <rect x="168" y="108" width="66" height="19" rx="9" fill="#EBF3FF" stroke="#BAD6FF"/>
-        <text x="201" y="121" text-anchor="middle" font-family="'Nunito',sans-serif" font-size="9" font-weight="600" fill="#1749A0">Документы</text>
-        <rect x="244" y="108" width="76" height="19" rx="9" fill="#EBF3FF" stroke="#BAD6FF"/>
-        <text x="282" y="121" text-anchor="middle" font-family="'Nunito',sans-serif" font-size="9" font-weight="600" fill="#1749A0">Голос → Текст</text>
-
-        <!-- Lines from tags to body -->
-        <line x1="168" y1="33" x2="150" y2="60" stroke="#BAD6FF" stroke-width=".8" opacity=".7"/>
-        <line x1="168" y1="62" x2="150" y2="80" stroke="#BAD6FF" stroke-width=".8" opacity=".7"/>
-        <line x1="168" y1="90" x2="150" y2="100" stroke="#BAD6FF" stroke-width=".8" opacity=".7"/>
-        <line x1="168" y1="117" x2="150" y2="120" stroke="#BAD6FF" stroke-width=".8" opacity=".7"/>
-      </svg>
-    </div>
-
-    <div class="bm-grid">
-      <div class="bm-box bm-l">
-        <div class="bm-lbl">Что умеет ИИ</div>
-        <ul class="bm-list">
-          <li><span class="fd"></span>Писать тексты в вашем стиле</li>
-          <li><span class="fd"></span>Анализировать документы</li>
-          <li><span class="fd"></span>Помнить ваш контекст</li>
-          <li><span class="fd"></span>Автоматизировать процессы</li>
-          <li><span class="fd"></span>Думать вместе с вами</li>
-          <li><span class="fd"></span>Быть ассистентом 24/7</li>
-        </ul>
-      </div>
-      <div class="bm-arrow">→</div>
-      <div class="bm-box bm-r">
-        <div class="bm-lbl">Как используют сейчас</div>
-        <ul class="bm-list">
-          <li><span class="fd"></span>«Напиши мне пост»</li>
-        </ul>
-        <p style="margin-top:10px; color:var(--amber);">И когда получают что-то среднее — разочаровываются и закрывают.</p>
-      </div>
+    <div class="sec-icon nb">🗺</div>
+    <div>
+      <div class="sec-title">Что вас ждёт на интенсиве</div>
+      <div class="sec-sub">3 часа живой работы — реальный экран, ваши задачи, два практических блока</div>
     </div>
   </div>
-
-  <div class="ins it">
-    <div class="lbl">Главная мысль</div>
-    <p>Это не инструмент заменяет вас — это инструмент, который вы ещё не научились использовать на полную. На интенсиве мы это изменим.</p>
-  </div>
-</div>
-
-<!-- ══ БЛОК 2: ИСТОРИИ ══ -->
-<div class="sec">
-  <div class="sec-head">
-    <div class="sec-num nt">2</div>
-    <div><div class="sec-title">Кто и что уже делегирует</div><div class="sec-sub">Реальные примеры из разных сфер</div></div>
-  </div>
-
-  <div class="stories-grid">
-    <div class="story">
-      <div class="story-top">
-        <div class="s-ico" style="background:#EBF3FF;">📋</div>
-        <div><div class="s-who">Консультант / коуч</div><div class="s-role">Специалист с встречами</div></div>
-      </div>
-      <div class="s-before">Раньше: 3 часа на подготовку материалов к каждой встрече</div>
-      <div class="s-after">Теперь 30 минут. Освободившееся время — на саму встречу и клиента</div>
-    </div>
-    <div class="story">
-      <div class="story-top">
-        <div class="s-ico" style="background:#E5FAF7;">🔧</div>
-        <div><div class="s-who">Мастер / подрядчик</div><div class="s-role">Физическая профессия</div></div>
-      </div>
-      <div class="s-before">Раньше: переписка, сметы и соцсети отнимали вечера</div>
-      <div class="s-after">Claude ведёт переписку и считает сметы. Руки — заняты делом</div>
-    </div>
-    <div class="story">
-      <div class="story-top">
-        <div class="s-ico" style="background:#FFF0F6;">✍</div>
-        <div><div class="s-who">Эксперт с курсом</div><div class="s-role">Методолог / тренер</div></div>
-      </div>
-      <div class="s-before">Раньше: знания были, но упиралась в пустой экран</div>
-      <div class="s-after">Надиктовывает голосом → Claude собирает структуру → она дорабатывает. Курс вышел.</div>
-    </div>
-    <div class="story">
-      <div class="story-top">
-        <div class="s-ico" style="background:#FFFBEC;">💼</div>
-        <div><div class="s-who">Предпринимательница</div><div class="s-role">Малый бизнес / фриланс</div></div>
-      </div>
-      <div class="s-before">Раньше: коммерческие предложения писала по 2 часа каждое</div>
-      <div class="s-after">Объясняет задачу голосом → черновик за 5 минут → правит 15 мин</div>
-    </div>
-    <div class="story">
-      <div class="story-top">
-        <div class="s-ico" style="background:#EBF3FF;">👩‍👧</div>
-        <div><div class="s-who">Мама с насыщенной жизнью</div><div class="s-role">Организатор / родитель</div></div>
-      </div>
-      <div class="s-before">Раньше: планирование, поиск активностей, разбор сложных вопросов</div>
-      <div class="s-after">Claude помогает с меню, идеями и объясняет сложное простым языком</div>
-    </div>
-    <div class="story">
-      <div class="story-top">
-        <div class="s-ico" style="background:#E5FAF7;">🎨</div>
-        <div><div class="s-who">Контент / SMM / дизайнер</div><div class="s-role">Творческая сфера</div></div>
-      </div>
-      <div class="s-before">Раньше: творческий блок, редактура и структурирование ели время</div>
-      <div class="s-after">Claude помогает выйти из блока и редактирует в нужном тоне</div>
-    </div>
-  </div>
-
-  <div class="ins ib">
-    <div class="lbl">Общий принцип</div>
-    <p>Во всех этих историях AI не сделал работу за них. Он освободил ресурс — время, энергию, смелость — на то, что откладывалось или казалось недостижимым.</p>
-  </div>
-</div>
-
-<div class="div"></div>
-
-<!-- ══ БЛОК 3: БАРЬЕРЫ ══ -->
-<div class="sec">
-  <div class="sec-head">
-    <div class="sec-num np">3</div>
-    <div><div class="sec-title">Что обычно мешает начать</div><div class="sec-sub">Нажмите на карточку, если узнали себя</div></div>
-  </div>
-
-  <div class="b-grid">
-    <div class="bc" onclick="toggleBarrier(this,'b1')" data-ins="Время не освобождается само — начать надо сейчас">
-      <div class="bc-check"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-      <div class="bc-q">«Разберусь, когда будет время»</div>
-      <div class="bc-a">Время не появляется само. Каждый день «потом» — это потраченные часы, которые могли пойти на важное. То, что вы здесь — уже первый шаг.</div>
-    </div>
-    <div class="bc" onclick="toggleBarrier(this,'b2')" data-ins="ИИ нужен чтобы делать то, на что не хватало сил">
-      <div class="bc-check"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-      <div class="bc-q">«Я и так справляюсь»</div>
-      <div class="bc-a">Справляетесь — да. Но что вы не делаете, потому что не хватает времени? Курс? Контент? Просто больше пространства для себя?</div>
-    </div>
-    <div class="bc" onclick="toggleBarrier(this,'b3')" data-ins="Плохой результат — проблема запроса, не инструмента">
-      <div class="bc-check"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-      <div class="bc-q">«Пробовала — не устроило»</div>
-      <div class="bc-a">Получили безликий ответ — это почти всегда проблема запроса, не Claude. Именно это мы разберём на интенсиве. У вас уже есть точка сравнения.</div>
-    </div>
-    <div class="bc" onclick="toggleBarrier(this,'b4')" data-ins="ИИ специально обучают для не-технарей — это просто разговор">
-      <div class="bc-check"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-      <div class="bc-q">«Я не технарь»</div>
-      <div class="bc-a">Claude — это разговор обычным текстом. Никаких кодов и команд. Пишете, как пишете сообщение подруге. ИИ специально обучают для не-технарей.</div>
-    </div>
-  </div>
-
-  <div class="ins ip" style="margin-top:10px;">
-    <div class="lbl">Про «стать зависимее»</div>
-    <p>Работа с ИИ не делает вас зависимее или поверхностнее. Когда объясняете задачу Claude — вы сами формулируете, чего хотите. Мысли структурируются. Люди говорят: «стала лучше понимать свои задачи».</p>
-  </div>
-</div>
-
-<div class="div"></div>
-
-<!-- ══ БЛОК 4: ИИ > ЧАТ ══ -->
-<div class="sec">
-  <div class="sec-head">
-    <div class="sec-num nt">4</div>
-    <div><div class="sec-title">ИИ — это больше, чем чат</div><div class="sec-sub">От поисковика к системе работы</div></div>
-  </div>
-
   <div class="card">
-    <p>Большинство думают о нейросети как о чате: написал вопрос → получил ответ → закрыл. Как умный поисковик. И да, это работает — но это лишь верхний слой.</p>
-    <p><strong>На самом деле это возможность выстроить свою систему работы</strong> — под ваши задачи, ваш стиль, ваши приоритеты.</p>
+    <div class="insight blue" style="margin-top:0">
+      <div class="insight-label">Первый час</div>
+      <p>Карта нейросетей — поймёте, что вообще бывает и где Claude. Первый запрос: сразу увидите разницу между «написал как попало» и «написал правильно».</p>
+    </div>
+    <div class="insight teal">
+      <div class="insight-label">Практика 1 — вау-момент</div>
+      <p>Голосом расскажете Claude всё о себе → получите персональный список: где именно ИИ может помочь именно вам. Конкретно под вашу ситуацию.</p>
+    </div>
+    <div class="insight pink">
+      <div class="insight-label">Практика 2 — после перерыва</div>
+      <p>Создадите первого настоящего ассистента в проекте Claude. Он запомнит вас, ваши задачи и стиль. Уйдёте с рабочим инструментом, а не просто впечатлениями.</p>
+    </div>
+    <div class="insight amber" style="margin-bottom:0">
+      <div class="insight-label">Главное отличие</div>
+      <p>Не учим «вставлять промпты» — уйдёте с пониманием, как работать с ИИ под свои задачи. Разница между рыбой и удочкой.</p>
+    </div>
+    <div class="react-row">
+      <button class="react-btn" id="rb1" onclick="reactOnce('rb1','reacted','s1',true)">✨ Звучит интересно!</button>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ БЛОК 2: ВОРКШОПЫ ══ -->
+<section>
+  <div class="sec-head">
+    <div class="sec-icon nt">🎯</div>
+    <div>
+      <div class="sec-title">Воркшопы: что дальше</div>
+      <div class="sec-sub">5 воркшопов — от личных задач до продвинутой автоматизации</div>
+    </div>
+  </div>
+  <div class="ws-list">
+    <div class="ws-item"><div class="ws-num">1</div><div><div class="ws-title">Личные задачи и обучение</div><div class="ws-desc">Ассистенты под личные задачи. Работа с транскрипциями через Claude — чтобы усваивать материал эффективнее.</div></div></div>
+    <div class="ws-item"><div class="ws-num">2</div><div><div class="ws-title">Рабочие задачи</div><div class="ws-desc">Автоматизируем то, что отнимает время на работе. Ассистенты под вашу профессию. Документы, тексты, клиенты.</div></div></div>
+    <div class="ws-item"><div class="ws-num">3</div><div><div class="ws-title">Контент и сайты — приглашённый эксперт</div><div class="ws-desc">Контент в вашем стиле, простой сайт на Тильде — с нуля, без технических знаний.</div></div></div>
+    <div class="ws-item adv"><div class="ws-num">4</div><div><div class="ws-title">Cowork — продвинутый уровень</div><div class="ws-desc">Несколько ИИ-систем работают вместе без вашего постоянного участия.</div></div></div>
+    <div class="ws-item adv"><div class="ws-num">5</div><div><div class="ws-title">Вайб-кодинг с Claude Code — продвинутый уровень</div><div class="ws-desc">Работающие приложения и инструменты без навыков программирования.</div></div></div>
+  </div>
+  <div class="card" style="margin-top:12px">
+    <div style="font-family:'Exo 2',sans-serif;font-size:14px;font-weight:700;color:var(--g800);margin-bottom:4px">Три варианта участия</div>
+    <div style="font-size:12px;color:var(--g500)">Купили только интенсив и захотите воркшопы — можно докупить отдельно.</div>
+    <div class="tariff-grid">
+      <div class="tariff-card"><span class="tariff-badge">Старт</span><div class="tariff-title">Только интенсив</div><ul class="tariff-list"><li>3 часа практики</li><li>Воркбук + инструкции</li><li>Первый ассистент</li></ul><div class="tariff-for">Попробовать и понять, ваше ли это.</div></div>
+      <div class="tariff-card featured"><span class="tariff-badge">Популярный</span><div class="tariff-title">Интенсив + воркшопы 1–3</div><ul class="tariff-list"><li>Личные задачи</li><li>Рабочие задачи</li><li>Контент и сайты</li></ul><div class="tariff-for">Полноценная система Claude в жизни.</div></div>
+      <div class="tariff-card"><span class="tariff-badge">Максимум</span><div class="tariff-title">Интенсив + воркшопы 1–5</div><ul class="tariff-list"><li>Всё из пред. тарифа</li><li>Cowork-автоматизация</li><li>Вайб-кодинг</li></ul><div class="tariff-for">Автоматизация по максимуму.</div></div>
+    </div>
+    <div class="react-row">
+      <button class="react-btn" id="rb2" onclick="reactOnce('rb2','reacted-teal','s2',false)">🚀 Как круто — хочу упростить работу с помощью Claude!</button>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ БЛОК 3: ЗАЧЕМ ══ -->
+<section>
+  <div class="sec-head">
+    <div class="sec-icon nb">🔭</div>
+    <div>
+      <div class="sec-title">Зачем это вообще стоит делать</div>
+      <div class="sec-sub">Данные, аналогии и реальные истории людей</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="insight blue" style="margin-top:0">
+      <div class="insight-label">Исследование Anthropic</div>
+      <p>Специалисты в IT теоретически могут делегировать ИИ 94% задач. Реально делегируют — около 33%. Разрыв между 94% и 33% — это не катастрофа. Это возможность.</p>
+    </div>
+    <div class="insight amber">
+      <div class="insight-label">Хорошая аналогия</div>
+      <p>Дорогой кухонный комбайн, который умеет двадцать вещей. Большинство используют его только чтобы нарезать лук. Именно так сейчас выглядит использование ИИ в мире.</p>
+    </div>
+    <div style="font-family:'Exo 2',sans-serif;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--g500);margin:16px 0 8px">Реальные истории</div>
+    <div class="story-grid">
+      <div class="story-card">
+        <div class="story-was">Было</div>
+        <div class="story-was-text">Три часа на подготовку материалов к встречам</div>
+        <div class="story-became">Стало: тридцать минут. Время — на саму встречу и клиента.</div>
+      </div>
+      <div class="story-card">
+        <div class="story-was">Было</div>
+        <div class="story-was-text">Курс готов в голове, но каждый раз — пустой экран</div>
+        <div class="story-became">Стало: надиктовала голосом, Claude собрал структуру. Курс вышел.</div>
+      </div>
+    </div>
+    <div class="insight teal" style="margin-bottom:0">
+      <div class="insight-label">Вывод</div>
+      <p>Специалисты с ИИ начали выдавать объём двух-трёх человек — не потому что умнее, а потому что инструмент берёт на себя то, что отнимало время без отдачи.</p>
+    </div>
+    <div class="react-row">
+      <button class="react-btn" id="rb3" onclick="reactOnce('rb3','reacted','s3',false)">💡 Хочу понять, что я смогу делать лучше и эффективнее</button>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ БЛОК 4: БАРЬЕРЫ ══ -->
+<section>
+  <div class="sec-head">
+    <div class="sec-icon np">🧱</div>
+    <div>
+      <div class="sec-title">Что обычно мешает начать работать с ИИ</div>
+      <div class="sec-sub">Нажмите на то, что узнаёте в себе</div>
+    </div>
+  </div>
+  <div class="barrier-grid">
+    <div class="barrier-card" id="b1" onclick="toggleBarrier(this,'b1')">
+      <div class="bc-top"><div class="bc-title">«Разберусь, когда будет время»</div><div class="bc-check">✓</div></div>
+      <div class="bc-desc">Откладывание. Время само не появляется — появляются новые задачи.</div>
+    </div>
+    <div class="barrier-card" id="b2" onclick="toggleBarrier(this,'b2')">
+      <div class="bc-top"><div class="bc-title">«Я и так справляюсь»</div><div class="bc-check">✓</div></div>
+      <div class="bc-desc">Справляетесь — но что вы не делаете из-за нехватки времени?</div>
+    </div>
+    <div class="barrier-card" id="b3" onclick="toggleBarrier(this,'b3')">
+      <div class="bc-top"><div class="bc-title">«Пробовала — качество не устроило»</div><div class="bc-check">✓</div></div>
+      <div class="bc-desc">Плохой результат — почти всегда проблема запроса, не инструмента.</div>
+    </div>
+    <div class="barrier-card" id="b4" onclick="toggleBarrier(this,'b4')">
+      <div class="bc-top"><div class="bc-title">«Я не технарь — это не для меня»</div><div class="bc-check">✓</div></div>
+      <div class="bc-desc">ИИ — это разговор обычным текстом. Никаких команд и кодов.</div>
+    </div>
+  </div>
+  <div id="barriers-insight" class="hidden fade-in" style="margin-top:12px">
+    <div class="insight pink" style="margin:0">
+      <div class="insight-label">Узнали себя?</div>
+      <p>На интенсиве мы разберём каждый из этих барьеров на практике. Через двадцать минут работы большинство из них исчезают сами.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ БЛОК 5: НАСТРОЙ ══ -->
+<section>
+  <div class="sec-head">
+    <div class="sec-icon nt">🌡</div>
+    <div>
+      <div class="sec-title">Ваш настрой после урока</div>
+      <div class="sec-sub">Два быстрых вопроса — и переходим к подготовке</div>
+    </div>
+  </div>
+  <div class="card">
+    <!-- Шкала -->
+    <div class="mood-label">Насколько хочется начать работать с Claude?</div>
+    <div class="mood-scale" id="moodScale">
+      <div class="mood-btn" onclick="setMood(0)">0</div>
+      <div class="mood-btn" onclick="setMood(1)">1</div>
+      <div class="mood-btn" onclick="setMood(2)">2</div>
+      <div class="mood-btn" onclick="setMood(3)">3</div>
+      <div class="mood-btn" onclick="setMood(4)">4</div>
+      <div class="mood-btn" onclick="setMood(5)">5</div>
+      <div class="mood-btn" onclick="setMood(6)">6</div>
+      <div class="mood-btn" onclick="setMood(7)">7</div>
+      <div class="mood-btn" onclick="setMood(8)">8</div>
+      <div class="mood-btn" onclick="setMood(9)">9</div>
+      <div class="mood-btn" onclick="setMood(10)">10</div>
+    </div>
+    <div class="mood-ends"><span>Пока непонятно зачем</span><span>Не терпится начать! 🔥</span></div>
+    <div class="mood-result" id="moodResult"></div>
+
+    <!-- Ясность -->
+    <div style="margin-top:20px;padding-top:18px;border-top:1px solid var(--g100)">
+      <div class="clarity-q">Понятно ли, что нужно настроить до интенсива?</div>
+      <div class="clarity-btns">
+        <button class="clarity-btn" id="cl-yes" onclick="setClarity('yes')">✅ Да, всё понятно</button>
+        <button class="clarity-btn" id="cl-no" onclick="setClarity('no')">🤔 Есть вопросы</button>
+      </div>
+      <div class="clarity-answer" id="clarityAnswer"></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ БЛОК 6: ПОДГОТОВКА К ИНТЕНСИВУ ══ -->
+<section id="sec-prep">
+  <div class="sec-head">
+    <div class="sec-icon na">✅</div>
+    <div>
+      <div class="sec-title">Подготовка к интенсиву</div>
+      <div class="sec-sub">Три шага — отметьте каждый, и всё готово</div>
+    </div>
   </div>
 
-  <div class="ins ib">
-    <div class="lbl">С чем мы работаем на интенсиве</div>
-    <p>Мы работаем с <strong>Claude</strong> — на сегодняшний день это один из лучших инструментов для работы с текстом, мышлением и задачами. Он точнее следует инструкциям, лучше удерживает суть длинного разговора и пишет живее, чем большинство аналогов. Именно поэтому — он в центре интенсива.</p>
-  </div>
+  <div class="card" style="padding:0">
+    <ul class="prep-list">
 
-  <div class="card mb8">
-    <div class="tag tt">Что это значит на практике</div>
-    <ul class="list-nice">
-      <li><span class="li-dot">✦</span><span><strong>Ассистенты под ваши задачи</strong> — настраиваете один раз, они помнят контекст при каждом обращении</span></li>
-      <li><span class="li-dot">✦</span><span><strong>Работа с документами</strong> — загружаете файлы, Claude работает с ними в разных чатах</span></li>
-      <li><span class="li-dot">✦</span><span><strong>Автоматизация повторяющегося</strong> — всё, что отнимает силы без отдачи</span></li>
-      <li><span class="li-dot">✦</span><span><strong>Это процесс, а не установка</strong> — на интенсиве база, дальше в своём темпе</span></li>
+      <!-- Шаг 1 -->
+      <li class="prep-item" id="pw1">
+        <div class="prep-left">
+          <div class="prep-num">01</div>
+          <div class="prep-text">
+            <div class="prep-title" id="pt1">Установите Claude на компьютер</div>
+            <div class="prep-desc">Скачайте приложение или откройте <a href="https://claude.ai" target="_blank">claude.ai</a> в браузере. Ссылка в описании к уроку.</div>
+          </div>
+        </div>
+        <div class="prep-right">
+          <button class="prep-done-btn" id="pc1" onclick="tck('pc1','pw1')">Сделал(а) ✓</button>
+        </div>
+      </li>
+
+      <!-- Шаг 2 -->
+      <li class="prep-item" id="pw2">
+        <div class="prep-left">
+          <div class="prep-num">02</div>
+          <div class="prep-text">
+            <div class="prep-title" id="pt2">Зарегистрируйтесь и настройте на работу</div>
+            <div class="prep-desc">Создайте аккаунт, войдите в систему, откройте новый чат — убедитесь, что Claude отвечает.<br>
+            <span style="color:var(--pink);font-weight:700">Если вы в России:</span> нужен VPN и зарубежный номер для SMS. Подробнее — в гайде.</div>
+          </div>
+        </div>
+        <div class="prep-right">
+          <button class="prep-guide" onclick="openModal('modal-vpn')">📋 Гайд для России</button>
+          <button class="prep-done-btn" id="pc2" onclick="tck('pc2','pw2')">Сделал(а) ✓</button>
+        </div>
+      </li>
+
+      <!-- Шаг 3 -->
+      <li class="prep-item" id="pw3">
+        <div class="prep-left">
+          <div class="prep-num">03</div>
+          <div class="prep-text">
+            <div class="prep-title" id="pt3">Установите приложение для голосового ввода</div>
+            <div class="prep-desc">Ускоряет работу с Claude в 4–5 раз — будем использовать с первых минут интенсива. Гайд с вариантами под разные устройства в материалах к уроку.</div>
+          </div>
+        </div>
+        <div class="prep-right">
+          <button class="prep-done-btn" id="pc3" onclick="tck('pc3','pw3')">Сделал(а) ✓</button>
+        </div>
+      </li>
+
     </ul>
   </div>
 
-  <div class="card">
-    <div class="tag tb">Три режима работы</div>
-    <div class="modes">
-      <div class="mode">
-        <span class="mode-ico">🎯</span>
-        <div class="mode-name">Поручить</div>
-        <div class="mode-desc">Конкретная задача → Claude выполняет</div>
-      </div>
-      <div class="mode">
-        <span class="mode-ico">💬</span>
-        <div class="mode-name">Думать вместе</div>
-        <div class="mode-desc">Набрасываете → он разворачивает → вы корректируете</div>
-      </div>
-      <div class="mode">
-        <span class="mode-ico">⚙</span>
-        <div class="mode-name">Работает на вас</div>
-        <div class="mode-desc">Один раз настроили — помнит контекст всегда</div>
-      </div>
+  <!-- Заметка про подписку -->
+  <div class="note-box">
+    💳 <strong>Для интенсива хватит бесплатной версии</strong> — лимиты за три часа вы не исчерпаете. Подписка Pro ($20/мес) нужна для активной работы после интенсива и на воркшопах.
+    <span style="display:inline-block;margin-left:4px"><button onclick="openModal('modal-pay')" style="background:none;border:none;color:var(--blue);font-weight:700;cursor:pointer;font-size:12px;padding:0;font-family:'Nunito',sans-serif">Инструкция по оплате →</button></span>
+  </div>
+
+  <!-- Финальный takeaway -->
+  <div id="sec-takeaway" class="hidden fade-in" style="margin-top:16px">
+    <div class="takeaway">
+      <h3>Всё готово — до встречи на интенсиве! 🎉</h3>
+      <p>Да, сейчас немного муторно — VPN, регистрация, приложение. Но вы делаете это один раз. А взамен получаете инструмент, который каждый день освобождает время для того, до чего никак не доходят руки.<br><br>Один час сейчас — и потом часы каждую неделю. Это честный обмен. До встречи!</p>
     </div>
   </div>
-</div>
+</section>
 
-<div class="div"></div>
+</div><!-- end .page -->
 
-<!-- ══ БЛОК 5: МОИ ИНСАЙТЫ ══ -->
-<div class="sec">
-  <div class="sec-head">
-    <div class="sec-num np">5</div>
-    <div><div class="sec-title">Что из этого урока осталось со мной</div><div class="sec-sub">Нажмите на то, что откликнулось — соберётся ваш список</div></div>
-  </div>
 
-  <div class="chips-hint">Это осознания из урока. Отметьте то, что почувствовали как своё.</div>
-  <div class="chips" id="chips">
-    <div class="ich" onclick="pick(this,'b')">Я открывал(а) ИИ ради одной кнопки — а там ещё двадцать девять</div>
-    <div class="ich" onclick="pick(this,'b')">У меня точно есть задачи, которые я делаю руками — хотя мог(ла) бы не делать</div>
-    <div class="ich" onclick="pick(this,'p')">Плохой ответ ИИ — не проблема инструмента, а знак, что стоит поработать с навыком постановки задач</div>
-    <div class="ich" onclick="pick(this,'p')">ИИ не думает вместо меня — он помогает мне думать лучше и быстрее</div>
-    <div class="ich" onclick="pick(this,'p')">Я откладывал(а) — но теперь полон(на) решимости действовать и погружаться</div>
-    <div class="ich" onclick="pick(this,'t')">Освоение ИИ — это навык, а не дар. Учится любой, даже не технарь</div>
-    <div class="ich" onclick="pick(this,'t')">Где-то в моей неделе есть время, которое можно освободить. Просто нужно его найти</div>
-    <div class="ich" onclick="pick(this,'t')">Начать работать с ИИ — не значит изучить всё сразу. Буду учиться постепенно</div>
-  </div>
-
-  <div class="my-picks">
-    <div class="mp-lbl">Моё из этого урока</div>
-    <div class="mp-items" id="mpi">
-      <div class="mp-empty" id="mpe">Пока пусто — нажмите на то, что откликнулось</div>
+<!-- ══ MODAL: VPN ══ -->
+<div class="modal-overlay" id="modal-vpn">
+  <div class="modal-box">
+    <div class="modal-hdr">
+      <div class="modal-hdr-icon">🔒</div>
+      <div><div class="modal-hdr-title">Настройка доступа к Claude</div><div class="modal-hdr-sub">Для пользователей из России</div></div>
+      <button class="modal-close" onclick="closeModal('modal-vpn')">×</button>
     </div>
-  </div>
-  <div style="font-size:12px; color:var(--g400); margin-bottom:10px;">💡 Сделайте скриншот, чтобы сохранить</div>
-</div>
-
-<div class="div"></div>
-
-<!-- ══ БЛОК 6: ПОДГОТОВКА + ЧЕКЛИСТ ══ -->
-<div class="sec">
-  <div class="sec-head">
-    <div class="sec-num nt">✓</div>
-    <div><div class="sec-title">Чек-лист подготовки к интенсиву</div><div class="sec-sub">Отметьте и откройте гайд — всё в одном месте</div></div>
-  </div>
-
-  <div class="card" style="padding:0; overflow:hidden;">
-    <div class="prep-item" id="pi1">
-      <div class="pi-left">
-        <div class="cbox" id="c1" onclick="tck('c1','pi1')"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div>
-          <div class="cl-t">Зарегистрирован(а) в Claude</div>
-          <div class="cl-d">claude.ai — аккаунт через почту или Google</div>
+    <div class="modal-progress">
+      <div class="modal-dot m-active" id="vdot1"></div>
+      <div class="modal-dot" id="vdot2"></div>
+      <div class="modal-dot" id="vdot3"></div>
+    </div>
+    <div class="modal-body">
+      <div class="modal-step m-current" id="vstep1">
+        <div class="modal-step-title">Шаг 1 — Включите VPN</div>
+        <div class="modal-step-desc">Включите VPN <strong>до того, как открываете claude.ai</strong>. Выберите локацию в разрешённой стране — США, Германия, Нидерланды.</div>
+        <div class="insight blue" style="margin:12px 0">
+          <div class="insight-label">Проверенные варианты</div>
+          <p>Outline VPN, Lantern, Windscribe (бесплатный тариф). Ссылки и инструкции — в материалах к уроку.</p>
+        </div>
+        <div class="modal-step-desc">После включения проверьте смену локации через <a href="https://2ip.ru" target="_blank">2ip.ru</a>.</div>
+      </div>
+      <div class="modal-step" id="vstep2">
+        <div class="modal-step-title">Шаг 2 — Зарегистрируйтесь</div>
+        <div class="modal-step-desc">Откройте <a href="https://claude.ai" target="_blank">claude.ai</a> с включённым VPN → <strong>Sign up</strong> → email и пароль.</div>
+        <div class="insight amber" style="margin:12px 0">
+          <div class="insight-label">Если просит номер телефона</div>
+          <p>Российские номера не принимаются. Попросите знакомого с зарубежным номером получить SMS — или используйте сервис виртуальных номеров. Инструкция в материалах.</p>
         </div>
       </div>
-      <a class="btn-g" href="#" onclick="return false;"><svg viewBox="0 0 12 12" fill="none"><path d="M1 6h10M7 2l4 4-4 4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>Гайд</a>
-    </div>
-    <div class="prep-item" id="pi2">
-      <div class="pi-left">
-        <div class="cbox" id="c2" onclick="tck('c2','pi2')"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div>
-          <div class="cl-t">Голосовой ввод настроен</div>
-          <div class="cl-d">Aquavoice или режим диктовки — ускоряет в 4–5 раз</div>
-        </div>
-      </div>
-      <a class="btn-g" href="#" onclick="return false;"><svg viewBox="0 0 12 12" fill="none"><path d="M1 6h10M7 2l4 4-4 4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>Гайд</a>
-    </div>
-    <div class="prep-item" style="border-bottom:none;" id="pi3">
-      <div class="pi-left">
-        <div class="cbox" id="c3" onclick="tck('c3','pi3')"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div>
-          <div class="cl-t">Вводный урок просмотрен до конца</div>
-          <div class="cl-d">Разобрался(лась) — зачем это и что мешало начать</div>
+      <div class="modal-step" id="vstep3">
+        <div class="modal-step-title">Шаг 3 — Проверьте, что всё работает</div>
+        <div class="modal-step-desc">Напишите в новом чате любое сообщение. Если Claude ответил — всё готово.</div>
+        <div class="insight teal" style="margin:12px 0">
+          <div class="insight-label">✅ Готово!</div>
+          <p>Теперь каждый раз при открытии Claude включайте VPN заранее. Без него на интенсиве сайт не откроется.</p>
         </div>
       </div>
     </div>
-  </div>
-
-  <div class="notice" style="margin-top:10px;">
-    <p><strong>Если вы в России или Китае:</strong> доступ к Claude может потребовать VPN — это решаемо. Все принципы работы с ИИ, которые мы разберём, <strong>универсальны</strong> — работают в ChatGPT, Gemini и других инструментах.</p>
-  </div>
-
-  <div class="tw" style="margin-top:14px;">
-    <div class="tw-lbl">До встречи на интенсиве</div>
-    <p>Если вы откладывали — сегодня это заканчивается. Если сомневались — скоро будет ответ из собственного опыта. Если пробовали и разочаровались — сегодня будет другой опыт. Обещаю.</p>
+    <div class="modal-nav">
+      <button class="btn btn-ghost" id="vpn-prev" onclick="vpnNav(-1)" style="visibility:hidden">← Назад</button>
+      <div class="modal-step-counter" id="vpn-counter">Шаг 1 из 3</div>
+      <button class="btn" id="vpn-next" onclick="vpnNav(1)">Далее →</button>
+    </div>
   </div>
 </div>
 
+<!-- ══ MODAL: ОПЛАТА ══ -->
+<div class="modal-overlay" id="modal-pay">
+  <div class="modal-box">
+    <div class="modal-hdr">
+      <div class="modal-hdr-icon">💳</div>
+      <div><div class="modal-hdr-title">Оплата подписки Claude Pro</div><div class="modal-hdr-sub">$20/месяц — хватит с запасом для работы</div></div>
+      <button class="modal-close" onclick="closeModal('modal-pay')">×</button>
+    </div>
+    <div class="modal-progress">
+      <div class="modal-dot m-active" id="pdot1"></div>
+      <div class="modal-dot" id="pdot2"></div>
+    </div>
+    <div class="modal-body">
+      <div class="modal-step m-current" id="pstep1">
+        <div class="modal-step-title">Как оформить подписку</div>
+        <div class="modal-step-desc">Зайдите на <a href="https://claude.ai" target="_blank">claude.ai</a> → своё имя в левом нижнем углу → <strong>Upgrade plan</strong>. Выбирайте <strong>Pro ($20/мес)</strong> — Max-тариф вам сейчас не нужен.</div>
+        <div class="insight blue" style="margin:12px 0">
+          <div class="insight-label">Напоминаем</div>
+          <p>Для самого интенсива бесплатной версии достаточно. Подписка нужна для активной работы после и на воркшопах.</p>
+        </div>
+      </div>
+      <div class="modal-step" id="pstep2">
+        <div class="modal-step-title">Если российская карта не проходит</div>
+        <div class="modal-step-desc">Российские карты Claude не принимает. Два рабочих варианта:</div>
+        <div class="insight teal" style="margin:10px 0 8px">
+          <div class="insight-label">Вариант 1 — подарочная подписка (проще)</div>
+          <p>Знакомый с зарубежной картой покупает подписку на <a href="https://claude.ai/gift" target="_blank">claude.ai/gift</a> и присылает ссылку. Его карта к вашему аккаунту не привязывается.</p>
+        </div>
+        <div class="insight amber">
+          <div class="insight-label">Вариант 2 — виртуальная карта</div>
+          <p>Pyyplbot → Rewarble — схема получения виртуальной карты. Подробная инструкция в материалах к уроку.</p>
+        </div>
+      </div>
+    </div>
+    <div class="modal-nav">
+      <button class="btn btn-ghost" id="pay-prev" onclick="payNav(-1)" style="visibility:hidden">← Назад</button>
+      <div class="modal-step-counter" id="pay-counter">Шаг 1 из 2</div>
+      <button class="btn" id="pay-next" onclick="payNav(1)">Далее →</button>
+    </div>
+  </div>
 </div>
+
 
 <script>
-const CBS = ['c1','c2','c3'];
+// ── STATE ──
+let barriersOn = new Set();
+let s1done=false, s2done=false, s3done=false, moodDone=false, clarityDone=false;
+let checksDone = new Set();
+let confettiFired = false;
 
-function tck(id, wid) {
-  document.getElementById(id).classList.toggle('on');
-  document.getElementById(wid).classList.toggle('done-wrap');
+// ── MINI BALLOONS on react ──
+function spawnBalloons(btn) {
+  const rect = btn.getBoundingClientRect();
+  const emojis = ['🎈','🎉','⭐','✨','🌟','💫','🎊'];
+  for (let i = 0; i < 8; i++) {
+    const el = document.createElement('div');
+    el.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+    el.style.cssText = `position:fixed;left:${rect.left + rect.width/2 + (Math.random()-0.5)*60}px;top:${rect.top}px;font-size:${18+Math.random()*12}px;pointer-events:none;z-index:9998;transition:none;`;
+    document.body.appendChild(el);
+    const dx = (Math.random() - 0.5) * 120;
+    const dy = -(60 + Math.random() * 80);
+    el.animate([
+      {transform:'translate(0,0) scale(1)', opacity:1},
+      {transform:`translate(${dx}px,${dy}px) scale(0.5)`, opacity:0}
+    ], {duration: 900 + Math.random()*400, easing:'ease-out', fill:'forwards'})
+    .onfinish = () => el.remove();
+  }
+}
+
+// ── REACTION BUTTONS ──
+function reactOnce(btnId, cls, section, withBalloons) {
+  const btn = document.getElementById(btnId);
+  if (btn.dataset.reacted) return;
+  btn.dataset.reacted = '1';
+  btn.classList.add(cls);
+  btn.style.cursor = 'default';
+  if (section === 's1') s1done = true;
+  if (section === 's2') s2done = true;
+  if (section === 's3') s3done = true;
+  if (withBalloons) spawnBalloons(btn);
   upd();
 }
+
+// ── BARRIERS ──
 function toggleBarrier(el, id) {
   el.classList.toggle('on');
-  const ins = el.getAttribute('data-ins');
-  const pid = 'bar-' + id;
-  if (el.classList.contains('on')) addPick(pid, ins, 'p');
-  else removePick(pid);
-  upd();
-}
-function pick(el, color) {
-  const text = el.textContent.trim();
-  const wasOn = el.classList.contains('pb') || el.classList.contains('pp') || el.classList.contains('pt');
-  el.classList.remove('pb','pp','pt');
-  const pid = 'chip-' + text.substring(0,14).replace(/[\s()]/g,'');
-  if (!wasOn) {
-    el.classList.add('p' + color);
-    addPick(pid, text, color);
+  if (el.classList.contains('on')) barriersOn.add(id);
+  else barriersOn.delete(id);
+  if (barriersOn.size > 0) {
+    document.getElementById('barriers-insight').classList.remove('hidden');
+    s3done = true;
   } else {
-    removePick(pid);
+    document.getElementById('barriers-insight').classList.add('hidden');
   }
   upd();
 }
-function addPick(id, text, color) {
-  removePick(id);
-  document.getElementById('mpe').style.display = 'none';
-  const d = document.createElement('div');
-  d.className = 'mp-item'; d.id = id;
-  const bg = color==='p'?'var(--pink)': color==='t'?'var(--teal)':'var(--blue)';
-  d.style.background = bg;
-  d.textContent = text;
-  document.getElementById('mpi').appendChild(d);
+
+// ── MOOD SCALE ──
+const moodMsg = {
+  0:'Это нормально — именно для этого и есть интенсив 🙂',
+  1:'Честный ответ. На интенсиве это изменится.',
+  2:'Понятно. Дадим вам конкретные причины начать.',
+  3:'Уже есть интерес — это главное.',
+  4:'Хороший старт. Скоро станет больше!',
+  5:'Неплохо! Половина пути позади.',
+  6:'Уже чувствуется желание. Отлично!',
+  7:'Хороший настрой — интенсив его усилит.',
+  8:'Отличный настрой! Увидимся скоро 🎯',
+  9:'Почти готовы рвануть! До встречи!',
+  10:'Не терпится? Отлично — увидимся на интенсиве! 🔥'
+};
+function setMood(val) {
+  document.querySelectorAll('.mood-btn').forEach((b,i) => b.classList.toggle('mood-sel', i===val));
+  document.getElementById('moodResult').textContent = moodMsg[val];
+  moodDone = true;
+  upd();
 }
-function removePick(id) {
-  const el = document.getElementById(id);
-  if (el) el.remove();
-  if (!document.querySelector('.mp-item')) document.getElementById('mpe').style.display = '';
-}
-function upd() {
-  const barriers = document.querySelectorAll('.bc.on').length;
-  const chips = document.querySelectorAll('.ich.pb,.ich.pp,.ich.pt').length;
-  const s1 = (barriers >= 1 && chips >= 1) ? 1 : 0;
-  const s2 = document.getElementById('c1').classList.contains('on') ? 1 : 0;
-  const s3 = document.getElementById('c2').classList.contains('on') ? 1 : 0;
-  const s4 = document.getElementById('c3').classList.contains('on') ? 1 : 0;
-  const done = s1 + s2 + s3 + s4;
-  const pct = done * 25;
-  document.getElementById('fill').style.width = pct + '%';
-  document.getElementById('pct').textContent = pct + '%';
-  function setDot(id, on) {
-    const d = document.getElementById(id);
-    if (on) { d.classList.add('done'); d.classList.remove('active'); }
-    else { d.classList.remove('done'); d.classList.toggle('active', true); }
+
+// ── CLARITY ──
+function setClarity(ans) {
+  const yes = document.getElementById('cl-yes');
+  const no = document.getElementById('cl-no');
+  if (yes.classList.contains('cl-yes') || no.classList.contains('cl-no')) return;
+  const box = document.getElementById('clarityAnswer');
+  if (ans === 'yes') {
+    yes.classList.add('cl-yes');
+    no.style.opacity='0.4'; no.style.pointerEvents='none';
+    box.textContent = 'Отлично! Переходите к подготовке ниже 👇';
+    box.className = 'clarity-answer show ans-yes';
+  } else {
+    no.classList.add('cl-no');
+    yes.style.opacity='0.4'; yes.style.pointerEvents='none';
+    box.innerHTML = 'Отлично, вопросы — это тоже замечательно! Пока подготовь всё необходимое. Свои вопросы можешь задать в чате или уже на самом интенсиве — обязательно разберём 💬';
+    box.className = 'clarity-answer show ans-no';
   }
-  setDot('d1', s1); setDot('d2', s2); setDot('d3', s3); setDot('d4', s4);
-  if (!s1) { document.getElementById('d1').classList.remove('done'); document.getElementById('d1').classList.add('active'); }
-  if (pct === 100 && !window._confettiFired) { window._confettiFired = true; launchConfetti(); }
-  if (pct < 100) window._confettiFired = false;
+  clarityDone = true;
+  upd();
+}
+
+// ── CHECKLIST ──
+function tck(cbId, wrapId) {
+  const cb = document.getElementById(cbId);
+  if (checksDone.has(cbId)) return;
+  checksDone.add(cbId);
+  cb.textContent = '✓ Сделано!';
+  cb.classList.add('done');
+  document.getElementById(wrapId).classList.add('done-wrap');
+  upd();
+  if (checksDone.size === 3) {
+    const ta = document.getElementById('sec-takeaway');
+    ta.classList.remove('hidden');
+    ta.classList.add('fade-in');
+    setTimeout(() => ta.scrollIntoView({behavior:'smooth',block:'start'}), 200);
+    if (!confettiFired) { confettiFired = true; launchConfetti(); }
+  }
+}
+
+// ── PROGRESS (5 шагов) ──
+function upd() {
+  // dot1: s1 reacted
+  // dot2: s2 or s3 reacted
+  // dot3: barriers touched
+  // dot4: mood + clarity
+  // dot5: all 3 checks
+  const d = [
+    s1done,
+    s2done || s3done,
+    barriersOn.size > 0,
+    moodDone && clarityDone,
+    checksDone.size === 3
+  ];
+  let pct = d.filter(Boolean).length * 20;
+  let step = 1;
+  d.forEach((v,i) => { if(v) step = i+2; });
+  document.getElementById('progFill').style.width = pct + '%';
+  for (let i = 1; i <= 5; i++) {
+    const dot = document.getElementById('dot'+i);
+    dot.classList.remove('active','done');
+    if (i < step) dot.classList.add('done');
+    else if (i === step) dot.classList.add('active');
+  }
+}
+
+// ── MODALS ──
+function openModal(id) { document.getElementById(id).classList.add('open'); document.body.style.overflow='hidden'; }
+function closeModal(id) { document.getElementById(id).classList.remove('open'); document.body.style.overflow=''; }
+document.querySelectorAll('.modal-overlay').forEach(m => m.addEventListener('click', e => { if(e.target===m) closeModal(m.id); }));
+
+let vpnStep=1;
+function vpnNav(dir) {
+  vpnStep = Math.max(1,Math.min(3,vpnStep+dir));
+  for(let i=1;i<=3;i++){
+    document.getElementById('vstep'+i).classList.toggle('m-current',i===vpnStep);
+    const d=document.getElementById('vdot'+i);
+    d.classList.toggle('m-active',i===vpnStep);
+    d.classList.toggle('m-done',i<vpnStep);
+  }
+  document.getElementById('vpn-counter').textContent='Шаг '+vpnStep+' из 3';
+  document.getElementById('vpn-prev').style.visibility=vpnStep>1?'visible':'hidden';
+  const nxt=document.getElementById('vpn-next');
+  if(vpnStep===3){nxt.textContent='Закрыть';nxt.onclick=()=>closeModal('modal-vpn');}
+  else{nxt.textContent='Далее →';nxt.onclick=()=>vpnNav(1);}
+}
+
+let payStep=1;
+function payNav(dir) {
+  payStep = Math.max(1,Math.min(2,payStep+dir));
+  for(let i=1;i<=2;i++){
+    document.getElementById('pstep'+i).classList.toggle('m-current',i===payStep);
+    const d=document.getElementById('pdot'+i);
+    d.classList.toggle('m-active',i===payStep);
+    d.classList.toggle('m-done',i<payStep);
+  }
+  document.getElementById('pay-counter').textContent='Шаг '+payStep+' из 2';
+  document.getElementById('pay-prev').style.visibility=payStep>1?'visible':'hidden';
+  const nxt=document.getElementById('pay-next');
+  if(payStep===2){nxt.textContent='Закрыть';nxt.onclick=()=>closeModal('modal-pay');}
+  else{nxt.textContent='Далее →';nxt.onclick=()=>payNav(1);}
 }
 
 // ── CONFETTI ──
 function launchConfetti() {
-  const canvas = document.createElement('canvas');
-  canvas.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;';
+  const canvas=document.createElement('canvas');
+  canvas.style.cssText='position:fixed;inset:0;width:100%;height:100%;z-index:9999;pointer-events:none';
+  canvas.width=innerWidth;canvas.height=innerHeight;
   document.body.appendChild(canvas);
-  const ctx = canvas.getContext('2d');
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-  const colors = ['#2C7BE5','#D94B78','#18A98E','#F5A623','#7B61FF','#FF6B6B'];
-  const particles = Array.from({length:120}, () => ({
-    x: Math.random() * canvas.width,
-    y: -20 - Math.random() * 100,
-    r: 4 + Math.random() * 6,
-    color: colors[Math.floor(Math.random()*colors.length)],
-    vx: (Math.random()-0.5)*4,
-    vy: 2 + Math.random()*4,
-    rot: Math.random()*360,
-    rotV: (Math.random()-0.5)*8,
-    shape: Math.random() > 0.5 ? 'rect' : 'circle'
+  const ctx=canvas.getContext('2d');
+  const colors=['#2C7BE5','#D94B78','#18A98E','#D98C0A','#BAD6FF','#E5FAF7'];
+  const p=Array.from({length:120},()=>({
+    x:Math.random()*innerWidth,y:-20,r:Math.random()*6+3,
+    c:colors[Math.floor(Math.random()*colors.length)],
+    vx:(Math.random()-.5)*4,vy:Math.random()*4+2,
+    rot:Math.random()*360,rv:(Math.random()-.5)*8,rect:Math.random()>.5
   }));
-  let frame = 0;
-  function draw() {
+  let f=0;
+  (function draw(){
     ctx.clearRect(0,0,canvas.width,canvas.height);
-    particles.forEach(p => {
-      ctx.save();
-      ctx.translate(p.x, p.y);
-      ctx.rotate(p.rot * Math.PI/180);
-      ctx.fillStyle = p.color;
-      ctx.globalAlpha = Math.max(0, 1 - frame/180);
-      if (p.shape === 'rect') ctx.fillRect(-p.r/2, -p.r/2, p.r, p.r*0.6);
-      else { ctx.beginPath(); ctx.arc(0,0,p.r/2,0,Math.PI*2); ctx.fill(); }
+    const a=f<150?1:Math.max(0,1-(f-150)/50);
+    p.forEach(q=>{
+      q.y+=q.vy;q.x+=q.vx;q.rot+=q.rv;q.vy+=.05;
+      ctx.save();ctx.globalAlpha=a;
+      ctx.translate(q.x,q.y);ctx.rotate(q.rot*Math.PI/180);
+      ctx.fillStyle=q.c;
+      if(q.rect)ctx.fillRect(-q.r,-q.r/2,q.r*2,q.r);
+      else{ctx.beginPath();ctx.arc(0,0,q.r,0,Math.PI*2);ctx.fill();}
       ctx.restore();
-      p.x += p.vx; p.y += p.vy; p.rot += p.rotV; p.vy += 0.08;
     });
-    frame++;
-    if (frame < 200) requestAnimationFrame(draw);
+    f++;
+    if(f<200)requestAnimationFrame(draw);
     else canvas.remove();
-  }
-  draw();
+  })();
 }
+
+upd();
 </script>
 </body>
 </html>
