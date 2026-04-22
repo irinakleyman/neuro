@@ -788,6 +788,235 @@ section{margin-bottom:24px}
   </div>
 </section>
 
+<!-- SECTION: CLAUDE ON PHONE -->
+<section id="sec-mobile" class="hidden fade-in">
+  <div class="sec-head">
+    <div class="sec-icon nt">📱</div>
+    <div>
+      <div class="sec-title">Claude на телефоне</div>
+      <div class="sec-sub">Чтобы быстро открывать с главного экрана — как обычное приложение</div>
+    </div>
+  </div>
+
+  <!-- Для тех, кто НЕ в России -->
+  <div class="path-card" id="path-mobile-intl">
+    <div class="path-header" onclick="togglePath('path-mobile-intl')">
+      <div class="path-badge" style="background:var(--teal-l)">🌍</div>
+      <div class="path-info">
+        <div class="path-title">Если вы живёте не в России</div>
+        <div class="path-sub">Самый простой вариант — один шаг</div>
+      </div>
+      <div class="path-toggle">›</div>
+    </div>
+    <div class="path-body">
+      <p>Откройте магазин приложений на своём телефоне и установите Claude — как любое другое приложение.</p>
+      <div class="service-links" style="margin-top:12px">
+        <a href="https://apps.apple.com/app/claude-by-anthropic/id6473753684" target="_blank" rel="noopener" class="service-link teal-link">🍎 App Store</a>
+        <a href="https://play.google.com/store/apps/details?id=com.anthropic.claude" target="_blank" rel="noopener" class="service-link teal-link">▶️ Google Play</a>
+      </div>
+      <p style="margin-top:12px">После установки войдите в свой аккаунт — тот же, что создавали на компьютере. Все чаты и проекты будут на месте.</p>
+    </div>
+  </div>
+
+  <!-- Для тех, кто в России -->
+  <div class="path-card" id="path-mobile-ru">
+    <div class="path-header" onclick="togglePath('path-mobile-ru')">
+      <div class="path-badge" style="background:var(--pink-l)">🇷🇺</div>
+      <div class="path-info">
+        <div class="path-title">Если вы в России</div>
+        <div class="path-sub">Два рабочих способа — выберите удобный</div>
+      </div>
+      <div class="path-toggle">›</div>
+    </div>
+    <div class="path-body">
+      <p>В российском App Store и Google Play приложения Claude нет. Есть два способа обойти это.</p>
+
+      <!-- Способ 1: сменить страну -->
+      <div class="path-sub-title" style="margin-top:18px">Способ 1. Сменить страну в магазине приложений</div>
+      <p style="margin-top:0">Надёжнее всего — один раз поменять регион аккаунта и дальше ставить приложение как обычно. Покажу оба варианта.</p>
+
+      <!-- iPhone / App Store -->
+      <div style="background:var(--g50);border:1px solid var(--g200);border-radius:var(--r2);padding:16px;margin-top:12px">
+        <div style="font-family:'Exo 2',sans-serif;font-size:13px;font-weight:700;color:var(--g800);margin-bottom:10px">🍎 iPhone — App Store</div>
+        <div class="mini-steps">
+          <div class="mini-step">
+            <div class="mini-step-left">
+              <div class="mini-step-dot">1</div>
+              <div class="mini-step-line"></div>
+            </div>
+            <div class="mini-step-content">
+              <div class="mini-step-title">Откройте «Настройки» → ваше имя сверху</div>
+              <div class="mini-step-desc">Затем — <strong>«Медиаматериалы и покупки»</strong> → <strong>«Просмотреть»</strong>. Возможно, понадобится ввести пароль Apple ID.</div>
+            </div>
+          </div>
+          <div class="mini-step">
+            <div class="mini-step-left">
+              <div class="mini-step-dot">2</div>
+              <div class="mini-step-line"></div>
+            </div>
+            <div class="mini-step-content">
+              <div class="mini-step-title">Нажмите «Страна/регион» → «Изменить страну»</div>
+              <div class="mini-step-desc">Выберите, например, <strong>США, Великобританию, Германию или Нидерланды</strong>.</div>
+            </div>
+          </div>
+          <div class="mini-step">
+            <div class="mini-step-left">
+              <div class="mini-step-dot">3</div>
+              <div class="mini-step-line"></div>
+            </div>
+            <div class="mini-step-content">
+              <div class="mini-step-title">Примите условия и заполните адрес</div>
+              <div class="mini-step-desc">В поле способа оплаты выберите <strong>«Нет» / «None»</strong> — иначе система попросит местную карту. Адрес можно указать любой валидный (например, адрес отеля из Google Maps).</div>
+            </div>
+          </div>
+          <div class="mini-step">
+            <div class="mini-step-left">
+              <div class="mini-step-dot">4</div>
+              <div class="mini-step-line"></div>
+            </div>
+            <div class="mini-step-content">
+              <div class="mini-step-title">Откройте App Store и найдите Claude</div>
+              <div class="mini-step-desc">Теперь приложение доступно. Установите его и войдите в свой аккаунт.</div>
+              <div class="warn-box" style="margin-top:10px">⚠️ Без VPN приложение может не запуститься — включите VPN перед первым входом.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Android / Google Play -->
+      <div style="background:var(--g50);border:1px solid var(--g200);border-radius:var(--r2);padding:16px;margin-top:12px">
+        <div style="font-family:'Exo 2',sans-serif;font-size:13px;font-weight:700;color:var(--g800);margin-bottom:10px">▶️ Android — Google Play</div>
+        <div class="mini-steps">
+          <div class="mini-step">
+            <div class="mini-step-left">
+              <div class="mini-step-dot">1</div>
+              <div class="mini-step-line"></div>
+            </div>
+            <div class="mini-step-content">
+              <div class="mini-step-title">Включите VPN с локацией нужной страны</div>
+              <div class="mini-step-desc">Google определяет страну по текущему IP при первом запросе на смену региона. Без VPN смена не сработает.</div>
+            </div>
+          </div>
+          <div class="mini-step">
+            <div class="mini-step-left">
+              <div class="mini-step-dot">2</div>
+              <div class="mini-step-line"></div>
+            </div>
+            <div class="mini-step-content">
+              <div class="mini-step-title">Откройте Google Play → иконка профиля → «Настройки»</div>
+              <div class="mini-step-desc">Раздел <strong>«Общие»</strong> → <strong>«Настройки аккаунта и устройства»</strong> → <strong>«Страна и профили»</strong>.</div>
+            </div>
+          </div>
+          <div class="mini-step">
+            <div class="mini-step-left">
+              <div class="mini-step-dot">3</div>
+              <div class="mini-step-line"></div>
+            </div>
+            <div class="mini-step-content">
+              <div class="mini-step-title">Нажмите на предложение сменить страну</div>
+              <div class="mini-step-desc">Если нужной страны не видно — проверьте, включён ли VPN. Добавьте способ оплаты или пропустите (по возможности).</div>
+            </div>
+          </div>
+          <div class="mini-step">
+            <div class="mini-step-left">
+              <div class="mini-step-dot">4</div>
+              <div class="mini-step-line"></div>
+            </div>
+            <div class="mini-step-content">
+              <div class="mini-step-title">Подождите несколько минут и очистите кэш Google Play</div>
+              <div class="mini-step-desc">«Настройки телефона» → «Приложения» → «Google Play Маркет» → «Очистить кэш». После этого приложение Claude появится в поиске.</div>
+              <div class="warn-box" style="margin-top:10px">⚠️ У Google есть ограничение: страну можно менять не чаще раза в год. Выбирайте вдумчиво.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Способ 2: веб-версия на экране -->
+      <div class="path-sub-title" style="margin-top:22px">Способ 2. Добавить сайт на главный экран</div>
+      <p style="margin-top:0">Самый быстрый вариант — не ставить приложение вообще. Открываете <strong>claude.ai</strong> в браузере и сохраняете ссылку на главный экран. Открывается тем же тапом, что и обычное приложение, работает быстро.</p>
+
+      <!-- iPhone Safari -->
+      <div style="background:var(--g50);border:1px solid var(--g200);border-radius:var(--r2);padding:16px;margin-top:12px">
+        <div style="font-family:'Exo 2',sans-serif;font-size:13px;font-weight:700;color:var(--g800);margin-bottom:10px">🍎 iPhone — Safari</div>
+        <div class="mini-steps">
+          <div class="mini-step">
+            <div class="mini-step-left">
+              <div class="mini-step-dot">1</div>
+              <div class="mini-step-line"></div>
+            </div>
+            <div class="mini-step-content">
+              <div class="mini-step-title">Откройте в Safari claude.ai и войдите в аккаунт</div>
+              <div class="mini-step-desc">Не забудьте включить VPN. В других браузерах (Chrome, Яндекс) функция добавления на экран работает иначе или отсутствует.</div>
+            </div>
+          </div>
+          <div class="mini-step">
+            <div class="mini-step-left">
+              <div class="mini-step-dot">2</div>
+              <div class="mini-step-line"></div>
+            </div>
+            <div class="mini-step-content">
+              <div class="mini-step-title">Нажмите «Поделиться» внизу экрана</div>
+              <div class="mini-step-desc">В списке действий выберите <strong>«На экран Домой»</strong> (может называться «Добавить на главный экран»).</div>
+            </div>
+          </div>
+          <div class="mini-step">
+            <div class="mini-step-left">
+              <div class="mini-step-dot">3</div>
+              <div class="mini-step-line"></div>
+            </div>
+            <div class="mini-step-content">
+              <div class="mini-step-title">Подтвердите название и нажмите «Добавить»</div>
+              <div class="mini-step-desc">Иконка Claude появится на главном экране. Тап — и открывается полноэкранное окно, без адресной строки браузера.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Android Chrome -->
+      <div style="background:var(--g50);border:1px solid var(--g200);border-radius:var(--r2);padding:16px;margin-top:12px">
+        <div style="font-family:'Exo 2',sans-serif;font-size:13px;font-weight:700;color:var(--g800);margin-bottom:10px">▶️ Android — Chrome</div>
+        <div class="mini-steps">
+          <div class="mini-step">
+            <div class="mini-step-left">
+              <div class="mini-step-dot">1</div>
+              <div class="mini-step-line"></div>
+            </div>
+            <div class="mini-step-content">
+              <div class="mini-step-title">Откройте в Chrome claude.ai и войдите в аккаунт</div>
+              <div class="mini-step-desc">VPN должен быть включён.</div>
+            </div>
+          </div>
+          <div class="mini-step">
+            <div class="mini-step-left">
+              <div class="mini-step-dot">2</div>
+              <div class="mini-step-line"></div>
+            </div>
+            <div class="mini-step-content">
+              <div class="mini-step-title">Нажмите на три точки в правом верхнем углу</div>
+              <div class="mini-step-desc">В меню выберите <strong>«Добавить на главный экран»</strong> или <strong>«Установить приложение»</strong> — название зависит от версии Chrome.</div>
+            </div>
+          </div>
+          <div class="mini-step">
+            <div class="mini-step-left">
+              <div class="mini-step-dot">3</div>
+              <div class="mini-step-line"></div>
+            </div>
+            <div class="mini-step-content">
+              <div class="mini-step-title">Подтвердите добавление</div>
+              <div class="mini-step-desc">Иконка появится на главном экране и в списке приложений. Открывается как обычное приложение — быстро и без лишних элементов браузера.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="insight teal" style="margin-top:16px">
+        <div class="insight-label">💡 Что выбрать</div>
+        <p>Если планируете часто пользоваться Claude с телефона — Способ 1 (установка приложения) удобнее: уведомления, голосовой ввод, полная интеграция. Если нужно только иногда — Способ 2 (сайт на экране) быстрее и не требует перестройки аккаунта в магазине.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- TAKEAWAY -->
 <section id="sec-takeaway" class="hidden fade-in">
   <div class="takeaway">
@@ -872,12 +1101,13 @@ function selectPlan(type) {
 
 // FINISH
 function finishGuide() {
+  show('sec-mobile');
   show('sec-takeaway');
   setStep(4, true);
   planDone = true;
   upd();
   launchConfetti();
-  document.getElementById('sec-takeaway').scrollIntoView({behavior:'smooth', block:'start'});
+  document.getElementById('sec-mobile').scrollIntoView({behavior:'smooth', block:'start'});
 }
 
 function markRegStep(n) {
